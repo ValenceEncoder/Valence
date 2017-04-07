@@ -1,0 +1,25 @@
+{
+  "name": "cld_server_control",
+  "version": "0.0.1",
+  "description": "Helper application that launches, kills and restarts the various JRCigars/Altadis servers and front ends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hammus/cld-server-ctl.git"
+  },
+  "keywords": [
+    "cld",
+    "toolchain",
+    "private",
+    "devtools"
+  ],
+  "author": "Liam Whan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hammus/cld-server-ctl/issues"
+  },
+  "homepage": "https://github.com/hammus/cld-server-ctl#readme"
+}
