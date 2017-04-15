@@ -25,5 +25,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "stateful-process-command-proxy": "^1.0.1"
   }
 }
