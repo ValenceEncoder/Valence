@@ -5,6 +5,10 @@ logs
 *.log
 npm-debug.log*
 
+# Compiled JS
+*.js
+*.js.map
+
 # Runtime data
 pids
 *.pid
@@ -42,3 +46,4 @@ jspm_packages
 test/vid
 tmp 
 .idea
+*.old
