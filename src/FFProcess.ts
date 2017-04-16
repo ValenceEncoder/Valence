@@ -1,6 +1,6 @@
 ///<reference path="../typings/config.d.ts" />
 const config:IConfig = require('config');
-import {ChildProcess, spawn} from "child_process";
+import {ChildProcess, spawn, exec} from "child_process";
 
 interface IFFProcess {
     exec(onclick: () => void):void;
@@ -36,7 +36,7 @@ export class FFProbe extends FFProcess {
     }
 
     exec(onData: (data:any) => void):void {
-        this.process = spawn(this.command, this.args);
+        this.process = exec(this.command, this.args);
         this.process.stdout.setEncoding('utf8');
         this.process.stdout.on('data', this.outputHandler);
     }

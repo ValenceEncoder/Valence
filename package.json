@@ -1,14 +1,14 @@
 {
-  "name": "cld_server_control",
+  "name": "MKV2ATV",
   "version": "0.0.1",
-  "description": "Helper application that launches, kills and restarts the various JRCigars/Altadis servers and front ends",
+  "description": "MKV to AppleTV (MKV2ATV) is a simple cross platform gui application that can speed up encoding video for AppleTV by using FFMPEG to preserve (copy) x264/h264 encoded video streams stored in MKV containers and converting them to MP4 containers.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hammus/cld-server-ctl.git"
+    "url": "git+https://github.com/hammus/MKV2ATV.git"
   },
   "keywords": [
     "cld",
@@ -19,9 +19,9 @@
   "author": "Liam Whan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hammus/cld-server-ctl/issues"
+    "url": "https://github.com/hammus/MKV2ATV/issues"
   },
-  "homepage": "https://github.com/hammus/cld-server-ctl#readme",
+  "homepage": "https://github.com/hammus/MKV2ATV#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.2.0"
