@@ -1,3 +1,7 @@
 bin:
   ffmpeg: "./ffmpeg/bin/ffmpeg.exe"
   ffprobe: "./ffmpeg/bin/ffprobe.exe"
+versions:
+  nwjs: 0.21.6
+  ffmpeg: "N-82794-g3ab1311"
+  node: 6.10.2
