@@ -1,3 +1,6 @@
+### IMPORTANT: MKV2ATV depends on FFMPEG and nw.js which in turn depends on a number of projects all respective licences are listed below.
+
+# MKV2ATV Source Code Licence
 MIT License
 
 Copyright (c) 2017 Liam Whan

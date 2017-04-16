@@ -11,10 +11,13 @@
     "url": "git+https://github.com/hammus/MKV2ATV.git"
   },
   "keywords": [
-    "cld",
-    "toolchain",
-    "private",
-    "devtools"
+    "video",
+    "encoding",
+    "mkv",
+    "mp4",
+    "appletv",
+    "converter",
+    "container"
   ],
   "author": "Liam Whan",
   "license": "MIT",
@@ -29,7 +32,6 @@
   "dependencies": {
     "@types/node": "^7.0.12",
     "config": "^1.25.1",
-    "js-yaml": "^3.8.3",
-    "stateful-process-command-proxy": "^1.0.1"
+    "js-yaml": "^3.8.3"
   }
 }

@@ -4,7 +4,6 @@ import {ChildProcess, spawn, exec} from "child_process";
 
 interface IFFProcess {
     exec(onclick: () => void):void;
-    parseArgs(inputFile:string):string[];
 }
 
 abstract class FFProcess implements IFFProcess {
@@ -25,7 +24,7 @@ abstract class FFProcess implements IFFProcess {
 }
 
 export class FFProbe extends FFProcess {
-    command:string = config.bin.ffprobe;
+    command = config.bin.ffprobe;
 
     protected parseArgs():string[] {
         return `-v quiet -print_format json -show_format -show_streams ${this.inputFile}`.split(" ");
@@ -43,7 +42,7 @@ export class FFProbe extends FFProcess {
 }
 
 export class FFMpeg extends FFProcess {
-    command:string = config.bin.ffmpeg;
+    command = config.bin.ffmpeg;
 
     protected parseArgs():string[] {
         return `-i ${this.inputFile} -c copy -c:a aac ${this.outputFile}`.split(" ");
