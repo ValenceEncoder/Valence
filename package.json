@@ -26,11 +26,12 @@
   },
   "homepage": "https://github.com/hammus/MKV2ATV#readme",
   "devDependencies": {
+    "@types/node": "^7.0.12",
     "chai": "^3.5.0",
     "mocha": "^3.2.0"
   },
   "dependencies": {
-    "@types/node": "^7.0.12",
+    "command-line-args": "^4.0.2",
     "config": "^1.25.1",
     "js-yaml": "^3.8.3"
   }
