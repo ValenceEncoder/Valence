@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
     "target": "es6",
-    "sourceMap": true
+    "sourceMap": true,
+    "outDir": "build"
   },
   "include": [
     "src/**/*"
