@@ -16,4 +16,6 @@ This works great but... it takes a long time and wastes alot of CPU computation 
 
 By using FFMPEG to preserve (copy) `x264` / `h264` encoded video streams stored in MKV containers and converting them to MP4 containers, we can save a heap of CPU cycles and time!
 
-
+### MKV2ATV utilizes the following technologies
+* [FFmpeg](https://ffmpeg.org) binaries for conversion and video file analysis
+* [nw.js](https://nwjs.io/) for a quick and easy cross-platform GUI
