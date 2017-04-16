@@ -1,6 +1,7 @@
-///<reference path="../typings/config.d.ts" />
-const config:IConfig = require('config');
 import {ChildProcess, spawn, exec} from "child_process";
+import {IConfig} from "../typings/config";
+
+const config:IConfig = require('config');
 
 interface IFFProcess {
     exec(onclick: () => void):void;
