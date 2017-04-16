@@ -7,8 +7,8 @@
  * FFPROBE writes debug to STDOUT
  */
 const spawn = require('child_process').spawn;
-const encodeArgs = ["-i", "./test/vid/TestAC3.mkv", "-c", "copy", "-c:a", "aac", "./tmp/Test1.mp4"];
-const probeArgs = ["-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", "./test/vid/TestAC3.mkv"];
+const encodeArgs = '-i ${input} -c copy -c:a aac ${output}';
+const probeArgs = '-v quiet -print_format json -show_format -show_streams ${input}';
 
 //const proc_ats = spawn('ffmpeg', encodeArgs);
 const proc_ats = spawn('ffprobe', probeArgs);

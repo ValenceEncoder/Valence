@@ -40,3 +40,5 @@ jspm_packages
 ffmpeg
 test/vid
 tmp 
+
+.idea

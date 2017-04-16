@@ -1,0 +1,3 @@
+bin:
+  ffmpeg: "./ffmpeg/bin/ffmpeg.exe"
+  ffprobe: "./ffmpeg/bin/ffprobe.exe"
