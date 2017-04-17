@@ -18,4 +18,4 @@ By using FFMPEG to preserve (copy) `x264` / `h264` encoded video streams stored 
 
 ### MKV2ATV utilizes the following technologies
 * [FFmpeg](https://ffmpeg.org) binaries for conversion and video file analysis
-* [nw.js](https://nwjs.io/) for a quick and easy cross-platform GUI
+* [Electron](https://electron.atom.io/) for a quick and easy cross-platform GUI application

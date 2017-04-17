@@ -33,6 +33,7 @@
   "dependencies": {
     "command-line-args": "^4.0.2",
     "config": "^1.25.1",
-    "js-yaml": "^3.8.3"
+    "js-yaml": "^3.8.3",
+    "electron":"~1.6.2"
   }
 }

@@ -25,4 +25,8 @@ declare module "M2A" {
         output:string;
         process: "ffprobe" | "ffmpeg";
     }
+
+    export interface IFFOutputHandler {
+        (message: string):void;
+    }
 }
