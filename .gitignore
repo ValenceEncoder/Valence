@@ -47,3 +47,4 @@ test/vid
 tmp 
 .idea
 *.old
+.vscode/

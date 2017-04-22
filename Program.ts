@@ -1,12 +1,9 @@
-///<reference path="../typings/local.d.ts"/>
-import {FFMpeg, FFProbe} from "./FFProcess";
-import {IFFOutputHandler, IFFProcess, IFFProcessOptions} from "M2A";
+import {FFMpeg, FFProbe, FFProcess, IFFOutputHandler, IFFProcessOptions} from "./FFProcess";
 
 export class Program {
-    private options: IFFProcessOptions;
-    private ffprobeInstance: FFProbe;
-    private ffmpegInstance: FFMpeg;
-    private activeProcess: IFFProcess;
+    public options: IFFProcessOptions;
+    private ffprobeInstance: FFProbe = null;
+    private ffmpegInstance: FFMpeg = null;
 
     constructor() {
         if (require.main == module) {
@@ -14,11 +11,9 @@ export class Program {
         }
     }
 
-
-
     run(endHandler:IFFOutputHandler, options?: IFFProcessOptions): void {
-
-        if (typeof this.options === 'undefined') {
+        
+        if (typeof this.options === 'undefined' && typeof options === 'undefined') {
             throw new Error("Options object is undefined. Before running a process you must supply an options object: {input:string, output?:string, process?:string}");
         }
 
@@ -26,18 +21,14 @@ export class Program {
         switch (this.options.process) {
             case "ffprobe":
                 this.ffprobeInstance = new FFProbe(this.options, endHandler);
-                this.ffprobeInstance.exec();
+                this.ffprobeInstance.run();
                 break;
             case "ffmpeg":
                 this.ffmpegInstance = new FFMpeg(this.options, endHandler);
-                this.ffmpegInstance.exec();
+                this.ffmpegInstance.run();
                 break;
 
         }
 
     }
 }
-
-
-
-

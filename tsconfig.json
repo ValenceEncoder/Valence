@@ -3,7 +3,9 @@
     "module": "CommonJS",
     "target": "es6",
     "sourceMap": true,
-    "outDir": "build"
+    "rootDir": "./src/",
+    "outDir": "./build/",
+    "watch": true
   },
   "include": [
     "src/**/*"

@@ -2,7 +2,7 @@
   "name": "MKV2ATV",
   "version": "0.0.1",
   "description": "MKV to AppleTV (MKV2ATV) is a simple cross platform gui application that can speed up encoding video for AppleTV by using FFMPEG to preserve (copy) x264/h264 encoded video streams stored in MKV containers and converting them to MP4 containers.",
-  "main": "index.js",
+  "main": "build/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,14 +27,30 @@
   "homepage": "https://github.com/hammus/MKV2ATV#readme",
   "devDependencies": {
     "@types/node": "^7.0.12",
+    "@types/npm": "latest",
+    "@types/electron": "latest",
+    "@types/electron-packager": "latest",
+    "@types/gulp": "latest",
+    "@types/gulp-util": "latest",
+    "@types/gulp-sass": "latest",
+    "@types/webpack": "latest",
     "chai": "^3.5.0",
-    "electron-builder": "^17.0.1",
-    "mocha": "^3.2.0"
+    "electron-builder": "latest",
+    "mocha": "^3.2.0",
+    "webpack": "latest",
+    "ts-loader": "latest",
+    "gulp": "latest",
+    "ts-node": "latest",
+    "gulp-util": "latest",
+    "typescript": "latest",
+    "electron": "latest",
+    "electron-packager": "latest",
+    "tslint": "latest"
   },
   "dependencies": {
     "command-line-args": "^4.0.2",
     "config": "^1.25.1",
     "js-yaml": "^3.8.3",
-    "electron": "~1.6.2"
+    "electron": "latest"
   }
 }

@@ -1,5 +1,5 @@
-import {IFFProcessOptions} from "M2A";
-import {Program} from "./Program";
+import { Program } from "./Program";
+import { IFFProcessOptions } from "./FFProcess";
 
 if (require.main != module) {
     // Loaded by another module e.g. with require('./src/Main');
@@ -21,5 +21,5 @@ if (require.main != module) {
         let metadata = JSON.parse(message);
         console.log(metadata);
     };
-    app.run(options, endHandler);
+    app.run(endHandler, options);
 }
