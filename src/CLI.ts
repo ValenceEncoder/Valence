@@ -1,4 +1,4 @@
-import { Program } from "./Program";
+import { FFMpegProgramManager } from "./Program";
 import { IFFProcessOptions } from "./FFProcess";
 
 if (require.main != module) {
@@ -16,7 +16,7 @@ if (require.main != module) {
     ];
 
     const options: IFFProcessOptions = commandLineArgs(argDefs);
-    const app: Program = new Program();
+    const app: FFMpegProgramManager = new FFMpegProgramManager();
     let endHandler:(message:string)=>void = function(message:string) {
         let metadata = JSON.parse(message);
         console.log(metadata);

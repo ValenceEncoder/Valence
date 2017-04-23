@@ -2,8 +2,9 @@
   "name": "MKV2ATV",
   "version": "0.0.1",
   "description": "MKV to AppleTV (MKV2ATV) is a simple cross platform gui application that can speed up encoding video for AppleTV by using FFMPEG to preserve (copy) x264/h264 encoded video streams stored in MKV containers and converting them to MP4 containers.",
-  "main": "build/main.js",
+  "main": "src/App.ts",
   "scripts": {
+    "start": "cross-env NODE_ENV=development electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +18,9 @@
     "mp4",
     "appletv",
     "converter",
-    "container"
+    "container",
+    "Electron",
+    "typscript"
   ],
   "author": "Liam Whan",
   "license": "MIT",
@@ -26,31 +29,25 @@
   },
   "homepage": "https://github.com/hammus/MKV2ATV#readme",
   "devDependencies": {
-    "@types/node": "^7.0.12",
-    "@types/npm": "latest",
-    "@types/electron": "latest",
+    "@types/electron": "^1.4.37",
     "@types/electron-packager": "latest",
-    "@types/gulp": "latest",
-    "@types/gulp-util": "latest",
-    "@types/gulp-sass": "latest",
-    "@types/webpack": "latest",
-    "chai": "^3.5.0",
+    "@types/node": "^7.0.13",
+    "@types/npm": "latest",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "cross-env": "^4.0.0",
     "electron-builder": "latest",
-    "mocha": "^3.2.0",
-    "webpack": "latest",
-    "ts-loader": "latest",
-    "gulp": "latest",
-    "ts-node": "latest",
-    "gulp-util": "latest",
-    "typescript": "latest",
-    "electron": "latest",
     "electron-packager": "latest",
-    "tslint": "latest"
+    "electron-prebuilt-compile": "^1.6.2",
+    "i": "^0.3.5",
+    "mocha": "^3.2.0",
+    "ts-node": "latest",
+    "tslint": "latest",
+    "typescript": "latest"
   },
   "dependencies": {
     "command-line-args": "^4.0.2",
     "config": "^1.25.1",
-    "js-yaml": "^3.8.3",
-    "electron": "latest"
+    "js-yaml": "^3.8.3"
   }
 }

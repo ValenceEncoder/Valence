@@ -1,4 +1,4 @@
-declare module "config" {
+
     interface IConfigBin {
         ffprobe: string;
         ffmpeg: string;
@@ -13,4 +13,4 @@ declare module "config" {
     export interface IConfig {
         bin: IConfigBin;
     }
-}
+

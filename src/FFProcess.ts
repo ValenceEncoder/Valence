@@ -1,6 +1,6 @@
-///<reference path="./typings/local.d.ts"/>
+///<reference path="../typings/local.d.ts"/>
 import { ChildProcess, spawn } from "child_process";
-import { IConfig } from "config";
+import { IConfig } from "../typings/local";
 
 const config: IConfig = require('config');
 
