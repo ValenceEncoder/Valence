@@ -44,7 +44,5 @@ jspm_packages
 
 # Project level ignores
 test/vid
-tmp 
 .idea
 *.old
-.vscode/
