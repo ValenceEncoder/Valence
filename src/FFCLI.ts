@@ -1,9 +1,9 @@
-import { FFMpegProgramManager } from "./Program";
+import { FFMpegProgramManager } from "./FFProgramManager";
 import { IFFProcessOptions } from "./FFProcess";
 
 if (require.main != module) {
     // Loaded by another module e.g. with require('./src/Main');
-    throw new Error("CLI cannot be loaded by a module loader, it is designed to be used from the command line e.g. `node ./build/CLI.js -i myVid.mkv -o myVidConverted.mp4");
+    throw new Error("CLI cannot be loaded by a module loader, it is designed to be used from the command line e.g. `node ./build/FFCLI.js -i myVid.mkv -o myVidConverted.mp4");
 
 } else {
     // Invoked from the command line e.g. with `node ./src/Main.ts`

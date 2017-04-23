@@ -7,7 +7,7 @@ export class FFMpegProgramManager {
 
     constructor() {
         if (require.main == module) {
-            throw new Error("FFMpegProgramManager Class cannot be instantiated from the command line. Use CLI.js instead");
+            throw new Error("FFMpegProgramManager Class cannot be instantiated from the command line. Use FFCLI.js instead");
         }
     }
 
