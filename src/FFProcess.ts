@@ -112,6 +112,12 @@ export interface IFFOutputHandler {
     (message: string): void;
 }
 
+export interface IStreamInfo {
+    codec_name:string;
+    duration?:string;
+}
+
+
 export abstract class FFProcess implements IFFProcess {
     protected args: string[];
     protected process: ChildProcess;
@@ -137,7 +143,7 @@ export abstract class FFProcess implements IFFProcess {
         this.process[this.targetOutput].on('close', () => { this.endHandler(this.outBuffer) });
     }
 
-    protected abstract parseArgs(): string[];
+    protected abstract parseArgs(infoVideo?:IStreamInfo, infoAudio?:IStreamInfo): string[];
 
 }
 
@@ -150,9 +156,42 @@ export class FFProbe extends FFProcess {
 }
 
 export class FFMpeg extends FFProcess {
+    private readonly FLAG_VERBOSITY:string = "-v quiet -stats";
+    private readonly FLAG_INPUT:string = "-i";
+    private readonly FLAG_CODEC_ALL:string = "-c";
+    private readonly FLAG_CODEC_AUDIO:string = "-c:a";
+    private readonly FLAG_CODEC_VIDEO:string = "-c:v";
+    private readonly FLAG_CODEC_SUBS:string = "-c:v";
 
-    protected parseArgs(): string[] {
-        return `-i ${this.options.input} -c copy -c:a aac ${this.options.output}`.split(" ");
+    private readonly OPT_CODEC_COPY:string = "copy";
+    private readonly OPT_CODEC_AUDIO_AAC:string = "aac";
+    private readonly OPT_CODEC_VIDEO_H264:string = "h264";
+
+    private constructArgs(videoInfo:IStreamInfo, audioInfo:IStreamInfo):string[] {
+        let outArgs:string[] = [
+            this.FLAG_VERBOSITY,
+            this.FLAG_INPUT,
+            this.options.input,
+            this.FLAG_CODEC_ALL,
+            this.OPT_CODEC_COPY
+        ];
+
+        if(videoInfo.codec_name !== "h264") {
+            outArgs.push(this.FLAG_CODEC_VIDEO, this.OPT_CODEC_VIDEO_H264);
+        }
+
+        if (audioInfo.codec_name !== "aac") {
+            outArgs.push(this.FLAG_CODEC_AUDIO, this.OPT_CODEC_AUDIO_AAC)
+        }
+
+        outArgs.push(this.options.output);
+        return outArgs;
+
+    }
+
+    protected parseArgs(videoInfo:IStreamInfo, audioInfo:IStreamInfo): string[] {
+
+        return this.constructArgs(videoInfo, audioInfo);
     }
 
 }

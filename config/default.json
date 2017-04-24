@@ -6,7 +6,7 @@
 	"versions": {
 		"win": {
 			"election": "1.6.2",
-			"ffmpeg": "N-82794-g3ab1311",
+			"ffmpeg": "N-83410-gb1e2192",
 			"node": "7.4.0"
 		},
 		"nix": {
