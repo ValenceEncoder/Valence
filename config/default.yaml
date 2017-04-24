@@ -1,7 +1,12 @@
 bin:
-  ffmpeg: "./ffmpeg/bin/ffmpeg.exe"
-  ffprobe: "./ffmpeg/bin/ffprobe.exe"
+  ffmpeg: "./ffmpeg/bin/ffmpeg"
+  ffprobe: "./ffmpeg/bin/ffprobe"
 versions:
-  election: 1.6.2
-  ffmpeg: "N-82794-g3ab1311"
-  node: 7.4.0
+  win:
+    election: 1.6.2
+    ffmpeg: "N-82794-g3ab1311"
+    node: 7.4.0
+  nix:
+    electron: 1.6.2
+    ffmpeg: 2.8.11-0ubuntu0.16.04.1
+    node: 7.4.0

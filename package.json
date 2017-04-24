@@ -7,10 +7,12 @@
     "start": "cross-env NODE_ENV=development electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": "dist/FFCli.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hammus/MKV2ATV.git"
   },
+  "private": true,
   "keywords": [
     "video",
     "encoding",

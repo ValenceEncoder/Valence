@@ -3,8 +3,7 @@
     "module": "CommonJS",
     "target": "es2015",
     "sourceMap": true,
-//    "outDir": "./build/",
-    "watch": true
+    "outDir": "./dist/"
   },
   "include": [
     "src/**/*.ts"

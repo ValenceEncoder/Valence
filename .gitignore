@@ -46,3 +46,4 @@ jspm_packages
 test/vid
 .idea
 *.old
+ffmpeg/bin
