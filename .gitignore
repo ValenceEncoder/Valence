@@ -43,8 +43,8 @@ jspm_packages
 .node_repl_history
 
 # Project level ignores
-test/vid
 .idea
 *.old
 ffmpeg/bin
 dist
+test
