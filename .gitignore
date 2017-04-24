@@ -47,3 +47,4 @@ test/vid
 .idea
 *.old
 ffmpeg/bin
+dist
