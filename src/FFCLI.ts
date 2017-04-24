@@ -19,6 +19,7 @@ if (require.main != module) {
     const app: FFMpegProgramManager = new FFMpegProgramManager();
     let endHandler:(message:string)=>void = function(message:string) {
         let metadata = JSON.parse(message);
+        let videoStream =
         console.log(metadata);
     };
     app.run(endHandler, options);
