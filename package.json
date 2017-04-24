@@ -4,6 +4,7 @@
   "description": "MKV to AppleTV (MKV2ATV) is a simple cross platform gui application that can speed up encoding video for AppleTV by using FFMPEG to preserve (copy) x264/h264 encoded video streams stored in MKV containers and converting them to MP4 containers.",
   "main": "src/App.ts",
   "scripts": {
+    "cli": "cross-env node ./dist/FFCLI.js",
     "start": "cross-env NODE_ENV=development electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

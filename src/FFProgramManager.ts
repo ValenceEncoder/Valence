@@ -1,13 +1,16 @@
-import {FFMpeg, FFProbe, FFProcess, IFFOutputHandler, IFFProcessOptions} from "./FFProcess";
+import {FFMpeg, FFProbe, IFFOutputHandler, IFFProcessOptions} from "./FFProcess";
 
 export class FFMpegProgramManager {
     public options: IFFProcessOptions;
     private ffprobeInstance: FFProbe = null;
     private ffmpegInstance: FFMpeg = null;
 
-    constructor() {
+    constructor(endHandler?:IFFOutputHandler, options?:IFFProcessOptions) {
         if (require.main == module) {
             throw new Error("FFMpegProgramManager Class cannot be instantiated from the command line. Use FFCLI.js instead");
+        }
+        if(!(typeof endHandler === 'undefined' && typeof options === 'undefined')) {
+            this.run(endHandler, options);
         }
     }
 

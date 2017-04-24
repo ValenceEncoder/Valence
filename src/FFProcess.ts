@@ -11,7 +11,7 @@ export interface IFFProcess {
 
 export interface IFFProcessOptions {
     input: string;
-    output: string;
+    output?: string;
     process: "ffprobe" | "ffmpeg";
 }
 
@@ -105,6 +105,7 @@ export interface IFFProbeDisposition {
 
 export interface IFFProbeOutput {
     streams:IFFProbeStreamData[];
+    format?:IFFProbeFormat;
 }
 
 export interface IFFOutputHandler {

@@ -2,7 +2,6 @@ import {BrowserWindow} from 'electron';
 import * as Url from "url";
 import * as Path from "path";
 
-// Module to control application life.
 export default class Main {
     static mainWindow: Electron.BrowserWindow;
     static application: Electron.App;
