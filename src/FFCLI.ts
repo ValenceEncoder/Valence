@@ -1,5 +1,5 @@
 // import { FFMpegProgramManager } from "./FFProgramManager";
-import {ICLIArgs, IFFProbeOutput, IFFProbeOutputHandler, IFFProbeStreamData, IStreamInfo} from "./FFInterfaces";
+import {IProcessOptions, IFFProbeOutput, IFFProbeOutputHandler, IFFProbeStreamData, IStreamInfo} from "./FFInterfaces";
 import {FFMpeg, FFProbe, FFProcess} from "./FFProcess";
 
 if (require.main != module) {
@@ -16,10 +16,10 @@ const argDefs = [
     {name: 'output', alias: 'o', type: String}
 ];
 
-const options: ICLIArgs = commandLineArgs(argDefs);
+const options: IProcessOptions = commandLineArgs(argDefs);
 
 const pipeProbeInfo: IFFProbeOutputHandler = (fileInfo: IFFProbeOutput): void => {
-    console.log("FFProbe complete... starting encode...");
+
     let videoStream: IFFProbeStreamData = fileInfo.streams.find(i => i.codec_type == 'video');
     let audioStream: IFFProbeStreamData = fileInfo.streams.find(i => i.codec_type == 'audio');
     let videoInfo: IStreamInfo = {codec_name: videoStream.codec_name, duration: videoStream.duration};

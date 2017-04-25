@@ -1,4 +1,4 @@
-export interface ICLIArgs {
+export interface IProcessOptions {
     input: string;
     process: string;
     output?: string;

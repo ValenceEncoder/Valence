@@ -1,16 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>MKV2ATV</title>
-    <script>require('./MainRender')</script>
-  </head>
-  <body>
-    <h1>FFProbe Output Test</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    <div id="ffprobe"></div>
-    <div id="ffmpeg"></div>
-  </body>
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+        td {
+            border: 1px solid black;
+        }
 
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<h1>FFProbe Output Test</h1>
+<div id="ffprobe"></div>
+<div id="ffmpeg">
 
+</div>
+<table id="tbl-ffmpeg">
+    <tr>
+        <th>Field</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td class="bold">Frame:</td>
+        <td id="frame"></td>
+    </tr>
+    <tr>
+        <td class="bold">FPS:</td>
+        <td id="fps"></td>
+    </tr>
+    <tr>
+        <td class="bold">Q:</td>
+        <td id="q"></td>
+    </tr>
+    <tr>
+        <td class="bold">Size:</td>
+        <td id="size"></td>
+    </tr>
+    <tr>
+        <td class="bold">Time:</td>
+        <td id="time"></td>
+    </tr>
+    <tr>
+        <td class="bold">Bitrate:</td>
+        <td id="bitrate"></td>
+    </tr>
+    <tr>
+        <td class="bold">Speed:</td>
+        <td id="speed"></td>
+    </tr>
+</table>
+<button type="button" id="ffmpeg-test">Encode</button>
+
+<script>require('./MainRender')</script>
+</body>
 </html>
