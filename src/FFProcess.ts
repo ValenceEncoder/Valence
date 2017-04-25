@@ -1,153 +1,49 @@
 ///<reference path="../typings/local.d.ts"/>
-import { ChildProcess, spawn } from "child_process";
-import { IConfig } from "../typings/local";
+import {ChildProcess, spawn} from "child_process";
+import {IConfig} from "../typings/local";
+import {
+    ICLIArgs, IFFmpegOutputHandler, IFFProbeOutput, IFFProbeOutputHandler,
+    IStreamInfo
+} from "./FFInterfaces";
 
 const config: IConfig = require('config');
 
-export interface IFFProcess {
-    run(): void;
-    options: IFFProcessOptions;
-}
-
-export interface IFFProcessOptions {
-    input: string;
-    output?: string;
-    process: "ffprobe" | "ffmpeg";
-}
-
-export interface IFFProbeStreamData {
-    index: number;
-    codec_name: string;
-    codec_long_name: string;
-    codec_type: string;
-    codec_time_base: string;
-    codec_tag_string?: string;
-    codec_tag?: string;
-    sample_fmt?: string;
-    sample_rate?: string;
-    bits_per_sample: number;
-    channels?: number;
-    channel_layout?: string;
-    profile?: string;
-    width?: number;
-    height?: number;
-    coded_width?: number;
-    coded_height?: number;
-    has_b_frames?: number;
-    sample_aspect_ratio?: string;
-    display_aspect_ratio?: string;
-    pix_fmt?: string;
-    level?: number;
-    color_range?: string;
-    color_space?: string ;
-    color_transfer?: string;
-    color_primaries?: string;
-    chroma_location?: string;
-    refs?: number;
-    is_avc?: number;
-    nal_length_size?: number;
-    r_frame_rate?: string;
-    avg_frame_rate?: string;
-    time_base?: string;
-    start_pts?: number;
-    start_time?: string;
-    duration_ts?: number;
-    duration?: string;
-    bit_rate?: string;
-    bits_per_raw_sample?: string;
-    nb_frames?: string;
-    disposition?:IFFProbeDisposition;
-    tags:IFFProbeStreamTags;
-    
-}
-
-export interface IFFProbeStreamTags {
-    creation_time?:string;
-    language?:string;
-    encoder?:string;
-}
-
-export interface IFFProbeFormat {
-    filename?: string;
-    nb_streams?: number;
-    nb_programs?: number;
-    format_name?: string;
-    format_long_name?: string;
-    start_time?: string;
-    duration?: string;
-    size?: string;
-    bit_rate?: string;
-    probe_score?: number;
-    tags?:IFFProbeFormatTags;
-}
-
-export interface IFFProbeFormatTags {
-    major_brand?: string;
-    minor_version?: string;
-    compatible_brands?: string;
-    creation_time?: string;
-    encoder?: string;
-}
-
-export interface IFFProbeDisposition {
-    "default"?: number;
-    dub?: number;
-    original?: number;
-    comment?: number;
-    lyrics?: number;
-    karaoke?: number;
-    forced?: number;
-    hearing_impaired?: number;
-    visual_impaired?: number;
-    clean_effects?: number;
-    attached_pic?: number;
-}
-
-export interface IFFProbeOutput {
-    streams:IFFProbeStreamData[];
-    format?:IFFProbeFormat;
-}
-
-export interface IFFOutputHandler {
-    (message: string): void;
-}
-
-export interface IStreamInfo {
-    codec_name:string;
-    duration?:string;
-}
-
-
-export abstract class FFProcess implements IFFProcess {
+export abstract class FFProcess {
     protected args: string[];
     protected process: ChildProcess;
     protected outBuffer: string = "";
-    protected outHandler: (data: string) => void = (data: string) => {
-        this.outBuffer += data;
-    };
-    protected targetOutput: "stderr" | "stdout";
+    protected abstract readonly targetOutput;
     protected command: string;
 
-    constructor(public options: IFFProcessOptions, protected endHandler: (data: any) => void) {
-        this.args = this.parseArgs();
-        this.endHandler = endHandler;
-        this.targetOutput = (options.process == "ffprobe") ? "stdout" : "stderr";
-        this.command = (options.process == "ffprobe") ? config.bin.ffprobe : config.bin.ffmpeg;
-    }
+    public abstract run(videoInfo?: IStreamInfo, audioInfo?: IStreamInfo):void;
 
-    public run(): void {
-        // console.info(`Spawning ${this.options.process.toUpperCase()} with args: ${this.args.join(" ")}`);
-        this.process = spawn(this.command, this.args);
-        this.process[this.targetOutput].setEncoding('utf8');
-        this.process[this.targetOutput].on('data', this.outHandler);
-        this.process[this.targetOutput].on('close', () => { this.endHandler(this.outBuffer) });
-    }
-
-    protected abstract parseArgs(infoVideo?:IStreamInfo, infoAudio?:IStreamInfo): string[];
+    protected abstract parseArgs(infoVideo?: IStreamInfo, infoAudio?: IStreamInfo): string[];
 
 }
 
 export class FFProbe extends FFProcess {
+    protected readonly targetOutput = "stdout";
+    protected bufferOutput: (data: string) => void = (data: string) => {
+        this.outBuffer += data;
+    };
+
+    constructor(public options: ICLIArgs, protected outputHandler:IFFProbeOutputHandler) {
+        super();
+        this.args = this.parseArgs();
+        this.command = config.bin.ffprobe;
+    }
+
+    public run(): void {
+        this.process = spawn(this.command, this.args);
+        this.process[this.targetOutput].setEncoding('utf8');
+        this.process[this.targetOutput].on('data', this.bufferOutput);
+        this.process[this.targetOutput].on('close', () => {
+
+            let output:IFFProbeOutput = JSON.parse(this.outBuffer);
+            this.outputHandler(output);
+
+        });
+    }
 
     protected parseArgs(): string[] {
         return `-v quiet -print_format json -show_format -show_streams ${this.options.input}`.split(" ");
@@ -156,27 +52,54 @@ export class FFProbe extends FFProcess {
 }
 
 export class FFMpeg extends FFProcess {
-    private readonly FLAG_VERBOSITY:string = "-v quiet -stats";
-    private readonly FLAG_INPUT:string = "-i";
-    private readonly FLAG_CODEC_ALL:string = "-c";
-    private readonly FLAG_CODEC_AUDIO:string = "-c:a";
-    private readonly FLAG_CODEC_VIDEO:string = "-c:v";
-    private readonly FLAG_CODEC_SUBS:string = "-c:v";
+    protected readonly targetOutput = "stderr";
 
-    private readonly OPT_CODEC_COPY:string = "copy";
-    private readonly OPT_CODEC_AUDIO_AAC:string = "aac";
-    private readonly OPT_CODEC_VIDEO_H264:string = "h264";
+    private readonly FLAG_VERBOSITY: string = "-v";
+    private readonly FLAG_INPUT: string = "-i";
+    private readonly FLAG_CODEC_ALL: string = "-c";
+    private readonly FLAG_CODEC_AUDIO: string = "-c:a";
+    private readonly FLAG_CODEC_VIDEO: string = "-c:v";
+    private readonly FLAG_CODEC_SUBS: string = "-c:s";
+    private readonly FLAG_STATS: string = "-stats";
 
-    private constructArgs(videoInfo:IStreamInfo, audioInfo:IStreamInfo):string[] {
-        let outArgs:string[] = [
+    private readonly OPT_VERBOSTY_QUIET = "quiet";
+    private readonly OPT_CODEC_COPY: string = "copy";
+    private readonly OPT_CODEC_AUDIO_AAC: string = "aac";
+    private readonly OPT_CODEC_VIDEO_H264: string = "h264";
+
+    constructor(public options: ICLIArgs, protected outputHandler:IFFmpegOutputHandler, protected onCloseHandler?:() => void) {
+        super();
+        this.command = config.bin.ffmpeg;
+
+        if(onCloseHandler == null) {
+            this.onCloseHandler = () => {
+                console.log("Encoding Complete.");
+            }
+        }
+    }
+
+    public run(videoInfo: IStreamInfo, audioInfo: IStreamInfo): void {
+        this.args = this.parseArgs(videoInfo, audioInfo);
+        console.log(`FFmpeg args: ${this.command} ${this.args.join(" ")}`);
+        this.process = spawn(this.command, this.args);
+        this.process[this.targetOutput].setEncoding('utf8');
+        this.process[this.targetOutput].on('data', this.outputHandler);
+        this.process[this.targetOutput].on('close', this.onCloseHandler);
+    }
+
+    protected parseArgs(videoInfo: IStreamInfo, audioInfo: IStreamInfo): string[] {
+
+        let outArgs: string[] = [
             this.FLAG_VERBOSITY,
+            this.OPT_VERBOSTY_QUIET,
+            this.FLAG_STATS,
             this.FLAG_INPUT,
             this.options.input,
             this.FLAG_CODEC_ALL,
             this.OPT_CODEC_COPY
         ];
 
-        if(videoInfo.codec_name !== "h264") {
+        if (videoInfo.codec_name !== "h264") {
             outArgs.push(this.FLAG_CODEC_VIDEO, this.OPT_CODEC_VIDEO_H264);
         }
 
@@ -186,12 +109,6 @@ export class FFMpeg extends FFProcess {
 
         outArgs.push(this.options.output);
         return outArgs;
-
-    }
-
-    protected parseArgs(videoInfo:IStreamInfo, audioInfo:IStreamInfo): string[] {
-
-        return this.constructArgs(videoInfo, audioInfo);
     }
 
 }
