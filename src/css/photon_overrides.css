@@ -1,0 +1,21 @@
+.btn-positive > .icon,
+.btn-primary > .icon {
+    color: #fff;
+}
+
+div.gradient {
+    display: box;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    line-height: 20px;
+}
+.gradient button,
+.gradient .button {
+    border: none;
+    display: block;
+    border: 1px solid hsl(0, 0%, 66%);
+    margin: -1px 0px -1px -1px;
+    background: none;
+}

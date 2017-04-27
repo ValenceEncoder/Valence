@@ -1,4 +1,9 @@
-import {app, BrowserWindow} from 'electron';
+import {app, BrowserWindow, globalShortcut} from 'electron';
+import {enableLiveReload} from 'electron-compile';
 import Main from './Main';
 
-Main.main(app, BrowserWindow);
+enableLiveReload();
+
+require('electron-debug')({showDevTools: true});
+
+Main.main(app, BrowserWindow, globalShortcut);

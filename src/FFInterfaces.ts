@@ -4,6 +4,11 @@ export interface IProcessOptions {
     output?: string;
 }
 
+export interface IFileInfo {
+    videoInfo:IStreamInfo;
+    audioInfo:IStreamInfo;
+}
+
 export interface IFFProbeStreamData {
     index: number;
     codec_name: string;
@@ -113,3 +118,29 @@ export interface IStreamInfo {
 export interface IProgramManagerCallback {
     (result: string | IFFProbeOutput): void;
 }
+
+export interface IFFMpegProgress {
+    frame: number;
+    fps: number;
+    q: number;
+    size: string;
+    time: string;
+    bitrate: string;
+    speed: string;
+}
+
+interface IConfigBin {
+        ffprobe: string;
+        ffmpeg: string;
+    }
+
+    interface IConfigVersions {
+        nwjs:number;
+        ffmpeg:string;
+        node:number;
+    }
+
+    export interface IConfig {
+        bin: IConfigBin;
+    }
+
