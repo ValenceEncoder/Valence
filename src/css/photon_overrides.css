@@ -3,6 +3,14 @@
     color: #fff;
 }
 
+.draggable {
+   -webkit-app-region: drag;
+}
+
+.non-draggable {
+    -webkit-app-region: no-drag;
+}
+
 div.gradient {
     display: box;
     display: -webkit-flex;
