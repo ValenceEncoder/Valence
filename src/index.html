@@ -4,47 +4,31 @@
     <meta charset="UTF-8">
     <title>MKV2ATV</title>
     <!-- Change to min for production -->
-    <link rel="stylesheet" href="vendor/photon/css/photon.css"/>
-    <link rel="stylesheet" href="css/photon_overrides.css"/>
+    <link rel="stylesheet" href="../node_modules/mkv-theme/css/mkv2atv.min.css"/>
+    <link rel="stylesheet" href="css/overrides.css"/>
 
 </head>
-<body>
-<div class="window">
-    <header class="toolbar toolbar-header draggable">
-    <h1 class="title">MKV to Apple TV</h1>
+<body class="app-bg">
+<div class="container">
+    <div class="row">
+        <div class="container">
+            <h5>MKV to AppleTV</h5>
 
-    <div class="toolbar-actions non-draggable">
-        <div class="btn-group">
-            <button class="btn btn-default active">
-                <span class="icon icon-home"></span>
-            </button>
-            <button class="btn btn-default" title="Open Video File">
-                <span class="icon icon-folder"></span>
-            </button>
-            <button class="btn btn-default" title="Start Encoding">
-                <span class="icon icon-play"></span>
-            </button>
         </div>
     </div>
-</header>
-<div class="window-content view gradient">
-
-    <div id="ffmpeg-output"></div>
-
-</div>
-
-<footer class="toolbar toolbar-footer">
-    <div class="toolbar-actions">
-        <button class="btn btn-large btn-default" id="btn-quit">
-            Quit
-        </button>
-
-        <button class="btn btn-large btn-positive pull-right" id="btn-encode">
-            <span class="icon icon icon-play icon-text"></span>
-            Start
-        </button>
+    <div class="row">
+        <div class="container">
+            <div class="col s3">
+                <button id="btn-encode" class="btn btn-success btn-s"><i class="fa fa-play"></i>Encode</button>
+            </div>
+            <div class="col s6"></div>
+            <div class="col s3">
+                <button id="btn-quit" class="btn btn-error btn-s"><i class="fa fa-close"></i>Quit</button>
+            </div>
+        </div>
     </div>
-</footer></div>
-<script>require('./MainRender')</script>
+</div>
+    <div id="ffmpeg-output"></div>
+<script>require('./MainRender');</script>
 </body>
 </html>

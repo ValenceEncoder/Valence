@@ -50,8 +50,11 @@
     "typescript": "latest"
   },
   "dependencies": {
+    "mkv-theme": "hammus/mkv-theme#1.0.0",
+    "materialize-css": "^0.98.2",
     "command-line-args": "^4.0.2",
     "config": "^1.25.1",
+    "jquery": "^3.2.1",
     "js-yaml": "^3.8.3"
   }
 }

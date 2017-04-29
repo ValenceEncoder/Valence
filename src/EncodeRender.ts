@@ -1,9 +1,9 @@
 import {remote, ipcRenderer} from 'electron';
-import IPCEventTypes from './AppConsts';
+import {IPCEventType} from './ElectronUtils';
 const BrowserWindow = remote.BrowserWindow;
 
-ipcRenderer.on(IPCEventTypes.SPAWN_ENCODER, function(event, message, fromWindowId) {
+ipcRenderer.on(IPCEventType.SPAWN_ENCODER, function(event, message, fromWindowId) {
     document.getElementById('message').innerText = message;
     const fromWindow = BrowserWindow.fromId(fromWindowId);
-    fromWindow.webContents.send(IPCEventTypes.ENCODE_COMPLETED)
+    fromWindow.webContents.send(IPCEventType.ENCODE_COMPLETED)
 });

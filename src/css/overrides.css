@@ -1,0 +1,15 @@
+.draggable {
+   -webkit-app-region: drag;
+}
+
+.non-draggable {
+    -webkit-app-region: no-drag;
+}
+
+.btn > i:after {
+    content: '\0000a0\0000a0\0000a0\0000a0';
+}
+
+h5 {
+    text-align: center;
+}

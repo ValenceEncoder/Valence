@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
+    "moduleResolution": "node",
     "target": "es2015",
     "sourceMap": true,
-    "outDir": "./dist/"
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "include": [
     "src/**/*.ts"

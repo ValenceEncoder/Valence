@@ -5,8 +5,8 @@ export interface IProcessOptions {
 }
 
 export interface IFileInfo {
-    videoInfo:IStreamInfo;
-    audioInfo:IStreamInfo;
+    videoInfo: IStreamInfo;
+    audioInfo: IStreamInfo;
 }
 
 
@@ -108,7 +108,7 @@ export interface IFFProbeOutputHandler {
 }
 
 export interface IFFmpegOutputHandler {
-    (result: string): void;
+    (progress: IFFMpegProgress): void;
 }
 
 export interface IStreamInfo {
@@ -121,27 +121,28 @@ export interface IProgramManagerCallback {
 }
 
 export interface IFFMpegProgress {
-    frame: number;
-    fps: number;
-    q: number;
-    size: string;
-    time: string;
-    bitrate: string;
-    speed: string;
+    frame?: number;
+    fps?: number;
+    q?: number;
+    size?: string;
+    time?: string;
+    bitrate?: string;
+    speed?: string;
 }
 
 interface IConfigBin {
-        ffprobe: string;
-        ffmpeg: string;
-    }
+    ffprobe: string;
+    ffmpeg: string;
+}
 
-    interface IConfigVersions {
-        nwjs:number;
-        ffmpeg:string;
-        node:number;
-    }
+interface IConfigVersions {
+    nwjs: number;
+    ffmpeg: string;
+    node: number;
+}
 
-    export interface IConfig {
-        bin: IConfigBin;
-    }
+export interface IConfig {
+    bin: IConfigBin;
+    versions: IConfigVersions;
+}
 
