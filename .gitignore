@@ -47,5 +47,5 @@ jspm_packages
 *.old
 ffmpeg/bin
 dist
-__tests__/vid/
+vid
 tmp
