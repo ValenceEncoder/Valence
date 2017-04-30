@@ -6,7 +6,10 @@
     "sourceMap": true,
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "typeRoots": [
+      "../node_modules"
+    ]
   },
   "include": [
     "src/**/*.ts"
