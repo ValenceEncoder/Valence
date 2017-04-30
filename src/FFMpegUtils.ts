@@ -51,13 +51,13 @@ export class FFMpegUtils {
     }
 
     public static fileExists(filepath: string): boolean {
-    try {
-        fs.statSync(path.resolve(filepath));
-    } catch (e) {
-        console.info(`File ${filepath} does not exist.`);
-        return false;
-    }
+        try {
+            fs.statSync(path.resolve(filepath));
+        } catch (e) {
+            console.info(`File ${filepath} does not exist.`);
+            return false;
+        }
 
-    return true;
-}
+        return true;
+    }
 }

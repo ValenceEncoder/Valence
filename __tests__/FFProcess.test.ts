@@ -1,5 +1,3 @@
-
-import {IFFProbeOutput} from "../src/FFInterfaces";
 import {FFProbe} from "../src/FFProcess";
 let ffprobeInstance:FFProbe;
 beforeAll(() => {

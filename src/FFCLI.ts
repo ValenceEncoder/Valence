@@ -1,6 +1,8 @@
-// import { FFMpegProgramManager } from "./FFProgramManager";
-import {IProcessOptions, IFFProbeOutput, IFFProbeOutputHandler, IFFProbeStreamData, IStreamInfo} from "./FFInterfaces";
-import {FFMpeg, FFProbe, FFProcess} from "./FFProcess";
+import {
+    IProcessOptions, IFFProbeOutput, IFFProbeOutputHandler, IFFProbeStreamData, IStreamInfo,
+    IFileInfo
+} from "./FFInterfaces";
+import {FFMpeg, FFProbe} from "./FFProcess";
 
 if (require.main != module) {
     // Loaded by another module e.g. with require('./src/Main');
@@ -18,18 +20,20 @@ const argDefs = [
 
 const options: IProcessOptions = commandLineArgs(argDefs);
 
-const pipeProbeInfo: IFFProbeOutputHandler = (fileInfo: IFFProbeOutput): void => {
+const pipeProbeInfo: IFFProbeOutputHandler = (probeOutput: IFFProbeOutput): void => {
 
-    let videoStream: IFFProbeStreamData = fileInfo.streams.find(i => i.codec_type == 'video');
-    let audioStream: IFFProbeStreamData = fileInfo.streams.find(i => i.codec_type == 'audio');
+    let videoStream: IFFProbeStreamData = probeOutput.streams.find(i => i.codec_type == 'video');
+    let audioStream: IFFProbeStreamData = probeOutput.streams.find(i => i.codec_type == 'audio');
     let videoInfo: IStreamInfo = {codec_name: videoStream.codec_name, duration: videoStream.duration};
     let audioInfo: IStreamInfo = {codec_name: audioStream.codec_name};
+
+    let fileInfo:IFileInfo = {videoInfo: videoInfo, audioInfo: audioInfo};
 
     ffmpegInstance = new FFMpeg(options, (result: string) => {
         console.log(result);
     }, () => console.log("Encoding Complete"));
 
-    ffmpegInstance.run(videoInfo, audioInfo);
+    ffmpegInstance.run(fileInfo);
 
 };
 
