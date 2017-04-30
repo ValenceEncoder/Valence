@@ -6,11 +6,23 @@
   "scripts": {
     "cli": "cross-env tsc && node dist/FFCLI.js",
     "start": "cross-env NODE_ENV=development electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --notify"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hammus/MKV2ATV.git"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ]
   },
   "private": true,
   "keywords": [
@@ -33,21 +45,20 @@
   "devDependencies": {
     "@types/electron": "^1.4.37",
     "@types/electron-packager": "latest",
-    "@types/node": "^7.0.13",
-    "@types/npm": "latest",
-    "babel-preset-env": "^1.4.0",
-    "babel-preset-react": "^6.24.1",
+    "@types/jest": "^19.2.2",
     "cross-env": "^4.0.0",
     "devtron": "^1.4.0",
     "electron-builder": "latest",
     "electron-debug": "^1.1.0",
     "electron-packager": "latest",
     "electron-prebuilt-compile": "^1.6.2",
+    "gulp": "^3.9.1",
     "i": "^0.3.5",
-    "mocha": "^3.2.0",
+    "jest": "^19.0.2",
+    "ts-jest": "^19.0.14",
     "ts-node": "latest",
     "tslint": "latest",
-    "typescript": "latest"
+    "typescript": "^2.3.2"
   },
   "dependencies": {
     "mkv-theme": "hammus/mkv-theme#1.0.0",
