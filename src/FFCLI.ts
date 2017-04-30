@@ -3,6 +3,8 @@ import {
     IFileInfo
 } from "./FFInterfaces";
 import {FFMpeg, FFProbe} from "./FFProcess";
+import * as Promise from 'promise'
+import {FFMpegUtils} from "./FFMpegUtils";
 
 if (require.main != module) {
     // Loaded by another module e.g. with require('./src/Main');
@@ -22,18 +24,13 @@ const options: IProcessOptions = commandLineArgs(argDefs);
 
 const pipeProbeInfo: IFFProbeOutputHandler = (probeOutput: IFFProbeOutput): void => {
 
-    let videoStream: IFFProbeStreamData = probeOutput.streams.find(i => i.codec_type == 'video');
-    let audioStream: IFFProbeStreamData = probeOutput.streams.find(i => i.codec_type == 'audio');
-    let videoInfo: IStreamInfo = {codec_name: videoStream.codec_name, duration: videoStream.duration};
-    let audioInfo: IStreamInfo = {codec_name: audioStream.codec_name};
+    let fileInfo = FFMpegUtils.getFileInfo(probeOutput);
 
-    let fileInfo:IFileInfo = {videoInfo: videoInfo, audioInfo: audioInfo};
+    ffmpegInstance = new FFMpeg(options);
 
-    ffmpegInstance = new FFMpeg(options, (result: string) => {
+    ffmpegInstance.run(fileInfo).then((result: string) => {
         console.log(result);
-    }, () => console.log("Encoding Complete"));
-
-    ffmpegInstance.run(fileInfo);
+    });
 
 };
 
@@ -48,11 +45,13 @@ let ffmpegInstance:FFMpeg;
 switch (options.process) {
 
     case "ffprobe":
-        ffprobeInstance = new FFProbe(options, logProbeInfo);
+        ffprobeInstance = new FFProbe(options);
+        ffprobeInstance.run().then(logProbeInfo);
         break;
     case "ffmpeg":
         console.log("FFMPEG Command Received. Initializing FFProbe first...");
-        ffprobeInstance = new FFProbe(options, pipeProbeInfo);
+        ffprobeInstance = new FFProbe(options);
+        ffprobeInstance.run().then(pipeProbeInfo);
         break;
 }
 

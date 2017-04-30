@@ -27,10 +27,15 @@ export class FFMpegUtils {
     public static OPT_CODEC_VIDEO_H264: string = "h264";
 
     public static getFileInfo(fileInfo: IFFProbeOutput): IFileInfo {
-
         let videoStream: IFFProbeStreamData = fileInfo.streams.find(i => i.codec_type == 'video');
         let audioStream: IFFProbeStreamData = fileInfo.streams.find(i => i.codec_type == 'audio');
-        let videoInfo: IStreamInfo          = {codec_name: videoStream.codec_name, duration: videoStream.duration};
+        let duration                        = fileInfo.format.duration;
+        let size                            = fileInfo.format.size;
+        let videoInfo: IStreamInfo          = {
+            codec_name: videoStream.codec_name,
+            duration: parseFloat(duration),
+            size: parseFloat(size)
+        };
         let audioInfo: IStreamInfo          = {codec_name: audioStream.codec_name};
         return {
             videoInfo,

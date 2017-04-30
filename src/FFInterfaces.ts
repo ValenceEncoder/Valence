@@ -52,7 +52,7 @@ export interface IFFProbeStreamData {
     bits_per_raw_sample?: string;
     nb_frames?: string;
     disposition?: IFFProbeDisposition;
-    tags: IFFProbeStreamTags;
+    tags?: IFFProbeStreamTags;
 
 }
 
@@ -113,7 +113,8 @@ export interface IFFmpegOutputHandler {
 
 export interface IStreamInfo {
     codec_name: string;
-    duration?: string;
+    duration?: number;
+    size?: number;
 }
 
 export interface IProgramManagerCallback {

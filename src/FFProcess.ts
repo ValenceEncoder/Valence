@@ -1,4 +1,5 @@
 import {ChildProcess, spawn} from "child_process";
+import * as Promise from 'promise';
 import {
     IProcessOptions, IFFProbeOutput,
     IStreamInfo, IFileInfo, IConfig, IFFMpegProgress
@@ -11,10 +12,12 @@ export abstract class FFProcess {
     protected args: string[];
     protected process: ChildProcess;
     protected outBuffer: string = "";
-    protected abstract readonly targetOutput:"stdout"|"stderr";
+    protected abstract readonly targetOutput: "stdout" | "stderr";
     protected command: string;
 
-    public abstract run(args?:any): Promise<IFileInfo|IFFMpegProgress>;
+    constructor(){}
+
+    public abstract run(args?: any): Promise.IThenable<IFileInfo | IFFMpegProgress>;
 
     protected abstract parseArgs(infoVideo?: IStreamInfo, infoAudio?: IStreamInfo): string[];
 
@@ -32,18 +35,19 @@ export class FFProbe extends FFProcess {
         this.command = config.bin.ffprobe;
     }
 
-    public run(): Promise<IFileInfo> {
+    public run(): Promise.IThenable<IFFProbeOutput> {
 
         return new Promise((resolve, reject) => {
             this.process = spawn(this.command, this.args);
             this.process[this.targetOutput].setEncoding('utf8');
+            this.process.stderr.on('error', err => reject(err));
             this.process[this.targetOutput].on('data', this.bufferOutput);
             this.process[this.targetOutput].on('close', () => {
                 let output: IFFProbeOutput;
                 try {
                     output = JSON.parse(this.outBuffer);
                     resolve(FFMpegUtils.getFileInfo(output));
-                } catch(err) {
+                } catch (err) {
                     reject(err);
                 }
 
@@ -72,7 +76,7 @@ export class FFMpeg extends FFProcess {
         }
     }
 
-    public run(fileInfo:IFileInfo): Promise<IFFMpegProgress> {
+    public run(fileInfo: IFileInfo): Promise.IThenable<IFFMpegProgress> {
         return new Promise((resolve, reject) => {
             this.args    = this.parseArgs(fileInfo.videoInfo, fileInfo.audioInfo);
             this.process = spawn(this.command, this.args);
