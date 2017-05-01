@@ -6,27 +6,11 @@
   "scripts": {
     "cli": "cross-env tsc && node dist/FFCLI.js",
     "start": "cross-env NODE_ENV=development electron .",
-    "test": "jasmine-ts spec/**/*.spec.ts"
+    "test": "mocha -c -S -R spec --compilers ts:ts-node/register --check-leaks"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hammus/MKV2ATV.git"
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>"
-    ],
-    "testEnvironment": "node",
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ]
   },
   "private": true,
   "keywords": [
@@ -51,6 +35,7 @@
     "@types/electron-packager": "latest",
     "@types/jasmine": "^2.5.47",
     "@types/promise": "^7.1.30",
+    "chai": "^3.5.0",
     "cross-env": "^4.0.0",
     "devtron": "^1.4.0",
     "electron-builder": "latest",
@@ -59,10 +44,12 @@
     "electron-prebuilt-compile": "^1.6.2",
     "gulp": "^3.9.1",
     "i": "^0.3.5",
+    "istanbul": "^1.1.0-alpha.1",
     "jasmine": "^2.6.0",
     "jasmine-node": "^1.14.5",
     "jasmine-spec-reporter": "^4.1.0",
     "jasmine-ts": "^0.1.0",
+    "mocha": "^3.3.0",
     "ts-node": "^3.0.2",
     "tslint": "latest",
     "typescript": "^2.3.2"

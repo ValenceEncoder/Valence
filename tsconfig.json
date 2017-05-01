@@ -2,8 +2,10 @@
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es6",
     "sourceMap": true,
+    "noEmit": true,
+    "noEmitOnError": true,
     "outDir": "./dist/",
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
