@@ -6,11 +6,23 @@
   "scripts": {
     "cli": "cross-env tsc && node dist/FFCLI.js",
     "start": "cross-env NODE_ENV=development electron .",
-    "test": "mocha -c -S -R spec --compilers ts:ts-node/register --check-leaks"
+    "test": "nyc mocha"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hammus/MKV2ATV.git"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "private": true,
   "keywords": [
@@ -55,7 +67,9 @@
     "jasmine-spec-reporter": "^4.1.0",
     "jasmine-ts": "^0.1.0",
     "mocha": "^3.3.0",
+    "nyc": "^10.3.0",
     "sinon": "^2.2.0",
+    "source-map-support": "^0.4.15",
     "ts-node": "^3.0.2",
     "tslint": "latest",
     "typescript": "^2.3.2"

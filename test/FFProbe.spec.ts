@@ -2,13 +2,10 @@ import * as chai from 'chai';
 import {FFProbe, FFMpeg} from '../src/FFProcess';
 import * as mocha from 'mocha';
 
-
-
 const expect          = chai.expect;
-const ffprobeInstance = new FFProbe({input: "vid/large.mkv"});
 
 describe("FFProbe", function () {
-
+    let ffprobeInstance = new FFProbe({input: "vid/large.mkv"});
     describe("#constructor()", function () {
         it("be an instance of the FFProbe class", function () {
             expect(ffprobeInstance).to.be.instanceof(FFProbe);
