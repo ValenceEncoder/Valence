@@ -1,6 +1,6 @@
 export interface IProcessOptions {
     input: string;
-    process: string;
+    process?: string;
     output?: string;
 }
 
@@ -146,4 +146,3 @@ export interface IConfig {
     bin: IConfigBin;
     versions: IConfigVersions;
 }
-

@@ -1,5 +1,6 @@
 import {ChildProcess, spawn} from "child_process";
-import * as Promise from 'promise';
+import {EventEmitter} from "events";
+import * as Promise from "bluebird";
 import {
     IProcessOptions, IFFProbeOutput,
     IStreamInfo, IFileInfo, IConfig, IFFMpegProgress
@@ -8,51 +9,55 @@ import {FFMpegUtils} from "./FFMpegUtils";
 
 const config: IConfig = require('config');
 
-export abstract class FFProcess {
+export abstract class FFProcess extends EventEmitter {
     protected args: string[];
     protected process: ChildProcess;
-    protected outBuffer: string = "";
+    protected outBuffer: string                   = "";
     protected abstract readonly targetOutput: "stdout" | "stderr";
+    public static readonly EVENT_OUTPUT: string   = "OUTPUT";
+    public static readonly EVENT_COMPLETE: string = "COMPLETE";
+    public static readonly EVENT_ERROR: string    = "ERROR";
+
     protected command: string;
 
-    constructor(){}
+    constructor(options:IProcessOptions) {
+        super();
+        if(!FFMpegUtils.fileExists(options.input)) {
+            throw new Error(`File ${options.input} does not exist`);
+        }
+    }
 
-    public abstract run(args?: any): Promise.IThenable<IFileInfo | IFFMpegProgress>;
+    public abstract run(args?: any): any;
 
     protected abstract parseArgs(infoVideo?: IStreamInfo, infoAudio?: IStreamInfo): string[];
 
 }
 
 export class FFProbe extends FFProcess {
-    protected readonly targetOutput                = "stdout";
+    protected readonly targetOutput = "stdout";
+
     protected bufferOutput: (data: string) => void = (data: string) => {
         this.outBuffer += data;
     };
 
     constructor(public options: IProcessOptions) {
-        super();
+        super(options);
         this.args    = this.parseArgs();
         this.command = config.bin.ffprobe;
     }
 
-    public run(): Promise.IThenable<IFFProbeOutput> {
-
-        return new Promise((resolve, reject) => {
-            this.process = spawn(this.command, this.args);
-            this.process[this.targetOutput].setEncoding('utf8');
-            this.process.stderr.on('error', err => reject(err));
-            this.process[this.targetOutput].on('data', this.bufferOutput);
-            this.process[this.targetOutput].on('close', () => {
-                let output: IFFProbeOutput;
-                try {
-                    output = JSON.parse(this.outBuffer);
-                    resolve(FFMpegUtils.getFileInfo(output));
-                } catch (err) {
-                    reject(err);
-                }
-
-            });
+    public run(): FFProbe {
+        // console.time("FFPROBE::RUN");
+        this.process = spawn(this.command, this.args);
+        this.process[this.targetOutput].setEncoding('utf8');
+        this.process[this.targetOutput].on('data', this.bufferOutput);
+        this.process[this.targetOutput].on('close', () => {
+            let output: IFFProbeOutput;
+            output = JSON.parse(this.outBuffer);
+            this.emit(FFProbe.EVENT_OUTPUT, FFMpegUtils.getFileInfo(output));
         });
+
+        return this;
     }
 
     protected parseArgs(): string[] {
@@ -65,38 +70,33 @@ export class FFMpeg extends FFProcess {
     protected readonly targetOutput = "stderr";
 
 
-    constructor(public options: IProcessOptions, protected onCloseHandler?: () => void) {
-        super();
+    constructor(public options: IProcessOptions) {
+        super(options);
         this.command = config.bin.ffmpeg;
 
-        if (onCloseHandler == null) {
-            this.onCloseHandler = () => {
-                console.log("Encoding Complete.");
-            }
-        }
     }
 
-    public run(fileInfo: IFileInfo): Promise.IThenable<IFFMpegProgress> {
-        return new Promise((resolve, reject) => {
-            this.args    = this.parseArgs(fileInfo.videoInfo, fileInfo.audioInfo);
-            this.process = spawn(this.command, this.args);
-            this.process[this.targetOutput].setEncoding('utf8');
+    public run(fileInfo: IFileInfo): FFMpeg {
 
-            /**
-             * Either Node or FFMPEG is flushing the output buffer with partially formed messages, so we test for correctly formed output
-             * and if not we buffer it and then flush it once its formed
-             */
-            this.process[this.targetOutput].on('data', (message: string) => {
-                this.outBuffer += message;
-                if (this.outBuffer.match(FFMpegUtils.RGX_FORMED_OUTPUT)) {
-                    let result     = this.outBuffer;
-                    this.outBuffer = "";
-                    resolve(result);
-                }
+        this.args    = this.parseArgs(fileInfo.videoInfo, fileInfo.audioInfo);
+        this.process = spawn(this.command, this.args);
+        this.process[this.targetOutput].setEncoding('utf8');
 
-            });
-            this.process[this.targetOutput].on('close', this.onCloseHandler);
+        /**
+         * Either Node or FFMPEG is flushing the output buffer with partially formed messages, so we test for correctly formed output
+         * and if not we buffer it and then flush it once its formed
+         */
+        this.process[this.targetOutput].on('data', (message: string) => {
+            this.outBuffer += message;
+            if (this.outBuffer.match(FFMpegUtils.RGX_FORMED_OUTPUT)) {
+                let result     = this.outBuffer;
+                this.outBuffer = "";
+                this.emit(FFProcess.EVENT_OUTPUT, result);
+            }
+
         });
+        this.process[this.targetOutput].on('close', () => this.emit(FFMpeg.EVENT_COMPLETE));
+        return this;
     }
 
     protected parseArgs(videoInfo: IStreamInfo, audioInfo: IStreamInfo): string[] {

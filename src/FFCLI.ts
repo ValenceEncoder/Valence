@@ -28,13 +28,14 @@ const pipeProbeInfo: IFFProbeOutputHandler = (probeOutput: IFFProbeOutput): void
 
     ffmpegInstance = new FFMpeg(options);
 
-    ffmpegInstance.run(fileInfo).then((result: string) => {
+    ffmpegInstance.run(fileInfo).on(FFMpeg.EVENT_OUTPUT, (result: string) => {
         console.log(result);
     });
 
 };
 
 let logProbeInfo: IFFProbeOutputHandler = (result: IFFProbeOutput): void => {
+    // console.timeEnd("FFPROBE::RUN");
     console.log(result);
 };
 
@@ -46,15 +47,12 @@ switch (options.process) {
 
     case "ffprobe":
         ffprobeInstance = new FFProbe(options);
-        ffprobeInstance.run().then(logProbeInfo);
+        ffprobeInstance.run().on(FFProbe.EVENT_OUTPUT, logProbeInfo);
         break;
     case "ffmpeg":
         console.log("FFMPEG Command Received. Initializing FFProbe first...");
         ffprobeInstance = new FFProbe(options);
-        ffprobeInstance.run().then(pipeProbeInfo);
+        ffprobeInstance.run().on(FFProbe.EVENT_OUTPUT, pipeProbeInfo);
         break;
 }
-
-ffprobeInstance.run();
-
 

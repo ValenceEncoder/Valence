@@ -4,8 +4,6 @@
     "moduleResolution": "node",
     "target": "es6",
     "sourceMap": true,
-    "noEmit": true,
-    "noEmitOnError": true,
     "outDir": "./dist/",
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
@@ -16,7 +14,7 @@
   ],
   "exclude": [
     "node_modules",
-    "__tests__/**/*",
+    "test/**/*",
     "tmp",
     "typings"
   ]
