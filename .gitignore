@@ -1,5 +1,3 @@
-.nvmrc
-nwjs
 # Logs
 logs
 *.log
@@ -47,5 +45,4 @@ jspm_packages
 *.old
 ffmpeg/bin
 dist
-vid
 tmp
