@@ -1,4 +1,5 @@
-## Notice (2017/4/23): MKV2ATV is new and under active development, so if you've landed on this page early, there probably won't be a tagged release for a few weeks.
+[![Build Status](https://travis-ci.org/hammus/MKV2ATV.svg?branch=master)](https://travis-ci.org/hammus/MKV2ATV)
+#### Notice (2017/4/23): MKV2ATV is new and under active development, so if you've landed on this page early, there probably won't be a tagged release for a few weeks.
 
 # MKV to AppleTV
 MKV to AppleTV (MKV2ATV) is a simple cross platform GUI application that can speed up converting video for Apple iTunes and AppleTV.
