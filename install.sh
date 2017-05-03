@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export FFMPEG_ARCHIVE="ffmpeg-git-64bit-static.tar.xz"
-export FFMPEG_ARCHIVE_DIR="./bin/ffmpeg/ffmpeg-git-20170417-64bit-static"
+export FFMPEG_ARCHIVE_DIR="./ffmpeg/bin/ffmpeg-git-20170417-64bit-static"
 export FFMPEG=$FFMPEG_ARCHIVE_DIR/ffmpeg
 export FFPROBE=$FFMPEG_ARCHIVE_DIR/ffprobe
 export FFMPEG_OUTDIR="./ffmpeg/bin"
