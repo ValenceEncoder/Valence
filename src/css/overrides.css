@@ -13,3 +13,10 @@
 h5 {
     text-align: center;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+}

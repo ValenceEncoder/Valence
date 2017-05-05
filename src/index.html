@@ -18,17 +18,29 @@
     </div>
     <div class="row">
         <div class="container">
-            <div class="col s3">
-                <button id="btn-encode" class="btn btn-success btn-s"><i class="fa fa-play"></i>Encode</button>
+            <div class="col s6">
+                <label for="file-input" class="grey-text">Input File:</label>
             </div>
-            <div class="col s6"></div>
-            <div class="col s3">
-                <button id="btn-quit" class="btn btn-error btn-s"><i class="fa fa-close"></i>Quit</button>
+            <div class="col s6">
+                <input id="file-input" type="text" class="text-input" />
             </div>
         </div>
     </div>
+    <footer class="footer">
+        <div class="row">
+            <div class="container">
+                <div class="col s3">
+                    <button id="btn-encode" class="btn btn-success btn-s"><i class="fa fa-play"></i>Encode</button>
+                </div>
+                <div class="col s6"></div>
+                <div class="col s3">
+                    <button id="btn-quit" class="btn btn-error btn-s"><i class="fa fa-close"></i>Quit</button>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
-    <div id="ffmpeg-output"></div>
+<div id="ffmpeg-output"></div>
 <script>require('./MainRender');</script>
 </body>
 </html>
