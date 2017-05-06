@@ -4,7 +4,7 @@ export class ElectronUtils {
     static path(filename:string) {
         return Url.format({
             protocol: "file:",
-            pathname: Path.join(__dirname, "EncodeView.html"),
+            pathname: Path.join(__dirname, filename),
             slashes: true
         });
     }
