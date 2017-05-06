@@ -2,16 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="vendor/photon/css/photon.min.css">
-    <link rel="stylesheet" href="css/overrides.css">
+    <link rel="stylesheet" href="../node_modules/mkv-theme/css/mkv2atv.min.css"/>
+    <link rel="stylesheet" href="css/overrides.scss"/>
     <title>Encode Progress</title>
 </head>
-<body>
-<div class="window">
-    <div class="window-content">
-        <div id="message"></div>
+<body class="app-bg">
+<header>
+    <h4 id="heading">Encoding</h4>
+</header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div id="message"></div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s12">
+                <div class="progress-container">
+                    <div class="progress-bar-info animate"></div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</main>
 <script>require('./EncodeRender')</script>
 </body>
 </html>
