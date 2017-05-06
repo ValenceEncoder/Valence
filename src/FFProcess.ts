@@ -47,9 +47,12 @@ export class FFProbe extends FFProcess {
     }
 
     public run(): FFProbe {
-        // console.time("FFPROBE::RUN");
+        console.log("FFPROBE::RUN");
         this.process = spawn(this.command, this.args);
         this.process[this.targetOutput].setEncoding('utf8');
+        this.process[this.targetOutput].on('error', (err:any) => {
+           this.emit(FFProbe.EVENT_ERROR, err);
+        });
         this.process[this.targetOutput].on('data', this.bufferOutput);
         this.process[this.targetOutput].on('close', () => {
             let output: IFFProbeOutput;
@@ -96,6 +99,7 @@ export class FFMpeg extends FFProcess {
 
         });
         this.process[this.targetOutput].on('close', () => this.emit(FFMpeg.EVENT_COMPLETE));
+        this.process[this.targetOutput].on('error', (err:any) => this.emit(FFMpeg.EVENT_ERROR, err));
         return this;
     }
 
