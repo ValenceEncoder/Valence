@@ -15,7 +15,7 @@ describe("FFProbe", function () {
     describe("#run()", function () {
         it("should return a JSON object of the correct form", function (done) {
             let expected = {
-                videoInfo: {codec_name: 'h264', duration: 20.256, size: 11808593},
+                videoInfo: {codec_name: 'h264', duration: 20.256, size: 11808.593},
                 audioInfo: {codec_name: 'ac3'}
             };
 
