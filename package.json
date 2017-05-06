@@ -80,7 +80,7 @@
     "config": "^1.25.1",
     "jquery": "^3.2.1",
     "materialize-css": "^0.98.2",
-    "mkv-theme": "../../mkv-theme",
+    "mkv-theme": "hammus/mkv-theme#1.0.1",
     "promise": "^7.1.1"
   }
 }
