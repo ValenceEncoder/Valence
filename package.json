@@ -66,11 +66,13 @@
   "dependencies": {
     "command-line-args": "^4.0.2",
     "config": "^1.25.1",
-    "mkv-theme": "hammus/mkv-theme#1.0.1",
+    "devtron": "^1.4.0",
     "electron-builder": "latest",
     "electron-debug": "^1.1.0",
     "electron-packager": "latest",
     "electron-prebuilt-compile": "^1.6.2",
-    "devtron": "^1.4.0"
+    "hammerjs": "^2.0.4",
+    "materialize-css": "^0.98.2",
+    "mkv-theme": "hammus/mkv-theme#1.0.1"
   }
 }

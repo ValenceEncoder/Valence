@@ -93,9 +93,8 @@ export class FFMpeg extends FFProcess {
             if (this.outBuffer.match(FFMpegUtils.RGX_FORMED_OUTPUT)) {
                 let result     = this.outBuffer;
                 this.outBuffer = "";
-                this.emit(FFProcess.EVENT_OUTPUT, result);
+                this.emit(FFProcess.EVENT_OUTPUT, FFMpegUtils.toObject(result));
             }
-
         });
         this.process[this.targetOutput].on('close', () => this.emit(FFMpeg.EVENT_COMPLETE));
         this.process[this.targetOutput].on('error', (err:any) => this.emit(FFMpeg.EVENT_ERROR, err));

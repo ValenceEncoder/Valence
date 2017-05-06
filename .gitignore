@@ -46,3 +46,5 @@ jspm_packages
 ffmpeg/bin
 dist
 tmp
+vid/O.J.*
+

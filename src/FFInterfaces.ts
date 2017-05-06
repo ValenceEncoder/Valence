@@ -125,7 +125,7 @@ export interface IFFMpegProgress {
     frame?: number;
     fps?: number;
     q?: number;
-    size?: string;
+    size?: number;
     time?: string;
     bitrate?: string;
     speed?: string;

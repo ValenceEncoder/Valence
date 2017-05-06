@@ -1,0 +1,41 @@
+.draggable {
+    -webkit-app-region: drag;
+}
+
+.non-draggable {
+    -webkit-app-region: no-drag;
+}
+
+/*Sticky Footer see http://materializecss.com/footer.html#sticky-footer*/
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+
+/* label focus color */
+
+.input-field input[type=text]:focus,
+.input-field input[type=text]:focus + label {
+    color: #FFFFFF !important;
+}
+
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #FFFFFF !important;
+    box-shadow: 0 1px 0 0 #b1b1b1 !important;
+    color: #FFFFFF !important;
+}
+
+/* valid color */
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #D1D1D1 !important;
+    box-shadow: 0 1px 0 0 #b1b1b1 !important;
+    color: #d1d1d1 !important;
+}

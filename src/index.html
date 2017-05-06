@@ -2,29 +2,63 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>MKV2ATV</title>
-    <link rel="stylesheet" href="../node_modules/mkv-theme/css/mkv2atv.min.css"/>
-    <link rel="stylesheet" href="css/overrides.scss"/>
+    <link rel="stylesheet" href="css/material-icons.css"/>
+    <link rel="stylesheet" href="../node_modules/materialize-css/bin/materialize.css"/>
+    <!--<link rel="stylesheet" href="../node_modules/mkv-theme/css/mkv2atv.min.css"/>-->
+    <link rel="stylesheet" href="css/app.css"/>
 
 </head>
-<body class="app-bg">
+<body class="grey darken-4">
 <header class="draggable">
-    <h5>MKV to AppleTV</h5>
+    <div class="container">
+        <div class="row">
+            <h4 class="grey-text text-lighten-3">MKV to AppleTV</h4>
+        </div>
+    </div>
+
 </header>
 
 
 <main>
     <div class="container">
         <div class="row"></div>
-        <div class="row"></div>
         <div class="row">
-            <div class="col s12">
-                <label for="txt-input" class="white-text lighten-4">Input File:</label>
-                <input id="txt-input" type="text" class="text-input" disabled/>
-                <button id="btn-browse-input" type="button" class="btn btn-info"><i class="fa fa-folder"></i> Browse
+
+        </div>
+        <div class="row">
+            <div class="col s10">
+                <div class="input-field">
+                    <input id="txt-input" class="grey-text lighten-1" type="text"
+                           placeholder="Click Browse to Select a Video File"/>
+                    <label for="txt-input" class="white-text darken-2">Source File</label>
+                </div>
+            </div>
+
+            <div class="col s2">
+                <button id="btn-browse-input" type="button" class="btn btn-floating btn-large cyan pulse">
+                    <i class="material-icons">folder</i>
                 </button>
             </div>
         </div>
+
+        <div id="div-output" class="row hide">
+            <div class="col s10">
+                <div class="input-field">
+                    <input id="txt-output" class="grey-text lighten-1" type="text"
+                           placeholder="Click Browse to Select a Video File"/>
+                    <label for="txt-output" class="white-text darken-2">Output File</label>
+                </div>
+            </div>
+
+            <div class="col s2">
+                <button id="btn-browse-output" type="button" class="btn btn-floating btn-large cyan">
+                    <i class="material-icons">folder</i>
+                </button>
+            </div>
+        </div>
+
     </div>
 </main>
 
@@ -32,30 +66,49 @@
 <div id="ffmpeg-output"></div>
 
 
-<div id="err-dialog" class="display-none">
-    <div id="err-dialog-container" class="red white-text">
-        <p id="err-message">File not found</p>
-        <button id="btn-err-close" type="button" class="btn btn-error"><i class="fa fa-close"></i>Close</button>
+<div id="err-dialog" class="modal bottom-sheet red darken-2">
+    <div id="err-dialog-container" class="modal-content">
+        <h4 class="white-text">Error</h4>
+        <p id="err-message" class="white-text">File not found</p>
+        <div class="modal-footer red darken-2">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text">Close</a>
+        </div>
     </div>
 </div>
 
 
-<footer class="page-footer">
-    <div class="row">
+<footer class="page-footer grey darken-3">
 
-        <div class="col s3">
-            <button id="btn-encode" class="btn btn-success btn-s"><i class="fa fa-play"></i>Encode</button>
-        </div>
-        <div class="col s6"></div>
-        <div class="col s3">
-            <button id="btn-quit" class="btn btn-error btn-s"><i class="fa fa-close"></i>Quit</button>
-        </div>
+    <div class="container">
+        <div class="row">
 
+            <div class="col s1">
+                <button id="btn-encode" class="btn btn-floating btn-large waves-effect waves-light green"><i
+                        class="material-icons left">play_arrow</i></button>
+            </div>
+
+            <div class="col s6"></div>
+
+            <div class="col s1 offset-s10">
+                <button id="btn-quit" class="btn btn-floating btn-large waves-effect waves-light red darken-2">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
+
+        </div>
     </div>
+
 </footer>
 
 
-<script>require('./MainRender');</script>
+<script>
+    window.$ = window.jQuery = require('materialize-css/node_modules/jquery/dist/jquery.js');
+    require('materialize-css');
+    $(document).ready(function() {
+       $("#err-dialog").modal();
+    });
+    require('./MainRender');
+</script>
 
 </body>
 </html>
