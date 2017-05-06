@@ -47,4 +47,5 @@ ffmpeg/bin
 dist
 tmp
 vid/O.J.*
+vid/*.mp4
 
