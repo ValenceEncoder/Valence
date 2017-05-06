@@ -1,9 +1,8 @@
 import {ChildProcess, spawn} from "child_process";
 import {EventEmitter} from "events";
-import * as Promise from "bluebird";
 import {
     IProcessOptions, IFFProbeOutput,
-    IStreamInfo, IFileInfo, IConfig, IFFMpegProgress
+    IStreamInfo, IFileInfo, IConfig
 } from "./FFInterfaces";
 import {FFMpegUtils} from "./FFMpegUtils";
 

@@ -1,9 +1,7 @@
 import {
-    IProcessOptions, IFFProbeOutput, IFFProbeOutputHandler, IFFProbeStreamData, IStreamInfo,
-    IFileInfo
+    IProcessOptions, IFFProbeOutput, IFFProbeOutputHandler
 } from "./FFInterfaces";
 import {FFMpeg, FFProbe} from "./FFProcess";
-import * as Promise from 'promise'
 import {FFMpegUtils} from "./FFMpegUtils";
 
 if (require.main != module) {
