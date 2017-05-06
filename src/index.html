@@ -3,44 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>MKV2ATV</title>
-    <!-- Change to min for production -->
     <link rel="stylesheet" href="../node_modules/mkv-theme/css/mkv2atv.min.css"/>
-    <link rel="stylesheet" href="css/overrides.css"/>
+    <link rel="stylesheet" href="css/overrides.scss"/>
 
 </head>
 <body class="app-bg">
-<div class="container">
-    <div class="row">
-        <div class="container">
-            <h5>MKV to AppleTV</h5>
+<header class="draggable">
+    <h5>MKV to AppleTV</h5>
+</header>
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="container">
-            <div class="col s6">
-                <label for="file-input" class="grey-text">Input File:</label>
-            </div>
-            <div class="col s6">
-                <input id="file-input" type="text" class="text-input" />
-            </div>
-        </div>
-    </div>
-    <footer class="footer">
+
+<main>
+    <div class="container">
+        <div class="row"></div>
+        <div class="row"></div>
         <div class="row">
-            <div class="container">
-                <div class="col s3">
-                    <button id="btn-encode" class="btn btn-success btn-s"><i class="fa fa-play"></i>Encode</button>
-                </div>
-                <div class="col s6"></div>
-                <div class="col s3">
-                    <button id="btn-quit" class="btn btn-error btn-s"><i class="fa fa-close"></i>Quit</button>
-                </div>
+            <div class="col s12">
+                <label for="txt-input" class="white-text lighten-4">Input File:</label>
+                <input id="txt-input" type="text" class="text-input" disabled/>
+                <button id="btn-browse-input" type="button" class="btn btn-info"><i class="fa fa-folder"></i> Browse
+                </button>
             </div>
         </div>
-    </footer>
-</div>
+    </div>
+</main>
+
+
 <div id="ffmpeg-output"></div>
+
+
+<div id="err-dialog" class="display-none">
+    <div id="err-dialog-container" class="red white-text">
+        <p id="err-message">File not found</p>
+        <button id="btn-err-close" type="button" class="btn btn-error"><i class="fa fa-close"></i>Close</button>
+    </div>
+</div>
+
+
+<footer class="page-footer">
+    <div class="row">
+
+        <div class="col s3">
+            <button id="btn-encode" class="btn btn-success btn-s"><i class="fa fa-play"></i>Encode</button>
+        </div>
+        <div class="col s6"></div>
+        <div class="col s3">
+            <button id="btn-quit" class="btn btn-error btn-s"><i class="fa fa-close"></i>Quit</button>
+        </div>
+
+    </div>
+</footer>
+
+
 <script>require('./MainRender');</script>
+
 </body>
 </html>
