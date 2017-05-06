@@ -37,8 +37,21 @@ export default class Main {
         Main.mainWindow = null;
     }
 
+    private static onOpenFile(event:Electron.IpcMainEvent) {
+        Electron.dialog.showOpenDialog({
+            properties: ['openFile'],
+
+        }, function(file:string[]) {
+            let _file = file[0];
+            if(_file) {
+                    event.sender.send(IPCEventType.APP_FILE_SELECTED, _file);
+            }
+        })
+    }
+
+
     private static onReady() {
-        Main.mainWindow = new Main.BrowserWindow({ width: 600, height: 500, frame: false });
+        Main.mainWindow = new Main.BrowserWindow({ width: 800, height: 600, frame: false });
         Main.mainWindow.loadURL(Url.format({
             protocol: "file:",
             pathname: Path.join(__dirname, 'index.html'),
@@ -52,6 +65,8 @@ export default class Main {
         Main.ipc.on(IPCEventType.APP_QUIT, Main.onQuit);
         Main.ipc.on(IPCEventType.ENCODE_COMPLETED, Main.onEncodeCompleted);
         Main.ipc.on(IPCEventType.SPAWN_ENCODER, Main.onSpawnEncoder);
+        Main.ipc.on(IPCEventType.APP_OPEN_FILE, Main.onOpenFile);
+
     }
 
     static main(app: Electron.App, browserWindow: typeof Electron.BrowserWindow) {
