@@ -1,0 +1,64 @@
+.draggable {
+  -webkit-app-region: drag;
+}
+
+.non-draggable {
+  -webkit-app-region: no-drag;
+}
+
+.btn > i:after, label:after {
+  content: '\0000a0\0000a0\0000a0\0000a0';
+}
+
+h5 {
+  text-align: center;
+}
+
+.text-input {
+  width: 60%;
+}
+
+.display-none {
+  display: none;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+#err-dialog {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+}
+#err-message {
+  text-align: center;
+  justify-self: center;
+}
+
+#err-dialog-container {
+  display:flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 3px;
+  position: relative;
+  width: 400px;
+  height: 100px;
+  text-align: center;
+  line-height: 1.0rem;
+  font-family: 'Roboto';
+  
+}
+
+button#btn-err-close {
+  align-self: flex-end;
+}
+
