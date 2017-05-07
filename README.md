@@ -49,7 +49,12 @@ So you look for a free alternative to [Handbrake :pineapple: ](https://handbrake
 By using FFMPEG to preserve (copy) `x264` / `h264` encoded video streams stored in MKV containers and converting them to MP4 containers, we can save a heap of CPU cycles and time!
 
 
-### Valence is basically just a wrapper/plugin for the following amazing open source projects
+### Valence is basically just a wrapper/interface for the following amazing open source projects
 * [FFmpeg](https://ffmpeg.org) binaries for conversion and video file analysis
 * [Electron](https://electron.atom.io/) for a quick and easy cross-platform GUI application
-* [electron-prebuilt-compile](https://github.com/electron-userland/electron-prebuilt-compile) which allows me to use T
+* [electron-prebuilt-compile](https://github.com/electron-userland/electron-prebuilt-compile) which runs Typescript, LESS, and other Javascript superset languages directly without transpiling.
+* [Node.js](https://nodejs.org) runs javascript Server-side like a champ
+
+### LICENCE
+Valence Video Encoder is Copyright &copy; 2017 Liam Whan. 
+Valence-specific source code is licensed under the MIT License. See [LICENSE.md]("./LICENSE.md"") for the Valence License as well as the Licenses of all third party packages used. 

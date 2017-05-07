@@ -1,6 +1,6 @@
-### IMPORTANT: MKV2ATV depends on FFMPEG and Electron which in turn depend on a number of 3rd party projects. All 3rd party licences are included below and in [ffmpeg/licences/](https://github.com/hammus/MKV2ATV/tree/master/ffmpeg/licenses).
+### IMPORTANT: Valence Video Encoder depends on FFMPEG and Electron which in turn depend on a number of 3rd party projects. All 3rd party licences are included below and in [ffmpeg/licences/](https://github.com/hammus/MKV2ATV/tree/master/ffmpeg/licenses).
 
-# MKV2ATV Source Code Licence
+# Valence Video Encoder Source Code Licence
 MIT License
 
 Copyright (c) 2017 Liam Whan
@@ -23,7 +23,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
------------- END MKV2ATV LICENSE
+
+
+------------ 
 
 # Electron LICENSE
 
@@ -49,7 +51,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
------------- END ELECTRON LICENCE
+------------ 
 
 ## BZIP2 LICENSE
 
@@ -97,7 +99,7 @@ bzip2/libbzip2 version 1.0.6 of 6 September 2010
 --------------------------------------------------------------------------
 
 
------------- END BZIP2 LICENSE
+
 ## DECKLINK LICENSE
 
 Copyright (c) 2016 Blackmagic Design
@@ -124,7 +126,8 @@ FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 
------------- END DECKLINK LICENSE
+------------ 
+
 ## FONTCONFIG LICENSE
 
 fontconfig/COPYING
@@ -156,7 +159,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 
 
------------- END FONTCONFIG LICENSE
+------------ 
+
 ## FREETYPE LICENSE
 
                     The FreeType Project LICENSE
@@ -330,7 +334,8 @@ Legal Terms
 --- end of FTL.TXT ---
 
 
------------- END FREETYPE LICENSE
+------------ 
+
 ## FREI0R LICENSE
 
 		    GNU GENERAL PUBLIC LICENSE
@@ -675,7 +680,8 @@ library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 
 
------------- END FREI0R LICENSE
+------------
+
 ## GME LICENSE
 
 		  GNU LESSER GENERAL PUBLIC LICENSE
@@ -1184,7 +1190,8 @@ That's all there is to it!
 
 
 
------------- END GME LICENSE
+------------ 
+
 ## GNUTLS LICENSE
 
                     GNU GENERAL PUBLIC LICENSE
@@ -1863,7 +1870,8 @@ Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 
 
------------- END GNUTLS LICENSE
+------------
+
 ## LAME LICENSE
 
 		  GNU LIBRARY GENERAL PUBLIC LICENSE
@@ -2349,7 +2357,8 @@ necessary.  Here is a sample; alter the names:
 That's all there is to it!
 
 
------------- END LAME LICENSE
+------------
+
 ## LIBASS LICENSE
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -2365,7 +2374,7 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
------------- END LIBASS LICENSE
+------------ 
 ## LIBBLURAY LICENSE
 
                   GNU LESSER GENERAL PUBLIC LICENSE
@@ -2828,7 +2837,7 @@ DAMAGES.
                      END OF TERMS AND CONDITIONS
 
 
------------- END LIBBLURAY LICENSE
+------------
 ## LIBBS2B LICENSE
 
 Copyright (c) 2005 Boris Mikhaylov
@@ -2853,7 +2862,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
------------- END LIBBS2B LICENSE
+------------
+
 ## LIBCACA LICENSE
 
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
@@ -2872,7 +2882,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 
------------- END LIBCACA LICENSE
+------------
+
 ## LIBGSM LICENSE
 
 Copyright 1992, 1993, 1994 by Jutta Degener and Carsten Bormann,
@@ -2912,7 +2923,7 @@ Jutta Degener
 Carsten Bormann
 
 
------------- END LIBGSM LICENSE
+------------
 ## LIBICONV LICENSE
 
                     GNU GENERAL PUBLIC LICENSE
@@ -3591,7 +3602,7 @@ Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 
 
------------- END LIBICONV LICENSE
+------------
 ## LIBILBC LICENSE
 
 Copyright (c) 2011, The WebRTC project authors. All rights reserved.
@@ -3625,7 +3636,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
------------- END LIBILBC LICENSE
+------------ 
 ## LIBMFX LICENSE
 
 Copyright (C) 2012 Intel Corporation.  All rights reserved.
@@ -3653,13 +3664,13 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
------------- END LIBMFX LICENSE
+------------
 ## LIBMODPLUG LICENSE
 
 ModPlug-XMMS and libmodplug are now in the public domain.
 
 
------------- END LIBMODPLUG LICENSE
+------------
 ## LIBTHEORA LICENSE
 
 Copyright (C) 2002-2009 Xiph.org Foundation
@@ -3692,7 +3703,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
------------- END LIBTHEORA LICENSE
+------------
 ## LIBVORBIS LICENSE
 
 Copyright (c) 2002-2008 Xiph.org Foundation
@@ -3725,7 +3736,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
------------- END LIBVORBIS LICENSE
+------------
 ## LIBVPX LICENSE
 
 Copyright (c) 2010, The WebM Project authors. All rights reserved.
@@ -3761,7 +3772,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
------------- END LIBVPX LICENSE
+------------
 ## LIBWEBP LICENSE
 
 Copyright (c) 2010, Google Inc. All rights reserved.
@@ -3796,7 +3807,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
------------- END LIBWEBP LICENSE
+------------
 ## OPENCORE-AMR LICENSE
 
 Apache License
@@ -3992,7 +4003,7 @@ identification within third-party archives.
  governing permissions and limitations under the License.
 
 
------------- END OPENCORE-AMR LICENSE
+------------
 ## OPENH264 LICENSE
 
 Copyright (c) 2013, Cisco Systems
@@ -4020,7 +4031,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
------------- END OPENH264 LICENSE
+------------
 ## OPENJPEG LICENSE
 
 /*
@@ -4059,7 +4070,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 
------------- END OPENJPEG LICENSE
+------------
 ## OPUS LICENSE
 
 Copyright 2001-2011 Xiph.Org, Skype Limited, Octasic,
@@ -4108,7 +4119,7 @@ Broadcom Corporation:
 https://datatracker.ietf.org/ipr/1526/
 
 
------------- END OPUS LICENSE
+------------
 ## RTMPDUMP LICENSE
 
 		    GNU GENERAL PUBLIC LICENSE
@@ -4452,7 +4463,7 @@ library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.
 
 
------------- END RTMPDUMP LICENSE
+------------
 ## SNAPPY LICENSE
 
 Copyright 2011, Google Inc.
@@ -4511,7 +4522,7 @@ Some of the benchmark data in testdata/ is licensed differently:
    (http://www.gutenberg.org/ebooks/53).
 
 
------------- END SNAPPY LICENSE
+------------
 ## SOXR LICENSE
 
 SoX Resampler Library       Copyright (c) 2007-13 robs@users.sourceforge.net
@@ -4540,7 +4551,7 @@ the library -- shall not be considered to be derivative works of the examples.
 2. If building with pffft.c, see the licence embedded in that file.
 
 
------------- END SOXR LICENSE
+------------
 ## SPEEX LICENSE
 
 Copyright 2002-2008 	Xiph.org Foundation
@@ -4580,7 +4591,7 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
------------- END SPEEX LICENSE
+------------
 ## TWOLAME LICENSE
 
 		  GNU LESSER GENERAL PUBLIC LICENSE
@@ -5089,7 +5100,7 @@ That's all there is to it!
 
 
 
------------- END TWOLAME LICENSE
+------------
 ## VID LICENSE
 
 In this project is open source in the sense of the GPL.
@@ -5110,7 +5121,7 @@ In this project is open source in the sense of the GPL.
  *   GNU General Public License for more details.                          *
 
 
------------- END VID LICENSE
+------------
 ## VO-AMRWBENC LICENSE
 
 Apache License
@@ -5306,7 +5317,7 @@ identification within third-party archives.
  governing permissions and limitations under the License.
 
 
------------- END VO-AMRWBENC LICENSE
+------------
 ## WAVPACK LICENSE
 
                Copyright (c) 1998 - 2009 Conifer Software
@@ -5336,7 +5347,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
------------- END WAVPACK LICENSE
+------------
 ## X264 LICENSE
 
 		    GNU GENERAL PUBLIC LICENSE
@@ -5681,7 +5692,7 @@ library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 
 
------------- END X264 LICENSE
+------------
 ## X265 LICENSE
 
 		    GNU GENERAL PUBLIC LICENSE
@@ -6029,7 +6040,7 @@ This program is also available under a commercial proprietary license.
 For more information, contact us at licensing@multicorewareinc.com.
 
 
------------- END X265 LICENSE
+------------
 ## XAVS LICENSE
 
                     GNU GENERAL PUBLIC LICENSE
@@ -6708,7 +6719,7 @@ Public License instead of this License.  But first, please read
 <http://www.gnu.org/philosophy/why-not-lgpl.html>.
 
 
------------- END XAVS LICENSE
+------------
 ## XVID LICENSE
 
 		    GNU GENERAL PUBLIC LICENSE
@@ -7053,7 +7064,7 @@ library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 
 
------------- END XVID LICENSE
+------------
 ## XZ LICENSE
 
 
@@ -7123,7 +7134,7 @@ XZ Utils Licensing
 
 
 
------------- END XZ LICENSE
+------------
 ## ZIMG LICENSE
 
             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
@@ -7142,7 +7153,7 @@ XZ Utils Licensing
 
 
 
------------- END ZIMG LICENSE
+------------
 ## ZLIB LICENSE
 
 /* zlib.h -- interface of the 'zlib' general purpose compression library
@@ -7173,4 +7184,4 @@ XZ Utils Licensing
 
 
 
------------- END ZLIB LICENSE
+------------
