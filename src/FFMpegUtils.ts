@@ -6,12 +6,12 @@ import * as Path from "path";
 export class FFMpegUtils {
     public static RGX_FORMED_OUTPUT: RegExp = /frame=\s*\d+\s*fps=\s*\d+\.*\d*\s*q=-?\d\.?\d?\s*size=\s*\d+kB\s*time=\s*\d{2}:\d{2}:\d{2}\.?\d{2}?\s*bitrate=\s*\d+\.?\d?k?bits\/s\s*speed=.*/;
     public static RGX_FRAME: RegExp         = /frame=\s*(\d+)/;
-    public static RGX_FPS: RegExp           = /fps=\s*(\d+)/;
+    public static RGX_FPS: RegExp           = /fps=\s*(\d+\.*\d*)/;
     public static RGX_Q: RegExp             = /q=\s*(-?\d\.?\d?)/;
-    public static RGX_SIZE: RegExp          = /size=\s*(\s?\d+)kB/;
+    public static RGX_SIZE: RegExp          = /size=\s*(\d+)kB/;
     public static RGX_TIME: RegExp          = /time=\s*(\d{2}:\d{2}:\d{2}\.?\d{2}?)/;
     public static RGX_BITRATE: RegExp       = /bitrate=\s*(\d+\.?\d?k?bits\/s)/;
-    public static RGX_SPEED: RegExp         = /speed=\s*(.*)x/;
+    public static RGX_SPEED: RegExp         = /speed=\s*(.*)x*/;
 
     public static FLAG_VERBOSITY: string   = "-v";
     public static FLAG_INPUT: string       = "-i";
@@ -46,17 +46,17 @@ export class FFMpegUtils {
 
     public static toObject(output: string): IFFMpegProgress {
         return {
-            frame: parseInt(output.match(FFMpegUtils.RGX_FRAME)[1]),
-            fps: parseInt(output.match(FFMpegUtils.RGX_FPS)[1]),
-            q: parseInt(output.match(FFMpegUtils.RGX_Q)[1]),
-            size: parseInt(output.match(FFMpegUtils.RGX_SIZE)[1]),
-            time: output.match(FFMpegUtils.RGX_TIME)[1],
-            bitrate: output.match(FFMpegUtils.RGX_BITRATE)[1],
-            speed: output.match(FFMpegUtils.RGX_SPEED)[1]
+            frame: FFMpegUtils.RGX_FRAME.test(output) ? parseInt(output.match(FFMpegUtils.RGX_FRAME)[1]) : null,
+            fps: FFMpegUtils.RGX_FPS.test(output) ? parseInt(output.match(FFMpegUtils.RGX_FPS)[1]) : null,
+            q: FFMpegUtils.RGX_Q.test(output) ? parseInt(output.match(FFMpegUtils.RGX_Q)[1]) : null,
+            size: FFMpegUtils.RGX_SIZE.test(output) ? parseInt(output.match(FFMpegUtils.RGX_SIZE)[1]) : null,
+            time: FFMpegUtils.RGX_TIME.test(output)? output.match(FFMpegUtils.RGX_TIME)[1] : null,
+            bitrate: FFMpegUtils.RGX_BITRATE.test(output)? output.match(FFMpegUtils.RGX_BITRATE)[1] : null,
+            speed: FFMpegUtils.RGX_SPEED.test(output) ? output.match(FFMpegUtils.RGX_SPEED)[1] : null
         }
     }
 
-    public static changeExtension(filepath: string, ext:string): string {
+    public static changeExtension(filepath: string, ext: string): string {
         return Path.join(
             Path.dirname(filepath),
             `${Path.basename(filepath, Path.extname(filepath))}.${ext}`,
