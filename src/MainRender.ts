@@ -2,25 +2,22 @@ import {ipcRenderer} from "electron";
 import {ElectronUtils, IPCEventType} from "./ElectronUtils";
 import {FFMpegUtils} from "./FFMpegUtils";
 import MainError from "./MainError";
+import {FFProbe, VideoFile} from "./FFProcess";
+import {IFileInfo, IProcessOptions} from "./FFInterfaces";
 
 
 const BrowserWindow                      = require('electron').remote.BrowserWindow;
 const fs                                 = require('fs');
 const path                               = require('path');
-const btnEncode: HTMLButtonElement       = <HTMLButtonElement> document.getElementById('btn-encode');
-const btnBrowseInput: HTMLButtonElement  = <HTMLButtonElement> document.getElementById('btn-browse-input');
-const btnBrowseOutput: HTMLButtonElement = <HTMLButtonElement> document.getElementById('btn-browse-output');
-const btnQuit: HTMLButtonElement         = <HTMLButtonElement> document.getElementById('btn-quit');
-const txtInput: HTMLInputElement         = <HTMLInputElement> document.getElementById('txt-input');
-const txtOutput: HTMLInputElement        = <HTMLInputElement> document.getElementById('txt-output');
-
-const divOutput: HTMLDivElement = <HTMLDivElement>document.getElementById('div-output');
-const divLog: HTMLElement       = document.getElementById('ffmpeg-output');
-
+let videoFile:VideoFile;
+let fileInfo:IFileInfo;
+let ffprobe:FFProbe;
+let input:IProcessOptions;
 /**
  * Quit Application
  */
-btnQuit.addEventListener('click', function (event) {
+
+$("#btn-quit").on('click', function (event) {
     ipcRenderer.send(IPCEventType.APP_QUIT);
 });
 
@@ -30,22 +27,22 @@ btnQuit.addEventListener('click', function (event) {
 function onBrowseClick(event: Event) {
     ipcRenderer.send(IPCEventType.APP_OPEN_FILE);
 }
-btnBrowseInput.onclick = onBrowseClick;
+$("#btn-browse-input").on('click', onBrowseClick);
 
 
 /**
  * Start Encode Job
  */
-btnEncode.addEventListener('click', function (event) {
-    const inputFile = txtInput.value;
-    if (!FFMpegUtils.fileExists(inputFile) || txtInput.value == "") {
+$("#btn-encode").on('click', function (event) {
+    const inputFile = $("#txt-input").val();
+    if (!FFMpegUtils.fileExists(inputFile) || $("#txt-input").val() == "") {
         $("#err-dialog").modal("open");
         return;
     }
     const windowID: number = BrowserWindow.getFocusedWindow().id;
 
     let encodeWin = new BrowserWindow({
-        width: 500,
+        width: 1100,
         height: 300,
         show: true,
         modal: true,
@@ -56,7 +53,7 @@ btnEncode.addEventListener('click', function (event) {
 
     encodeWin.webContents.on('did-finish-load', () => {
         encodeWin.show();
-        encodeWin.webContents.send(IPCEventType.SPAWN_ENCODER, inputFile, windowID);
+        encodeWin.webContents.send(IPCEventType.SPAWN_ENCODER, videoFile, windowID);
     });
 
     encodeWin.on('closed', () => {
@@ -64,7 +61,21 @@ btnEncode.addEventListener('click', function (event) {
     });
 });
 
+function outputAnalysis(result:IFileInfo) {
+    videoFile = new VideoFile(result, input);
+    $('#td-video-codec').text(videoFile.VideoCodec);
+    $('#td-video-duration').text(videoFile.Duration.toString());
+    $('#td-video-size').text(`${videoFile.Size}kb`);
+    $("#td-audio-codec").text(videoFile.AudioCodec);
+    $('#analysis-result').removeClass('hide');
+    $('#analysis-preloader').addClass('hide');
+    $('#div-output').removeClass('hide');
 
+
+}
+function onProbeComplete() {
+    ffprobe = null;
+}
 /**
  * ipcRenderer Listeners
  */
@@ -73,8 +84,14 @@ ipcRenderer.on(IPCEventType.ENCODE_COMPLETED, function (event, message) {
 });
 
 ipcRenderer.on(IPCEventType.APP_FILE_SELECTED, function (event: Electron.IpcRendererEvent, file: string) {
-    txtInput.value  = file;
-    txtOutput.value = FFMpegUtils.changeExtension(file);
-    btnBrowseInput.classList.remove('pulse');
-    divOutput.classList.remove('hide');
+    $("#txt-input").val(file);
+    $("#txt-output").val(FFMpegUtils.changeExtension(file, "mp4"));
+    $("#btn-browse-input").removeClass('pulse');
+    input = {input: file};
+    ffprobe = new FFProbe(input);
+    ffprobe.on(FFProbe.EVENT_OUTPUT, outputAnalysis);
+    ffprobe.on(FFProbe.EVENT_COMPLETE, onProbeComplete);
+    ffprobe.run();
+    Materialize.updateTextFields();
+    $('#analysis-preloader').removeClass('hide');
 });

@@ -10,8 +10,8 @@
 <body class="app-bg">
 <header class="draggable">
     <div class="container">
-        <div class="row">
-            <img class="responsive-img" src="img/banner-app.png" alt="Valence Video Encoder Brand Banner"/>
+        <div class="row pad-16">
+            <img class="responsive-img center-block" src="img/banner-app.png" alt="Valence Video Encoder Brand Banner"/>
         </div>
     </div>
 
@@ -20,42 +20,118 @@
 
 <main>
     <div class="container">
-        <div class="row"></div>
-        <div class="row">
-
-        </div>
         <div class="row">
             <div class="col s10">
                 <div class="input-field">
-                    <input id="txt-input"  type="text"
+                    <input id="txt-input" type="text"
                            placeholder="Click Browse to Select a Video File"/>
                     <label for="txt-input">Source File</label>
                 </div>
             </div>
 
             <div class="col s2">
-                <button id="btn-browse-input" type="button" class="btn btn-floating btn-large valence-blue pulse">
+                <button id="btn-browse-input" type="button" class="btn btn-floating btn-large valence-blue lighten-1 pulse">
                     <i class="material-icons">folder</i>
                 </button>
             </div>
         </div>
+    </div>
+    <div id="analysis-preloader" class="container hide">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h4>ANALYSING VIDEO</h4>
+            </div>
 
+        </div>
+
+        <div class="row">
+            <div class="col s12 center-align">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="analysis-result" class="container hide">
+        <div class="row">
+            <div class="col s12">
+                <h4>File Information</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="collapsible popout" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header valence-blue"><i class="large material-icons">video_label</i>Video
+                            Stream
+                        </div>
+                        <div class="collapsible-body valence-blue lighten-1">
+                            <table class="highlight">
+                                <thead>
+                                <tr>
+                                    <th>Codec</th>
+                                    <th>Duration</th>
+                                    <th>Size (kB)</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td id="td-video-codec"></td>
+                                    <td id="td-video-duration"></td>
+                                    <td id="td-video-size"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header valence-blue"><i class="large material-icons">audiotrack</i>Audio
+                            Stream
+                        </div>
+                        <div class="collapsible-body valence-blue lighten-1">
+                            <table class="highlight">
+                                <thead>
+                                <tr>
+                                    <th>Codec</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td id="td-audio-codec"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div id="div-output" class="row hide">
             <div class="col s10">
                 <div class="input-field">
-                    <input id="txt-output" type="text"
-                           placeholder="Click Browse to Select a Video File"/>
-                    <label for="txt-output">Output File</label>
+                    <input id="txt-output" type="text"/>
+                    <label for="txt-output" class="active">Output File</label>
                 </div>
             </div>
 
             <div class="col s2">
-                <button id="btn-browse-output" type="button" class="btn btn-floating btn-large valence-blue">
-                    <i class="material-icons">folder</i>
-                </button>
+                <button id="btn-browse-output" type="button" class="btn btn-floating btn-large valence-blue lighten-1"><i class="material-icons">folder</i></button>
             </div>
         </div>
-
     </div>
 </main>
 
@@ -80,14 +156,14 @@
         <div class="row">
 
             <div class="col s1">
-                <button id="btn-encode" class="btn btn-floating btn-large waves-effect waves-light light-green darken-1"><i
-                        class="material-icons left">play_arrow</i></button>
+                <button id="btn-encode"
+                        class="btn btn-floating btn-large waves-effect waves-light light-green darken-1">
+                    <i class="material-icons left">play_arrow</i>
+                </button>
             </div>
 
-            <div class="col s6"></div>
-
             <div class="col s1 offset-s10">
-                <button id="btn-quit" class="btn btn-floating btn-large waves-effect waves-light red darken-2 left-align">
+                <button id="btn-quit" class="btn btn-floating btn-large waves-effect waves-light red darken-2 right">
                     <i class="material-icons">close</i>
                 </button>
             </div>
@@ -101,8 +177,8 @@
 <script>
     window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.js');
     require('materialize-css');
-    $(document).ready(function() {
-       $("#err-dialog").modal();
+    $(document).ready(function () {
+        $("#err-dialog").modal();
     });
     require('./MainRender');
 </script>

@@ -46,7 +46,6 @@ export class FFProbe extends FFProcess {
     }
 
     public run(): FFProbe {
-        console.log("FFPROBE::RUN");
         this.process = spawn(this.command, this.args);
         this.process[this.targetOutput].setEncoding('utf8');
         this.process[this.targetOutput].on('error', (err:any) => {
@@ -89,8 +88,9 @@ export class FFMpeg extends FFProcess {
          * and if not we buffer it and then flush it once its formed
          */
         this.process[this.targetOutput].on('data', (message: string) => {
+            console.log(this.outBuffer);
             this.outBuffer += message;
-            if (this.outBuffer.match(FFMpegUtils.RGX_FORMED_OUTPUT)) {
+            if (FFMpegUtils.RGX_FORMED_OUTPUT.test(this.outBuffer)) {
                 let result     = this.outBuffer;
                 this.outBuffer = "";
                 this.emit(FFProcess.EVENT_OUTPUT, FFMpegUtils.toObject(result));
@@ -126,4 +126,48 @@ export class FFMpeg extends FFProcess {
         return outArgs;
     }
 
+}
+
+export class VideoFile {
+
+    public get VideoCodec():string {
+        return this.probeData.videoInfo.codec_name;
+    }
+
+    public get AudioCodec():string {
+        return this.probeData.audioInfo.codec_name;
+    }
+
+    public get Duration():number {
+        return this.probeData.videoInfo.duration;
+    }
+
+    public get InputPath():string {
+        return this.jobOptions.input;
+    }
+    //TODO Add options to output other container formats
+    public get OutputPath():string {
+        return FFMpegUtils.changeExtension(this.InputPath, "mp4");
+    }
+
+    public get ProbeData():IFileInfo {
+        return this.probeData;
+    }
+
+    public get ProcessOptions():IProcessOptions {
+        return {
+            input: this.InputPath,
+            output: this.OutputPath
+        }
+    }
+
+    public get Size():number {
+        return parseFloat((this.probeData.videoInfo.size / 1000).toFixed(1));
+    }
+
+    public getProgress(bytesProcessed:number):number {
+        return (bytesProcessed / this.Size) * 100;
+    }
+
+    constructor(private probeData:IFileInfo, private jobOptions:IProcessOptions) {}
 }

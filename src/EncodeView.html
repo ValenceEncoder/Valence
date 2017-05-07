@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../node_modules/mkv-theme/css/mkv2atv.min.css"/>
-    <link rel="stylesheet" href="css/app.css"/>
-    <title>Encode Progress</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VALENCE - Encoding</title>
+    <link rel="stylesheet" href="css/materialize.min.css"/>
 </head>
 <body class="app-bg">
 <header>
-    <h4 id="heading">Encoding</h4>
+    <h6 id="heading">ENCODING </h6>
 </header>
 <main>
     <div class="container">
@@ -21,13 +21,25 @@
 
         <div class="row">
             <div class="col s12">
-                <div class="progress-container">
-                    <div class="progress-bar-info"></div>
+                <div class="progress">
+                    <div id="progress-bar" class="determinate"></div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <p id="progress-text"></p>
             </div>
         </div>
     </div>
 </main>
-<script>require('./EncodeRender')</script>
+<script>
+    window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.js');
+    require('materialize-css');
+    $(document).ready(function () {
+        $("#err-dialog").modal();
+    });
+    require('./EncodeRender');
+</script>
 </body>
 </html>

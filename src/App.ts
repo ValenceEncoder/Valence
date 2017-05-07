@@ -4,6 +4,6 @@ import Main from './Main';
 
 enableLiveReload();
 
-require('electron-debug')({showDevTools: true});
+require('electron-debug')({showDevTools: false});
 
 Main.main(app, BrowserWindow);

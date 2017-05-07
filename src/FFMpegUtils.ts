@@ -4,14 +4,14 @@ import * as path from "path";
 import * as Path from "path";
 
 export class FFMpegUtils {
-    public static RGX_FORMED_OUTPUT: RegExp = /frame=\s*\d+\s*fps=\s*\d+\s+q=-?\d\.?\d?\s+size=\s*\d+kB\s+time=\s*\d{2}:\d{2}:\d{2}\.?\d{2}?\s*bitrate=\s*\d+\.?\d?k?bits\/s\s+speed=\s*\d+\.?\d?x/;
+    public static RGX_FORMED_OUTPUT: RegExp = /frame=\s*\d+\s*fps=\s*\d+\.*\d*\s*q=-?\d\.?\d?\s*size=\s*\d+kB\s*time=\s*\d{2}:\d{2}:\d{2}\.?\d{2}?\s*bitrate=\s*\d+\.?\d?k?bits\/s\s*speed=.*/;
     public static RGX_FRAME: RegExp         = /frame=\s*(\d+)/;
     public static RGX_FPS: RegExp           = /fps=\s*(\d+)/;
     public static RGX_Q: RegExp             = /q=\s*(-?\d\.?\d?)/;
-    public static RGX_SIZE: RegExp          = /size=\s*((\s?\d+))kB/;
+    public static RGX_SIZE: RegExp          = /size=\s*(\s?\d+)kB/;
     public static RGX_TIME: RegExp          = /time=\s*(\d{2}:\d{2}:\d{2}\.?\d{2}?)/;
     public static RGX_BITRATE: RegExp       = /bitrate=\s*(\d+\.?\d?k?bits\/s)/;
-    public static RGX_SPEED: RegExp         = /speed=\s*(\d+\.?\d?x)/;
+    public static RGX_SPEED: RegExp         = /speed=\s*(.*)x/;
 
     public static FLAG_VERBOSITY: string   = "-v";
     public static FLAG_INPUT: string       = "-i";
@@ -35,7 +35,7 @@ export class FFMpegUtils {
         let videoInfo: IStreamInfo          = {
             codec_name: videoStream.codec_name,
             duration: parseFloat(duration),
-            size: parseInt(size)/1000
+            size: parseInt(size)
         };
         let audioInfo: IStreamInfo          = {codec_name: audioStream.codec_name};
         return {
@@ -56,11 +56,11 @@ export class FFMpegUtils {
         }
     }
 
-    public static changeExtension(filepath: string): string {
+    public static changeExtension(filepath: string, ext:string): string {
         return Path.join(
             Path.dirname(filepath),
-            `${Path.basename(filepath, Path.extname(filepath))}.mp4`,
-        )
+            `${Path.basename(filepath, Path.extname(filepath))}.${ext}`,
+        );
     }
 
     public static fileExists(filepath: string): boolean {
