@@ -49,3 +49,6 @@ tmp
 vid/O.J.*
 vid/*.mp4
 
+# yarn breaks travis at the moment
+yarn.lock
+
