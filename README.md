@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.org/hammus/MKV2ATV.svg?branch=master)](https://travis-ci.org/hammus/MKV2ATV)
-#### Notice (2017/4/23): MKV2ATV is new and under active development, so if you've landed on this page early, there probably won't be a tagged release for a few weeks.
+[![Build Status](https://travis-ci.org/hammus/Valence.svg?branch=master)](https://travis-ci.org/hammus/Valence)
 
-# MKV to AppleTV
-MKV to AppleTV (MKV2ATV) is a simple cross platform GUI application that can speed up converting video for Apple iTunes and AppleTV.
+![Valence Video Encoder](./logo/banner-gh.png)
+# Valence Video Encoder
+Valence is a simple cross platform GUI application that can speed up converting video for Apple iTunes and AppleTV.
 
-### What does MKV2ATV do?
-It should really be called **MKV to MP4** as all it really does is change the container of a video file that is already encoded using the `x264` or `h264` codec from `.mkv` to `.mp4` and ensuring the audio is in an iTunes supported codec. 
+### What does Valence do?
+It should really be called **MKV to MP4** (in fact it nearly was, but I decided to pay my respects to [Electron](https://electron.atom.io)) as all it really does is change the container of a video file that is already encoded using the `x264` or `h264` codec from `.mkv` to `.mp4` and ensuring the audio is in an iTunes supported codec. 
 
 ### How does it work? (and why did you bother creating it?)
 Well I created it for 2 primary reasons:
@@ -26,7 +26,7 @@ So you look for a free alternative to [Handbrake :pineapple: ](https://handbrake
 By using FFMPEG to preserve (copy) `x264` / `h264` encoded video streams stored in MKV containers and converting them to MP4 containers, we can save a heap of CPU cycles and time!
 
 
-### MKV2ATV is basically just a wrapper/plugin for the following amazing open source projects
+### Valence is basically just a wrapper/plugin for the following amazing open source projects
 * [FFmpeg](https://ffmpeg.org) binaries for conversion and video file analysis
 * [Electron](https://electron.atom.io/) for a quick and easy cross-platform GUI application
 * [electron-prebuilt-compile](https://github.com/electron-userland/electron-prebuilt-compile) which allows me to use T
