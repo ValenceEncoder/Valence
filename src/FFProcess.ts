@@ -5,6 +5,8 @@ import {
     IStreamInfo, IFileInfo, IConfig
 } from "./FFInterfaces";
 import {FFMpegUtils} from "./FFMpegUtils";
+import * as decimal from "decimal.js";
+import Decimal = decimal.Decimal;
 
 const config: IConfig = require('config');
 
@@ -162,11 +164,13 @@ export class VideoFile {
     }
 
     public get Size():number {
-        return parseFloat((this.probeData.videoInfo.size / 1000).toFixed(1));
+        return this.probeData.videoInfo.size / 1000;
     }
 
     public getProgress(bytesProcessed:number):number {
-        return (bytesProcessed / this.Size) * 100;
+        var x:Decimal = new Decimal(bytesProcessed);
+        var y:Decimal = new Decimal(this.Size);
+        return x.dividedBy(y).times(100).toDecimalPlaces(2).toNumber();
     }
 
     constructor(private probeData:IFileInfo, private jobOptions:IProcessOptions) {}

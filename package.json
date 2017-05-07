@@ -49,6 +49,7 @@
   "homepage": "https://github.com/hammus/Valence#readme",
   "devDependencies": {
     "@types/chai": "^3.5.2",
+    "@types/decimal.js": "0.0.30",
     "@types/electron": "^1.4.37",
     "@types/materialize-css": "^0.98.0",
     "@types/mocha": "^2.2.41",
@@ -79,10 +80,13 @@
     "typescript": "^2.3.2"
   },
   "dependencies": {
+    "@types/mathjs": "0.0.34",
     "command-line-args": "^4.0.2",
     "config": "^1.25.1",
+    "decimal.js-light": "^2.2.3",
     "hammerjs": "^2.0.4",
-    "materialize-css": "^0.98.2"
+    "materialize-css": "^0.98.2",
+    "mathjs": "^3.12.3"
   },
   "config": {
     "forge": {
