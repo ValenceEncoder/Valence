@@ -2,10 +2,33 @@
 
 ![Valence Video Encoder](./logo/banner-gh.png)
 # Valence Video Encoder
-Valence is a simple cross platform GUI application that can speed up converting video for Apple iTunes and AppleTV.
+Valence is an simple cross platform GUI application that uses the amazing Open Source video encoder [FFmpeg](https://ffmpeg.org) a little more user friendly. 
+
+### Project Goals
+#### Long Term
+Over the long term, Valence aims to:
+1. Make FFMpeg easier to use by providing a clean and easy-to-use graphical user interface
+2. Allow GPU accelerated encoding/decoding of [supported codecs on supported GPUs](https://trac.ffmpeg.org/wiki/HWAccelIntro)  
+3. Be a one-stop-app for encoding/decoding, converting and tagging video files 
+4. Be seen or used by at least 1 person on the planet who is not either:
+
+   4a. my wife; or
+   
+   4b. my mother.
+
+#### Short Term
+When released Valence v1.0.0 will allow users to:
+1. Convert `x264` encoded `MKV` video files to `MP4` without needlessly re-encoding the video stream, speeding up conversion significantly, for playback on devices with limited container/codec support such as [AppleTV](https://www.apple.com/apple-tv/specs/). 
+2. Convert non-`AAC` audio streams to `AAC` so they can be played on devices with limited audio codec support such as [AppleTV](https://www.apple.com/apple-tv/specs/)
+
+
+
+It is particularly useful can speed up converting video for Apple iTunes and AppleTV.
 
 ### What does Valence do?
-It should really be called **MKV to MP4** (in fact it nearly was, but I decided to pay my respects to [Electron](https://electron.atom.io)) as all it really does is change the container of a video file that is already encoded using the `x264` or `h264` codec from `.mkv` to `.mp4` and ensuring the audio is in an iTunes supported codec. 
+It should really be called **MKV to MP4** (in fact it nearly was, but I decided to pay my respects to [Electron](https://electron.atom.io)) 
+as all it really does is change the container of a video file that is already encoded using the `x264` or `h264` codec from `.mkv` to `.mp4` 
+and ensuring the audio is in an iTunes supported codec. 
 
 ### How does it work? (and why did you bother creating it?)
 Well I created it for 2 primary reasons:
