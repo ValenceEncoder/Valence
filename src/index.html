@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>MKV2ATV</title>
-    <link rel="stylesheet" href="css/material-icons.css"/>
-    <link rel="stylesheet" href="../node_modules/materialize-css/bin/materialize.css"/>
-    <!--<link rel="stylesheet" href="../node_modules/mkv-theme/css/mkv2atv.min.css"/>-->
-    <link rel="stylesheet" href="css/app.css"/>
+    <title>VALENCE</title>
+    <link rel="stylesheet" href="css/materialize.min.css"/>
 
 </head>
-<body class="grey darken-4">
+<body class="app-bg">
 <header class="draggable">
     <div class="container">
         <div class="row">
-            <h4 class="grey-text text-lighten-3">MKV to AppleTV</h4>
+            <h3 class="brand-font">VALENCE</h3>
         </div>
     </div>
 
@@ -30,14 +27,14 @@
         <div class="row">
             <div class="col s10">
                 <div class="input-field">
-                    <input id="txt-input" class="grey-text lighten-1" type="text"
+                    <input id="txt-input"  type="text"
                            placeholder="Click Browse to Select a Video File"/>
-                    <label for="txt-input" class="white-text darken-2">Source File</label>
+                    <label for="txt-input">Source File</label>
                 </div>
             </div>
 
             <div class="col s2">
-                <button id="btn-browse-input" type="button" class="btn btn-floating btn-large cyan pulse">
+                <button id="btn-browse-input" type="button" class="btn btn-floating btn-large valence-blue pulse">
                     <i class="material-icons">folder</i>
                 </button>
             </div>
@@ -46,14 +43,14 @@
         <div id="div-output" class="row hide">
             <div class="col s10">
                 <div class="input-field">
-                    <input id="txt-output" class="grey-text lighten-1" type="text"
+                    <input id="txt-output" type="text"
                            placeholder="Click Browse to Select a Video File"/>
-                    <label for="txt-output" class="white-text darken-2">Output File</label>
+                    <label for="txt-output">Output File</label>
                 </div>
             </div>
 
             <div class="col s2">
-                <button id="btn-browse-output" type="button" class="btn btn-floating btn-large cyan">
+                <button id="btn-browse-output" type="button" class="btn btn-floating btn-large valence-blue">
                     <i class="material-icons">folder</i>
                 </button>
             </div>
@@ -63,34 +60,34 @@
 </main>
 
 
-<div id="ffmpeg-output"></div>
-
-
 <div id="err-dialog" class="modal bottom-sheet red darken-2">
+
     <div id="err-dialog-container" class="modal-content">
-        <h4 class="white-text">Error</h4>
+
+        <h4 class="white-text">ERROR</h4>
         <p id="err-message" class="white-text">File not found</p>
         <div class="modal-footer red darken-2">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text">Close</a>
         </div>
     </div>
+
 </div>
 
 
-<footer class="page-footer grey darken-3">
+<footer class="page-footer valence-purple darken-2">
 
     <div class="container">
         <div class="row">
 
             <div class="col s1">
-                <button id="btn-encode" class="btn btn-floating btn-large waves-effect waves-light green"><i
+                <button id="btn-encode" class="btn btn-floating btn-large waves-effect waves-light light-green darken-1"><i
                         class="material-icons left">play_arrow</i></button>
             </div>
 
             <div class="col s6"></div>
 
             <div class="col s1 offset-s10">
-                <button id="btn-quit" class="btn btn-floating btn-large waves-effect waves-light red darken-2">
+                <button id="btn-quit" class="btn btn-floating btn-large waves-effect waves-light red darken-2 left-align">
                     <i class="material-icons">close</i>
                 </button>
             </div>

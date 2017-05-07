@@ -1,0 +1,93 @@
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons.woff2) format('woff2');
+}
+
+/* @font-face kit by Fonts2u (http://www.fonts2u.com) */
+@font-face {
+  font-family: "Metro Normal";
+  src: url("../fonts/metror.eot?") format("eot"), url("../fonts/metror.woff") format("woff"), url("../fonts/metror.ttf") format("truetype"), url("../fonts/metror.svg#Metro-Normal") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.brand-font {
+  font-family: "Metro Normal";
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: 1.3rem;
+  text-transform: none;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.draggable {
+  -webkit-app-region: drag;
+}
+
+.non-draggable {
+  -webkit-app-region: no-drag;
+}
+
+/*Sticky Footer see http://materializecss.com/footer.html#sticky-footer*/
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.app-bg {
+  @extend .valence-purple
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @extend .white-text, .brand-font;
+}
+
+
+/* label focus color */
+
+.input-field label {
+  font-size: $label-font-size !important;
+}
+.input-field input[type=text]:disabled, .input-field input[type=text] {
+  color: $input-disabled-border !important;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus + label {
+  border-bottom: 1px solid #FFFFFF !important;
+  box-shadow: 0 1px 0 0 #b1b1b1 !important;
+  color: #FFFFFF !important;
+}
+
