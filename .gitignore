@@ -51,3 +51,4 @@ vid/*
 # yarn breaks travis at the moment
 yarn.lock
 
+.idea
