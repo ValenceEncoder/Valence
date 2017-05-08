@@ -42,14 +42,14 @@ $("#btn-encode").on('click', function (event) {
     const windowID: number = BrowserWindow.getFocusedWindow().id;
 
     let encodeWin = new BrowserWindow({
-        width: 1100,
+        width: 900,
         height: 300,
         show: true,
         modal: true,
         autoHideMenuBar: true,
     });
 
-    encodeWin.loadURL(ElectronUtils.path("EncodeView.html"));
+    encodeWin.loadURL(ElectronUtils.path("/views/EncodeView.html"));
 
     encodeWin.webContents.on('did-finish-load', () => {
         encodeWin.show();
