@@ -33,7 +33,6 @@ const pipeProbeInfo: IFFProbeOutputHandler = (probeOutput: IFFProbeOutput): void
 };
 
 let logProbeInfo: IFFProbeOutputHandler = (result: IFFProbeOutput): void => {
-    // console.timeEnd("FFPROBE::RUN");
     console.log(result);
 };
 

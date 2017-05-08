@@ -45,7 +45,8 @@ jspm_packages
 ffmpeg/bin
 dist
 tmp
-vid/*.*
+vid/*
+!vid/CCTest.mkv
 
 # yarn breaks travis at the moment
 yarn.lock
