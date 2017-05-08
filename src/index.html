@@ -143,6 +143,19 @@
         <h4 class="white-text">ERROR</h4>
         <p id="err-message" class="white-text">File not found</p>
         <div class="modal-footer red darken-2">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat white-text">Close</a>
+        </div>
+    </div>
+
+</div>
+
+<div id="success-dialog" class="modal bottom-sheet green darken-2">
+
+    <div id="success-dialog-container" class="modal-content">
+
+        <h4 class="white-text">ENCODE COMPLETE</h4>
+        <p id="success-message" class="white-text">Your video file was successfully encoded.</p>
+        <div class="modal-footer green darken-2">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text">Close</a>
         </div>
     </div>
@@ -179,6 +192,7 @@
     require('materialize-css');
     $(document).ready(function () {
         $("#err-dialog").modal();
+        $("#success-dialog").modal();
     });
     require('./MainRender');
 </script>

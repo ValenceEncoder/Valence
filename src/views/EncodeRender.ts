@@ -29,9 +29,8 @@ export class EncodeRenderer {
     };
 
     public static onMpegOutput(info: IFFMpegProgress): void {
-        console.log(`${EncodeRenderer.videoFile.getProgress(info.size)}% Complete`);
         $("#progress-bar").css('width', `${EncodeRenderer.videoFile.getProgress(info.size)}%`);
-        $("#progress-text").text(`${EncodeRenderer.videoFile.getProgress(info.size)}% Complete`);
+        $("#progress-text").text(`CONVERTING ${EncodeRenderer.videoFile.getProgress(info.size)}%`);
 
     }
 
@@ -60,7 +59,6 @@ export class EncodeRenderer {
 
 
 ipcRenderer.on(IPCEventType.SPAWN_ENCODER, function (event, fileInfo: VideoFile, parentId: number) {
-    console.log("SPAWN_ENCODER");
     //FIXME I assume due to protypical inheritance, this is getting passed as a POJO between window instances
     let videoFile: VideoFile = new VideoFile(fileInfo.ProbeData, fileInfo.ProcessOptions);
     EncodeRenderer.start(videoFile, parentId);

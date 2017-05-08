@@ -9,7 +9,6 @@ const BrowserWindow                      = require('electron').remote.BrowserWin
 const fs                                 = require('fs');
 const path                               = require('path');
 let videoFile:VideoFile;
-let fileInfo:IFileInfo;
 let ffprobe:FFProbe;
 let input:IProcessOptions;
 /**
@@ -59,6 +58,12 @@ $("#btn-encode").on('click', function (event) {
     encodeWin.on('closed', () => {
         encodeWin = null;
     });
+
+    ipcRenderer.on(IPCEventType.ENCODE_COMPLETED, function (event, message) {
+        encodeWin.close();
+        encodeWin = null;
+        $("#success-dialog").modal('open');
+    });
 });
 
 function outputAnalysis(result:IFileInfo) {
@@ -79,9 +84,7 @@ function onProbeComplete() {
 /**
  * ipcRenderer Listeners
  */
-ipcRenderer.on(IPCEventType.ENCODE_COMPLETED, function (event, message) {
-    console.log(message);
-});
+
 
 ipcRenderer.on(IPCEventType.APP_FILE_SELECTED, function (event: Electron.IpcRendererEvent, file: string) {
     $("#txt-input").val(file);
