@@ -1,9 +1,8 @@
 import {ipcRenderer} from "electron";
 import {ElectronUtils, IPCEventType} from "./ElectronUtils";
-import {FFMpegUtils} from "./FFMpegUtils";
-import MainError from "./MainError";
-import {FFProbe, VideoFile} from "./FFProcess";
-import {IFileInfo, IProcessOptions} from "./FFInterfaces";
+import {FFMpegUtils} from "./lib/FFMpegUtils";
+import {FFProbe, VideoFile} from "./lib/FFProcess";
+import {IFileInfo, IProcessOptions} from "./lib/FFInterfaces";
 
 
 const BrowserWindow                      = require('electron').remote.BrowserWindow;
@@ -34,8 +33,9 @@ $("#btn-browse-input").on('click', onBrowseClick);
  * Start Encode Job
  */
 $("#btn-encode").on('click', function (event) {
-    const inputFile = $("#txt-input").val();
-    if (!FFMpegUtils.fileExists(inputFile) || $("#txt-input").val() == "") {
+    const $txtInput = $("#txt-input");
+    const inputFile = $txtInput.val();
+    if (!FFMpegUtils.fileExists(inputFile) || $txtInput.val() == "") {
         $("#err-dialog").modal("open");
         return;
     }

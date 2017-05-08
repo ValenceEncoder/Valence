@@ -1,5 +1,5 @@
 import * as chai from 'chai';
-import {FFProbe, FFMpeg} from '../src/FFProcess';
+import {FFProbe, FFMpeg} from '../src/lib/FFProcess';
 import * as mocha from 'mocha';
 
 const expect = chai.expect;

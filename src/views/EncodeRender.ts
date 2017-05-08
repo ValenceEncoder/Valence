@@ -1,10 +1,9 @@
 import {remote, ipcRenderer} from 'electron';
-import {IPCEventType} from './ElectronUtils';
+import {IPCEventType} from '../ElectronUtils';
 import * as Path from "path";
-import {FFMpeg, FFProbe, VideoFile} from "./FFProcess";
-import {IFFMpegProgress, IFileInfo, IProcessOptions} from "./FFInterfaces";
+import {FFMpeg, VideoFile} from "../lib/FFProcess";
+import {IFFMpegProgress} from "../lib/FFInterfaces";
 import BrowserWindow = Electron.BrowserWindow;
-import {FFMpegUtils} from "./FFMpegUtils";
 
 
 enum EncodeState {
