@@ -6,6 +6,7 @@ npm-debug.log*
 # Compiled JS
 *.js
 *.js.map
+!prebuild.js
 
 # Runtime data
 pids

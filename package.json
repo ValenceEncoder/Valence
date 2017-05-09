@@ -7,7 +7,7 @@
     "cli": "cross-env tsc && node dist/FFCLI.js",
     "start": "electron-forge start",
     "test": "nyc mocha",
-    "package": "electron-forge package",
+    "package": "node prebuild.js && electron-forge package",
     "make": "node ./prebuild.js && electron-forge make",
     "postinstall": "cp ./materialize/picker.js ./node_modules/materialize-css/bin"
   },
