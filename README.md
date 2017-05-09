@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/hammus/Valence.svg?branch=master)](https://travis-ci.org/hammus/Valence)
+[![Build Status](https://travis-ci.org/hammus/Valence.svg?branch=master)](https://travis-ci.org/hammus/Valence) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Valence Video Encoder](./logo/banner-gh.png)
 # Valence Video Encoder
