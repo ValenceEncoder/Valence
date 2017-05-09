@@ -8,7 +8,7 @@
     "start": "electron-forge start",
     "test": "nyc mocha",
     "package": "electron-forge package",
-    "make": "electron-forge make",
+    "make": "node ./prebuild.js && electron-forge make",
     "postinstall": "cp ./materialize/picker.js ./node_modules/materialize-css/bin"
   },
   "repository": {
@@ -102,7 +102,16 @@
           "rpm"
         ]
       },
-      "electronPackagerConfig": {},
+      "electronPackagerConfig": {
+        "ignore": [
+          "out",
+          ".idea",
+          "logo",
+          "materialize",
+          "test",
+          "vid"
+        ]
+      },
       "electronWinstallerConfig": {
         "name": ""
       },
