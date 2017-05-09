@@ -29,6 +29,7 @@ coverage
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+out
 
 # Dependency directories
 node_modules
@@ -47,7 +48,7 @@ dist
 tmp
 vid/*
 !vid/CCTest.mkv
-
+src/package.json
 # yarn breaks travis at the moment
 yarn.lock
 
