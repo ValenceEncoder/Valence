@@ -17,7 +17,7 @@ Over the long term, Valence aims to:
    4b. my mother.
 
 #### Short Term
-When released Valence v1.0.0 will allow users to:
+The alpha release of Valence v0.1.0-alpha will allows to:
 1. Convert `x264` encoded `MKV` video files to `MP4` without needlessly re-encoding the video stream, speeding up conversion significantly, for playback on devices with limited container/codec support such as [AppleTV](https://www.apple.com/apple-tv/specs/). 
 2. Convert non-`AAC` audio streams to `AAC` so they can be played on devices with limited audio codec support such as [AppleTV](https://www.apple.com/apple-tv/specs/)
 

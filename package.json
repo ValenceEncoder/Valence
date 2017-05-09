@@ -1,6 +1,6 @@
 {
   "name": "Valence",
-  "version": "0.0.1",
+  "version": "0.1.0-alpha",
   "description": "Valence Video Encoder is a simple cross platform gui application that can speed up encoding video for AppleTV by using FFMPEG to preserve (copy) x264/h264 encoded video streams stored in MKV containers and converting them to MP4 containers.",
   "main": "src/App.ts",
   "scripts": {
@@ -85,8 +85,7 @@
     "config": "^1.25.1",
     "decimal.js-light": "^2.2.3",
     "hammerjs": "^2.0.4",
-    "materialize-css": "^0.98.2",
-    "mathjs": "^3.12.3"
+    "materialize-css": "^0.98.2"
   },
   "config": {
     "forge": {
