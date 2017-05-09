@@ -85,7 +85,8 @@
     "config": "^1.25.1",
     "decimal.js-light": "^2.2.3",
     "hammerjs": "^2.0.4",
-    "materialize-css": "^0.98.2"
+    "materialize-css": "^0.98.2",
+    "electron-compile": "^6.4.1"
   },
   "config": {
     "forge": {
@@ -104,11 +105,16 @@
       "electronPackagerConfig": {
         "ignore": [
           "out",
+          "dist",
+          ".nyc_output",
+          "test",
+          "tmp",
+          "vid",
           ".idea",
-          "logo",
           "materialize",
           "test",
-          "vid"
+          "vid",
+          "logo/ValenceLogo.ai"
         ]
       },
       "electronWinstallerConfig": {

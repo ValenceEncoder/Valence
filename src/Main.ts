@@ -51,7 +51,12 @@ export default class Main {
 
 
     private static onReady() {
-        Main.mainWindow = new Main.BrowserWindow({ width: 1200, height: 768, frame: false, icon: "../" });
+        Main.mainWindow = new Main.BrowserWindow({
+            width: 1200,
+            height: 768,
+            frame: false,
+            icon: "../logo/valence-purple-base-1024px.ico"
+        });
         Main.mainWindow.loadURL(Url.format({
             protocol: "file:",
             pathname: Path.join(__dirname, 'index.html'),
