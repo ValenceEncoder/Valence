@@ -58,4 +58,4 @@ By using FFMPEG to preserve (copy) `x264` / `h264` encoded video streams stored 
 ### LICENCE
 Valence Video Encoder is Copyright &copy; 2017 Liam Whan. Valence is Free and Open Source Software. 
 No warranties either express or implied are provided, and by downloading this software or repository you are doing so at your own risk. 
-Valence-specific source code is licensed under the MIT License. See [LICENSE.md]("LICENSE.md") for the Valence License as well as the Licenses of all third party packages used. 
+Valence-specific source code is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for the Valence License as well as the Licenses of all third party packages used. 
