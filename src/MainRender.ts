@@ -3,6 +3,7 @@ import {ElectronUtils, IPCEventType} from "./ElectronUtils";
 import {FFMpegUtils} from "./lib/FFMpegUtils";
 import {FFProbe, VideoFile} from "./lib/FFProcess";
 import {IFileInfo, IProcessOptions} from "./lib/FFInterfaces";
+import ProcessMemoryInfo = NodeJS.ProcessMemoryInfo;
 
 
 const BrowserWindow                      = require('electron').remote.BrowserWindow;
@@ -11,6 +12,9 @@ const path                               = require('path');
 let videoFile:VideoFile;
 let ffprobe:FFProbe;
 let input:IProcessOptions;
+
+let statsVisible:boolean = false;
+
 /**
  * Quit Application
  */
@@ -98,3 +102,27 @@ ipcRenderer.on(IPCEventType.APP_FILE_SELECTED, function (event: Electron.IpcRend
     Materialize.updateTextFields();
     $('#analysis-preloader').removeClass('hide');
 });
+
+ipcRenderer.on(IPCEventType.APP_SHOW_STATISTICS, function(event) {
+
+    statsVisible = !statsVisible;
+    let navAction:string = (statsVisible) ? "show" : "hide";
+    $(".button-collapse").sideNav(navAction);
+
+    getRAMUsage();
+
+
+});
+
+function getRAMUsage():void {
+    if(!statsVisible) {
+        return;
+    }
+
+    let memInfo:ProcessMemoryInfo = process.getProcessMemoryInfo();
+
+    $("#ram-working").text(memInfo.workingSetSize);
+    $("#ram-max").text(memInfo.workingSetSize);
+    $("#ram-process").text(memInfo.privateBytes);
+    setTimeout(getRAMUsage, 500);
+}
