@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/hammus/Valence.svg?branch=master)](https://travis-ci.org/hammus/Valence) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ![Valence Video Encoder](./logo/banner-gh.png)
 # Valence Video Encoder
@@ -56,5 +56,6 @@ By using FFMPEG to preserve (copy) `x264` / `h264` encoded video streams stored 
 * [Node.js](https://nodejs.org) runs javascript Server-side like a champ
 
 ### LICENCE
-Valence Video Encoder is Copyright &copy; 2017 Liam Whan. 
-Valence-specific source code is licensed under the MIT License. See [LICENSE.md]("/LICENSE.md"") for the Valence License as well as the Licenses of all third party packages used. 
+Valence Video Encoder is Copyright &copy; 2017 Liam Whan. Valence is Free and Open Source Software. 
+No warranties either express or implied are provided, and by downloading this software or repository you are doing so at your own risk. 
+Valence-specific source code is licensed under the MIT License. See [LICENSE.md]("LICENSE.md") for the Valence License as well as the Licenses of all third party packages used. 
