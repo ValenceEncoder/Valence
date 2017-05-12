@@ -162,6 +162,17 @@
 
 </div>
 
+<ul id="slide-out" class="side-nav">
+    <li><a href="#!"><i class="material-icons">graphic_eq</i>App Resource Usage Stats</a></li>
+    <li><a href="#!">Memory</a></li>
+    <li><div class="divider"></div></li>
+    <li><div class="subheader">App</div></li>
+    <li><a class="waves-effect" href="#!"><span id="ram-working"></span></a></li>
+    <li><a class="waves-effect" href="#!"><span id="ram-max"></span></a></li>
+    <li><div class="subheader">This Process</div></li>
+    <li><a class="waves-effect" href="#!"><span id="ram-process"></span></a></li>
+</ul>
+<a href="#" data-activates="slide-out" class="hide button-collapse"><i class="material-icons">menu</i></a>
 
 <footer class="page-footer valence-purple darken-2">
 
@@ -193,6 +204,7 @@
     $(document).ready(function () {
         $("#err-dialog").modal();
         $("#success-dialog").modal();
+        $(".button-collapse").sideNav();
     });
     require('./MainRender');
 </script>
