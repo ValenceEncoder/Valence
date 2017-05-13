@@ -54,3 +54,5 @@ src/package.json
 yarn.lock
 
 .idea
+
+Valence-win32-x64/

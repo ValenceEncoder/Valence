@@ -4,12 +4,13 @@
     "moduleResolution": "node",
     "target": "es6",
     "sourceMap": true,
-    "outDir": "./dist/",
+    "outDir": "./dist/src",
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true
   },
   "include": [
+    "App.ts",
     "src/**/*.ts"
   ],
   "exclude": [
