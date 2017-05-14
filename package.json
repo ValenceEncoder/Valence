@@ -1,94 +1,91 @@
 {
   "name": "Valence",
+  "productName": "Valence",
   "version": "0.1.0-alpha",
-  "description": "Valence Video Encoder is a simple cross platform gui application that can speed up encoding video for AppleTV by using FFMPEG to preserve (copy) x264/h264 encoded video streams stored in MKV containers and converting them to MP4 containers.",
-  "main": "App.ts",
+  "description": "My Electron application description",
+  "main": "src/App.ts",
   "scripts": {
-    "cli": "cross-env tsc && node dist/FFCLI.js",
     "start": "electron-forge start",
-    "start-build": "gulp && electron ./dist",
-    "test": "nyc mocha",
-    "pack": "build --dir .",
-    "build": "electron-packager . --overwrite --electronVersion=1.6.6 --asar=false --platform=win32 --arch=x64 --icon=assets/icons/win/icon.ico --prune=true --out=release --version-string.CompanyName=ValenceEncoder --version-string.ProductName=\"Valence Encoder\"",
-    "postinstall": "cp ./materialize/picker.js ./node_modules/materialize-css/bin",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "lint": "eslint src",
+    "postinstall": "cp ./materialize/picker.js ./node_modules/materialize-css/bin"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ValenceEncoder/Valence.git"
-  },
-  "nyc": {
-    "extension": [
-      ".ts",
-      ".tsx"
-    ],
-    "exclude": [
-      "**/*.d.ts",
-      "test/**/*.ts",
-      "node_modules/**/*"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
-  },
-  "private": true,
-  "keywords": [
-    "video",
-    "encoding",
-    "mkv",
-    "mp4",
-    "appletv",
-    "converter",
-    "container",
-    "Electron",
-    "typscript"
-  ],
+  "keywords": [],
   "author": "Liam Whan",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hammus/Valence/issues"
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "ignore": [
+          ".idea",
+          "materialize/fonts",
+          "materialize/sass",
+          "dist",
+          "vid",
+          "test",
+          "install.sh",
+          "Gulpfile.js",
+          "license-concat.js",
+          ".nvmrc",
+          ".gitignore",
+          ".nyc_output",
+          "logo/ValenceLogo.ai"
+
+        ],
+        "icon": "build/icon.ico",
+        "electronVersion": "1.6.6",
+        "overwrite": true
+      },
+      "electronWinstallerConfig": {
+        "name": "Valence",
+        "setupExe": "valence-encoder-setup.exe",
+        "description": "Valence is a graphical interface video encoder that uses Electron and FFMPEG."
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "valence"
+      }
+    }
   },
-  "homepage": "https://github.com/hammus/Valence#readme",
-  "devDependencies": {
+  "dependencies": {
     "@types/chai": "^3.5.2",
     "@types/decimal.js": "0.0.30",
     "@types/electron": "^1.4.37",
     "@types/materialize-css": "^0.98.0",
     "@types/mocha": "^2.2.41",
     "@types/sinon": "^2.1.3",
-    "chai": "^3.5.0",
-    "cross-env": "^4.0.0",
-    "devtron": "^1.4.0",
-    "electron-debug": "^1.1.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-clean": "^0.3.2",
-    "gulp-copy": "^1.0.0",
-    "gulp-install": "^1.1.0",
-    "gulp-json-modify": "^1.0.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.0",
-    "gulp-typescript": "^3.1.6",
-    "gulp-uglifycss": "^1.0.8",
-    "i": "^0.3.5",
-    "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^3.3.0",
-    "nyc": "^10.3.0",
-    "run-sequence": "^1.2.2",
-    "source-map-support": "^0.4.15",
-    "ts-node": "^3.0.2",
-    "tslint": "latest",
-    "electron-prebuilt-compile": "1.6.6",
-    "typescript": "^2.3.2"
-  },
-  "dependencies": {
     "command-line-args": "^4.0.2",
-    "config": "^1.25.1",
+    "config": "1.26.1",
     "decimal.js": "^7.2.1",
     "electron-compile": "^6.4.1",
+    "electron-debug": "^1.1.0",
     "hammerjs": "^2.0.4",
+    "jquery": "2.2.4",
     "materialize-css": "^0.98.2"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-prebuilt-compile": "1.6.6"
   }
 }

@@ -3,6 +3,8 @@ import * as Url from "url";
 import * as Path from "path";
 import {IPCEventType} from "./ElectronUtils";
 
+
+
 export default class Main {
     static mainWindow: Electron.BrowserWindow;
     static application: Electron.App;
@@ -59,10 +61,11 @@ export default class Main {
         });
         let indexURL = Url.format({
             protocol: "file:",
-            pathname: Path.join(__dirname, '../index.html'),
+            pathname: Path.join(__dirname, 'index.html'),
             slashes: true
         });
         Main.mainWindow.loadURL(indexURL);
+        Main.mainWindow.webContents.openDevTools();
         Main.mainWindow.on('closed', Main.onClose);
         Main.GlobalShortcut.register('CommandOrControl+Q', () => {
             Main.application.exit(0);
