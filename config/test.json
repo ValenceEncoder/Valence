@@ -1,7 +1,7 @@
 {
 	"bin": {
-		"ffmpeg": "./ffmpeg/bin/ffmpeg",
-		"ffprobe": "./ffmpeg/bin/ffprobe"
+		"ffmpeg": "/ffmpeg/bin/ffmpeg",
+		"ffprobe": "/ffmpeg/bin/ffprobe"
 	},
 	"versions": {
 		"win": {

@@ -8,22 +8,23 @@ import {FFMpegUtils} from "./FFMpegUtils";
 import * as decimal from "decimal.js";
 import Decimal = decimal.Decimal;
 
-const config: IConfig = require('config');
+const config: IConfig = require('electron').remote.getGlobal('ValenceConfig');
+
 
 export abstract class FFProcess extends EventEmitter {
+    protected abstract readonly targetOutput: "stdout" | "stderr";
     protected args: string[];
     protected process: ChildProcess;
     protected outBuffer: string                   = "";
-    protected abstract readonly targetOutput: "stdout" | "stderr";
     public static readonly EVENT_OUTPUT: string   = "OUTPUT";
     public static readonly EVENT_COMPLETE: string = "COMPLETE";
     public static readonly EVENT_ERROR: string    = "ERROR";
 
     protected command: string;
 
-    constructor(options:IProcessOptions) {
+    constructor(options: IProcessOptions) {
         super();
-        if(!FFMpegUtils.fileExists(options.input)) {
+        if (!FFMpegUtils.fileExists(options.input)) {
             throw new Error(`File ${options.input} does not exist`);
         }
     }
@@ -35,7 +36,7 @@ export abstract class FFProcess extends EventEmitter {
 }
 
 export class FFProbe extends FFProcess {
-    protected readonly targetOutput = "stdout";
+    protected readonly targetOutput: "stdout" = "stdout";
 
     protected bufferOutput: (data: string) => void = (data: string) => {
         this.outBuffer += data;
@@ -50,8 +51,8 @@ export class FFProbe extends FFProcess {
     public run(): FFProbe {
         this.process = spawn(this.command, this.args);
         this.process[this.targetOutput].setEncoding('utf8');
-        this.process[this.targetOutput].on('error', (err:any) => {
-           this.emit(FFProbe.EVENT_ERROR, err);
+        this.process[this.targetOutput].on('error', (err: any) => {
+            this.emit(FFProbe.EVENT_ERROR, err);
         });
         this.process[this.targetOutput].on('data', this.bufferOutput);
         this.process[this.targetOutput].on('close', () => {
@@ -70,7 +71,7 @@ export class FFProbe extends FFProcess {
 }
 
 export class FFMpeg extends FFProcess {
-    protected readonly targetOutput = "stderr";
+    protected readonly targetOutput: "stderr" = "stderr";
 
 
     constructor(public options: IProcessOptions) {
@@ -99,7 +100,7 @@ export class FFMpeg extends FFProcess {
             }
         });
         this.process[this.targetOutput].on('close', () => this.emit(FFMpeg.EVENT_COMPLETE));
-        this.process[this.targetOutput].on('error', (err:any) => this.emit(FFMpeg.EVENT_ERROR, err));
+        this.process[this.targetOutput].on('error', (err: any) => this.emit(FFMpeg.EVENT_ERROR, err));
         return this;
     }
 
@@ -132,46 +133,48 @@ export class FFMpeg extends FFProcess {
 
 export class VideoFile {
 
-    public get VideoCodec():string {
+    public get VideoCodec(): string {
         return this.probeData.videoInfo.codec_name;
     }
 
-    public get AudioCodec():string {
+    public get AudioCodec(): string {
         return this.probeData.audioInfo.codec_name;
     }
 
-    public get Duration():number {
+    public get Duration(): number {
         return this.probeData.videoInfo.duration;
     }
 
-    public get InputPath():string {
+    public get InputPath(): string {
         return this.jobOptions.input;
     }
+
     //TODO Add options to output other container formats
-    public get OutputPath():string {
+    public get OutputPath(): string {
         return FFMpegUtils.changeExtension(this.InputPath, "mp4");
     }
 
-    public get ProbeData():IFileInfo {
+    public get ProbeData(): IFileInfo {
         return this.probeData;
     }
 
-    public get ProcessOptions():IProcessOptions {
+    public get ProcessOptions(): IProcessOptions {
         return {
             input: this.InputPath,
             output: this.OutputPath
         }
     }
 
-    public get Size():number {
+    public get Size(): number {
         return this.probeData.videoInfo.size / 1000;
     }
 
-    public getProgress(bytesProcessed:number):number {
-        var x:Decimal = new Decimal(bytesProcessed);
-        var y:Decimal = new Decimal(this.Size);
+    public getProgress(bytesProcessed: number): number {
+        var x: Decimal = new Decimal(bytesProcessed);
+        var y: Decimal = new Decimal(this.Size);
         return x.dividedBy(y).times(100).toDecimalPlaces(2).toNumber();
     }
 
-    constructor(private probeData:IFileInfo, private jobOptions:IProcessOptions) {}
+    constructor(private probeData: IFileInfo, private jobOptions: IProcessOptions) {
+    }
 }

@@ -142,7 +142,9 @@ interface IConfigVersions {
     node: number;
 }
 
+
 export interface IConfig {
     bin: IConfigBin;
     versions: IConfigVersions;
 }
+
