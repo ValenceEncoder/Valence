@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>VALENCE</title>
-    <link rel="stylesheet" href="css/materialize.min.css"/>
+    <link rel="stylesheet" href="src/css/materialize.min.css"/>
 
 </head>
 <body class="app-bg">
 <header class="draggable">
     <div class="container">
         <div class="row pad-16">
-            <img class="responsive-img center-block" src="img/banner-app.png" alt="Valence Video Encoder Brand Banner"/>
+            <img class="responsive-img center-block" src="src/img/banner-app.png" alt="Valence Video Encoder Brand Banner"/>
         </div>
     </div>
 
@@ -199,14 +199,14 @@
 
 
 <script>
-    window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.js');
+    window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.js');
     require('materialize-css');
     $(document).ready(function () {
         $("#err-dialog").modal();
         $("#success-dialog").modal();
         $(".button-collapse").sideNav();
     });
-    require('./MainRender');
+    require('./src/MainRender');
 </script>
 
 </body>

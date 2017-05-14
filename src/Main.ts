@@ -57,11 +57,12 @@ export default class Main {
             frame: false,
             icon: "../logo/valence-purple-base-1024px.ico"
         });
-        Main.mainWindow.loadURL(Url.format({
+        let indexURL = Url.format({
             protocol: "file:",
-            pathname: Path.join(__dirname, 'index.html'),
+            pathname: Path.join(__dirname, '../index.html'),
             slashes: true
-        }));
+        });
+        Main.mainWindow.loadURL(indexURL);
         Main.mainWindow.on('closed', Main.onClose);
         Main.GlobalShortcut.register('CommandOrControl+Q', () => {
             Main.application.exit(0);

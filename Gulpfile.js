@@ -17,7 +17,9 @@ const picker_src = 'materialize/picker.js';
 const css_src    = 'src/css';
 const img_src    = 'src/img/**/*';
 const views_src  = 'src/views/**/*.html';
-const html_src   = 'src/index.html';
+const html_src   = 'index.html';
+const appts_src  = 'App.ts';
+const ts_src     = 'src/**/*.ts';
 
 const logo_src   = 'logo/*.{ico,icns,png}';
 const font_src   = 'src/fonts/**/*';
@@ -105,14 +107,24 @@ gulp.task('copy-package', function () {
 gulp.task('copy-ffmpeg', function () {
     return gulp.src(ffmpeg_src)
         .pipe(gulp.dest(ffmpeg_output));
-})
+});
+
+gulp.task('copy-App.ts', function () {
+    return gulp.src(appts_src)
+        .pipe(gulp.dest(dist));
+});
 
 gulp.task('typescript', function () {
     return tsProject.src()
         .pipe(tsProject())
         .js
         .pipe(gulp.dest(dist));
-})
+});
+
+gulp.task('copy-ts', function () {
+    return gulp.src(ts_src)
+        .pipe(gulp.dest(src_output));
+});
 
 gulp.task('watch', function () {
     return gulp
@@ -143,6 +155,8 @@ gulp.task('css-min-dist', function () {
 });
 
 gulp.task('copy', [
+    'copy-App.ts',
+    'copy-ts',
     'copy-config',
     'copy-package',
     'copy-ffmpeg',
@@ -162,7 +176,7 @@ gulp.task('sass', function (end) {
     runsequence('sass-compile', 'css-min', end);
 });
 
-gulp.task('dist', ['sass-build', 'typescript', 'copy']);
+gulp.task('dist', ['sass-build', 'copy']);
 
 gulp.task('prepackage', function (end) {
     runsequence('dist', 'install', end);
@@ -172,6 +186,4 @@ gulp.task('sass-build', function (end) {
     runsequence('sass', 'css-min-dist', end);
 });
 
-gulp.task('default', function (end) {
-    runsequence('sass', 'watch', end);
-});
+gulp.task('default', ['prepackage']);
