@@ -1,2 +1,9 @@
 node_modules
 out
+.nyc_output
+*.js
+!Gulpfile.js
+src/package.json
+vid/**/*
+!vid/CCTest.mkv
+dist
