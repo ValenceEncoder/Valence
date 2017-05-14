@@ -8,6 +8,9 @@ global.ValenceConfig = require(Path.join(appPath,  '/src/vendor/electron-node-co
 global.ValenceConfig.bin.ffprobe = Path.join(appPath, global.ValenceConfig.bin.ffprobe);
 global.ValenceConfig.bin.ffmpeg = Path.join(appPath, global.ValenceConfig.bin.ffmpeg);
 
-require('electron-debug')({showDevTools: true});
+if(process.env.NODE_ENV !== "production") {
+    require('electron-debug')({showDevTools: true});
+}
+
 
 Main.main(app, BrowserWindow);

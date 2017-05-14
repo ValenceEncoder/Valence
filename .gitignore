@@ -7,3 +7,4 @@ src/package.json
 vid/**/*
 !vid/CCTest.mkv
 dist
+.ghtoken.js
