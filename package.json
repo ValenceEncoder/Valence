@@ -1,0 +1,75 @@
+{
+  "name": "Valence",
+  "productName": "Valence",
+  "version": "0.1.0-alpha",
+  "description": "My Electron application description",
+  "main": "src/App.ts",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "lint": "eslint src",
+    "postinstall": "cp ./materialize/picker.js ./node_modules/materialize-css/bin"
+  },
+  "keywords": [],
+  "author": "Liam Whan",
+  "license": "MIT",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "ignore": [
+          ".idea"
+        ],
+        "prune": true,
+        "overwrite": true
+      },
+      "electronWinstallerConfig": {
+        "name": "valence"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "valence"
+      }
+    }
+  },
+  "dependencies": {
+    "@types/chai": "^3.5.2",
+    "@types/decimal.js": "0.0.30",
+    "@types/electron": "^1.4.37",
+    "@types/materialize-css": "^0.98.0",
+    "@types/mocha": "^2.2.41",
+    "@types/sinon": "^2.1.3",
+    "command-line-args": "^4.0.2",
+    "config": "1.26.1",
+    "decimal.js": "^7.2.1",
+    "electron-compile": "^6.4.1",
+    "electron-debug": "^1.1.0",
+    "hammerjs": "^2.0.4",
+    "jquery": "2.2.4",
+    "materialize-css": "^0.98.2"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-prebuilt-compile": "1.6.6"
+  }
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VALENCE - Encoding</title>
+    <link rel="stylesheet" href="../css/materialize.min.css"/>
+</head>
+<body class="app-bg">
+<header>
+</header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h3 class="brand-font">ENCODING</h3>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s12">
+                <span id="progress-text"></span>
+            </div>
+            <div class="col s12">
+                <div class="progress">
+                    <div id="progress-bar" class="determinate"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    window.$ = window.jQuery = require('../../node_modules/jquery/dist/jquery.js');
+    require('materialize-css');
+    require('./EncodeRender');
+</script>
+</body>
+</html>
