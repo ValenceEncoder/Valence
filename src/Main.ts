@@ -65,7 +65,6 @@ export default class Main {
             slashes: true
         });
         Main.mainWindow.loadURL(indexURL);
-        Main.mainWindow.webContents.openDevTools();
         Main.mainWindow.on('closed', Main.onClose);
         Main.GlobalShortcut.register('CommandOrControl+Q', () => {
             Main.application.exit(0);
