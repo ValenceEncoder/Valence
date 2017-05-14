@@ -1,3 +1,4 @@
+
 import {app, BrowserWindow} from 'electron';
 import Main from './Main';
 import * as Path from 'path';
