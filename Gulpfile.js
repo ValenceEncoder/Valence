@@ -12,8 +12,8 @@ const json         = require('gulp-json-modify');
 const install      = require('gulp-install');
 const clean        = require('gulp-clean');
 
-const sass_src   = 'src/materialize/sass/**/*.scss';
-const picker_src = 'src/materialize/picker.js';
+const sass_src   = 'src/vendor/materialize/sass/**/*.scss';
+const picker_src = 'src/vendor/materialize/picker.js';
 const css_src    = 'src/css';
 const img_src    = 'src/img/**/*';
 const views_src  = 'src/views/**/*.html';

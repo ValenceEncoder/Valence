@@ -65,8 +65,7 @@
         ],
         "icon": "build/icon.ico",
         "electronVersion": "1.6.6",
-        "overwrite": true,
-        "arch": "all"
+        "overwrite": true
       },
       "electronWinstallerConfig": {
         "name": "Valence",
