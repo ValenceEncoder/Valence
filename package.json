@@ -9,8 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint src",
-    "postinstall": "cp ./materialize/picker.js ./node_modules/materialize-css/bin"
+    "lint": "eslint src"
   },
   "keywords": ["mkv", "converter", "appletv", "apple-tv", "mp4", "ffmpeg", "handbrake", "video"],
   "author": "Liam Whan",
@@ -43,8 +42,8 @@
       "electronPackagerConfig": {
         "ignore": [
           ".idea",
-          "materialize/fonts",
-          "materialize/sass",
+          "src/vendor/materialize/fonts",
+          "src/vendor/materialize/sass",
           "dist",
           "vid",
           "test",
