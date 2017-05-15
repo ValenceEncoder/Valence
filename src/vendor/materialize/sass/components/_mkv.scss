@@ -1,0 +1,61 @@
+html {
+  color: $text-base-color;
+}
+.draggable {
+  -webkit-app-region: drag;
+}
+
+.non-draggable {
+  -webkit-app-region: no-drag;
+}
+
+/*Sticky Footer see http://materializecss.com/footer.html#sticky-footer*/
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.app-bg {
+  @extend .valence-purple
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @extend .white-text, .brand-font, .center-align;
+}
+.font-1p2 {
+  font-size: 1.6rem;
+}
+.collapsible-header {
+  @extend .collapsible-header, .brand-font, .font-1p2;
+}
+
+
+/* label focus color */
+
+.input-field label {
+  font-size: $label-font-size !important;
+}
+.input-field input[type=text]:disabled, .input-field input[type=text] {
+  color: $input-disabled-border !important;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus + label {
+  border-bottom: 1px solid #FFFFFF !important;
+  box-shadow: 0 1px 0 0 #b1b1b1 !important;
+  color: #FFFFFF !important;
+}
+
+
+/* fallback */
+

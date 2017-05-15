@@ -2,6 +2,7 @@ node_modules
 out
 .nyc_output
 *.js
+!src/vendor/*/*.js
 !Gulpfile.js
 src/package.json
 vid/**/*

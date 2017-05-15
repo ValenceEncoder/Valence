@@ -1,0 +1,15 @@
+$text-base-color: #f6f6f6;
+$input-border-color: #e1e1e1;
+$input-disabled-color: $text-base-color;
+$label-font-size: .9rem;
+$placeholder-text-color: $input-border-color;
+$input-border: 1px solid $input-border-color !important;
+$input-disabled-border: 1px solid $input-disabled-color !important;
+
+$spinner-default-color: color('valence-blue', 'lighten-2');
+
+$table-border-color:  color('valence-blue', 'darken-1');
+$table-striped-color: color('valence-blue', 'lighten-2');
+
+$collapsible-border-color: color('valence-blue', 'darken-1');
+$progress-bar-color: color('valence-blue', 'lighten-1');
