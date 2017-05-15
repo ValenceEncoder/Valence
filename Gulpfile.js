@@ -12,8 +12,8 @@ const json         = require('gulp-json-modify');
 const install      = require('gulp-install');
 const clean        = require('gulp-clean');
 
-const sass_src   = 'materialize/sass/**/*.scss';
-const picker_src = 'materialize/picker.js';
+const sass_src   = 'src/materialize/sass/**/*.scss';
+const picker_src = 'src/materialize/picker.js';
 const css_src    = 'src/css';
 const img_src    = 'src/img/**/*';
 const views_src  = 'src/views/**/*.html';
@@ -33,9 +33,9 @@ const font_output   = `${src_output}/fonts`;
 const img_output    = `${src_output}/img`;
 const views_output  = `${src_output}/views`;
 const html_output   = dist;
-const config_output = `${dist}/config`
-const ffmpeg_output = `${dist}/ffmpeg`
-const css_output    = `${css_src}/materialize.css`
+const config_output = `${dist}/config`;
+const ffmpeg_output = `${dist}/ffmpeg`;
+const css_output    = `${css_src}/materialize.css`;
 const sassOptions   = {
     errLogToConsole: true,
     outputStyle    : 'expanded'
@@ -165,7 +165,7 @@ gulp.task('copy', [
     'copy-views',
     'copy-index.html',
     'copy-picker'
-])
+]);
 
 gulp.task('clean', function () {
     return gulp.src(`${dist}/**/*`, {read: false})

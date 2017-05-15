@@ -2,7 +2,7 @@
   "name": "Valence",
   "productName": "Valence",
   "version": "0.1.0-alpha",
-  "description": "My Electron application description",
+  "description": "Valence is a simple GUI application for converting video files",
   "main": "src/App.ts",
   "scripts": {
     "start": "electron-forge start",
@@ -11,7 +11,16 @@
     "publish": "electron-forge publish",
     "lint": "eslint src"
   },
-  "keywords": ["mkv", "converter", "appletv", "apple-tv", "mp4", "ffmpeg", "handbrake", "video"],
+  "keywords": [
+    "mkv",
+    "converter",
+    "appletv",
+    "apple-tv",
+    "mp4",
+    "ffmpeg",
+    "handbrake",
+    "video"
+  ],
   "author": "Liam Whan",
   "license": "MIT",
   "config": {
@@ -35,8 +44,7 @@
           "zip"
         ],
         "linux": [
-          "deb",
-          "rpm"
+          "deb"
         ]
       },
       "electronPackagerConfig": {
@@ -54,7 +62,6 @@
           ".gitignore",
           ".nyc_output",
           "logo/ValenceLogo.ai"
-
         ],
         "icon": "build/icon.ico",
         "electronVersion": "1.6.6",
@@ -86,6 +93,8 @@
     "decimal.js": "^7.2.1",
     "electron-compile": "^6.4.1",
     "electron-debug": "^1.1.0",
+    "electron-node-config": "^1.0.1",
+    "gulp-uglifycss": "^1.0.8",
     "hammerjs": "^2.0.4",
     "jquery": "2.2.4",
     "materialize-css": "^0.98.2"
@@ -94,6 +103,17 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.24.1",
-    "electron-prebuilt-compile": "1.6.6"
+    "electron-prebuilt-compile": "1.6.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-copy": "^1.0.0",
+    "gulp-install": "^1.1.0",
+    "gulp-json-modify": "^1.0.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-typescript": "^3.1.6",
+    "run-sequence": "^1.2.2"
   }
 }

@@ -8,8 +8,8 @@
 
 /* @font-face kit by Fonts2u (http://www.fonts2u.com) */
 @font-face {
-  font-family: "Metro Normal";
-  src: url("../fonts/metror.eot?") format("eot"), url("../fonts/metror.ttf") format("truetype"), url("../fonts/metror.svg#Metro-Normal") format("svg");
+  font-family: "Metro";
+  src: url("../fonts/metror.ttf") format("truetype"),  url(../fonts/metror.woff2) format('woff2');
   font-weight: normal;
   font-style: normal;
 }

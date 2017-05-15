@@ -4486,7 +4486,7 @@ nav .input-field label.active i {
 
 /* @font-face kit by Fonts2u (http://www.fonts2u.com) */
 @font-face {
-  font-family: "Metro Normal";
+  font-family: "Metro";
   src: url("../fonts/metror.eot?") format("eot"), url("../fonts/metror.ttf") format("truetype"), url("../fonts/metror.svg#Metro-Normal") format("svg");
   font-weight: normal;
   font-style: normal;
