@@ -2,8 +2,9 @@
 
 ![Valence Video Encoder](./logo/banner-gh.png)
 # Valence Video Encoder
-Valence is an simple cross platform GUI application that uses the amazing Open Source video encoder [FFmpeg](https://ffmpeg.org) a little more user friendly. 
 
+> ### NOTICE: 
+> Valence is in prerelease at the moment, it is currently maintined by 1 developer and I work on it in my spare time. Features are added whenever I get a chance but if you want to see them come along more quickly, please feel free to submit a PR!
 ### Project Goals
 #### Long Term
 Over the long term, Valence aims to:
