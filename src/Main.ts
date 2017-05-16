@@ -72,6 +72,9 @@ export default class Main {
         Main.GlobalShortcut.register('CommandOrControl+D', () => {
             Main.mainWindow.webContents.send(IPCEventType.APP_SHOW_STATISTICS);
         });
+        Main.GlobalShortcut.register('CommandOrControl+I', () => {
+           Main.mainWindow.webContents.openDevTools();
+        });
 
         Main.ipc.on(IPCEventType.APP_QUIT, Main.onQuit);
         Main.ipc.on(IPCEventType.ENCODE_COMPLETED, Main.onEncodeCompleted);

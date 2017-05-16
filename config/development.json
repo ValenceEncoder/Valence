@@ -1,6 +1,0 @@
-{
-	"bin": {
-		"ffmpeg": "../ffmpeg/bin/ffmpeg",
-		"ffprobe": "../ffmpeg/bin/ffprobe"
-	}
-}

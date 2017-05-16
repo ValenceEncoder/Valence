@@ -5,7 +5,7 @@
   "description": "Valence is a simple GUI application for converting video files",
   "main": "src/App.ts",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "NODE_ENV=development electron-forge start",
     "package": "electron-forge package --platform=all",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -65,13 +65,7 @@
         ],
         "icon": "build/icon.ico",
         "electronVersion": "1.6.6",
-<<<<<<< HEAD
-        "overwrite": true,
-        "platform": "all",
-        "arch": "all"
-=======
         "overwrite": true
->>>>>>> b3c13fce3f0212b839fb118255eb430898f231f9
       },
       "electronWinstallerConfig": {
         "name": "Valence",
@@ -94,7 +88,6 @@
     "@types/mocha": "^2.2.41",
     "@types/sinon": "^2.1.3",
     "command-line-args": "^4.0.2",
-    "config": "1.26.1",
     "decimal.js": "^7.2.1",
     "electron-compile": "^6.4.1",
     "electron-debug": "^1.1.0",
