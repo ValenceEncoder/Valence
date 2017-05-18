@@ -14,7 +14,6 @@ if(process.env.NODE_ENV === "development") {
 } else {
 
     const appPath = require('electron').app.getAppPath();
-    global.ValenceConfig = require(Path.join(appPath,  '/src/vendor/electron-node-config'));
     global.ValenceConfig = {
         bin: {
             ffprobe: Path.join(appPath, "/ffmpeg/bin/ffprobe"),
