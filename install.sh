@@ -21,10 +21,11 @@ mkdir -p ${OUTDIR}
 
 
 if [ "$(uname)" == "Darwin" ]; then
-    echo "Getting macOS binaries"
+    echo -e "\e[92mGetting macOS binaries\e[0m"
     wget ${URL}
     echo "Extracting archive to ${OUTDIR}"
     unzip ${ARCHIVE} -d ${OUTDIR}
+    rm ${ARCHIVE}
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     echo "Getting Linux binaries"
     wget ${URL} && tar -xvf ${ARCHIVE} -C ${OUTDIR}
@@ -34,16 +35,19 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
         echo "Checksums Validated"
         rm ${ARCHIVE}
         rm ${CHECKSUM}
+        mv ${FFMPEG} ${OUTDIR}
+        mv ${FFPROBE} ${OUTDIR}
+        rm -rf ${ARCHIVE_DIR}
     else
          echo "Checksum Failed"
          rm ${ARCHIVE}
          rm ${CHECKSUM}
+         mv ${FFMPEG} ${OUTDIR}
+         mv ${FFPROBE} ${OUTDIR}
+         rm -rf ${ARCHIVE_DIR}
          exit 1
     fi
 fi
 
 
 # Compare Checksums
-mv ${FFMPEG} ${OUTDIR}
-mv ${FFPROBE} ${OUTDIR}
-rm -rf ${ARCHIVE_DIR}
