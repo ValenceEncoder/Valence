@@ -1,27 +1,49 @@
 #!/usr/bin/env bash
 
-FFMPEG_OUTDIR="./ffmpeg/bin"
-FFMPEG_ARCHIVE="ffmpeg-git-64bit-static.tar.xz"
-FFMPEG_CHECKSUM="ffmpeg-git-64bit-static.tar.xz.md5"
-FFMPEG_ARCHIVE_DIR="${FFMPEG_OUTDIR}/ffmpeg-git-20170417-64bit-static"
-FFMPEG=${FFMPEG_ARCHIVE_DIR}/ffmpeg
-FFPROBE=${FFMPEG_ARCHIVE_DIR}/ffprobe
-mkdir -p ${FFMPEG_OUTDIR}
-wget https://johnvansickle.com/ffmpeg/builds/${FFMPEG_ARCHIVE} && tar -xvf ${FFMPEG_ARCHIVE} -C ${FFMPEG_OUTDIR}
-wget https://johnvansickle.com/ffmpeg/builds/${FFMPEG_CHECKSUM}
-# Compare Checksums
-GENSUM="$(md5sum ${FFMPEG_ARCHIVE})"
-ACTSUM="$(cat ${FFMPEG_CHECKSUM})"
-
-if [ "${GENSUM}" == "${ACTSUM}" ]; then
-    echo "Checksums Validated"
-else
-     echo "Checksum Failed"
-     exit 1
+if [ "$(uname)" == "Darwin" ]; then
+    BASENAME="Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_15.05.2017"
+    ARCHIVE="${BASENAME}.zip"
+    URL="http://www.ffmpegmac.net/resources/${ARCHIVE}"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    BASENAME="ffmpeg-git-64bit-static"
+    ARCHIVE="${BASENAME}.tar.xz"
+    CHECKSUM="${ARCHIVE}.md5"
+    URL="https://johnvansickle.com/ffmpeg/builds/${ARCHIVE}"
 fi
 
-mv ${FFMPEG} ${FFMPEG_OUTDIR}
-mv ${FFPROBE} ${FFMPEG_OUTDIR}
-rm -rf ${FFMPEG_ARCHIVE_DIR}
-rm ${FFMPEG_ARCHIVE}
-rm ${FFMPEG_CHECKSUM}
+
+OUTDIR="./ffmpeg/bin"
+
+ARCHIVE_DIR="${OUTDIR}/${BASENAME}"
+FFMPEG=${ARCHIVE_DIR}/ffmpeg
+FFPROBE=${ARCHIVE_DIR}/ffprobe
+mkdir -p ${OUTDIR}
+
+
+if [ "$(uname)" == "Darwin" ]; then
+    echo "Getting macOS binaries"
+    wget ${URL}
+    echo "Extracting archive to ${OUTDIR}"
+    unzip ${ARCHIVE} -d ${OUTDIR}
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    echo "Getting Linux binaries"
+    wget ${URL} && tar -xvf ${ARCHIVE} -C ${OUTDIR}
+    GENSUM="$(md5sum ${ARCHIVE})"
+    ACTSUM="$(cat ${CHECKSUM})"
+    if [ "${GENSUM}" == "${ACTSUM}" ]; then
+        echo "Checksums Validated"
+        rm ${ARCHIVE}
+        rm ${CHECKSUM}
+    else
+         echo "Checksum Failed"
+         rm ${ARCHIVE}
+         rm ${CHECKSUM}
+         exit 1
+    fi
+fi
+
+
+# Compare Checksums
+mv ${FFMPEG} ${OUTDIR}
+mv ${FFPROBE} ${OUTDIR}
+rm -rf ${ARCHIVE_DIR}

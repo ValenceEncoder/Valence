@@ -9,3 +9,4 @@ vid/**/*
 !vid/CCTest.mkv
 dist
 .ghtoken.js
+ffmpeg/bin
