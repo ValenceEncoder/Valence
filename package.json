@@ -8,6 +8,7 @@
     "start": "NODE_ENV=development electron-forge start",
     "package": "electron-forge package",
     "package-darwin": "electron-forge package --platform darwin",
+    "make-darwin": "electron-forge make --platform darwin",
     "package-win": "electron-forge package --platform win32",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -75,6 +76,11 @@
         "description": "Valence is a graphical interface video encoder that uses Electron and FFMPEG."
       },
       "electronInstallerDebian": {},
+      "electronInstallerDMG": {
+        "icon": "build/icon.icns",
+        "background": "build/background.png",
+        "overwrite": true
+      },
       "electronInstallerRedhat": {},
       "windowsStoreConfig": {
         "packageName": "",
