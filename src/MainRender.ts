@@ -31,6 +31,10 @@ function onBrowseClick(event: Event) {
 }
 $("#btn-browse-input").on('click', onBrowseClick);
 
+function onBrowseOutputClick(event: Event) {
+  ipcRenderer.send(IPCEventType.APP_SAVE_FILE, $("#txt-output").val());
+}
+
 
 /**
  * Start Encode Job
@@ -93,6 +97,7 @@ function onProbeComplete() {
 ipcRenderer.on(IPCEventType.APP_FILE_SELECTED, function (event: Electron.IpcRendererEvent, file: string) {
     $("#txt-input").val(file);
     $("#txt-output").val(FFMpegUtils.changeExtension(file, "mp4"));
+    $("#btn-browse-output").on('click', onBrowseOutputClick).addClass("pulse");
     $("#btn-browse-input").removeClass('pulse');
     input = {input: file};
     ffprobe = new FFProbe(input);
@@ -101,6 +106,14 @@ ipcRenderer.on(IPCEventType.APP_FILE_SELECTED, function (event: Electron.IpcRend
     ffprobe.run();
     Materialize.updateTextFields();
     $('#analysis-preloader').removeClass('hide');
+});
+
+ipcRenderer.on(IPCEventType.APP_SAVE_FILE_SELECTED, function (event: Electron.IpcRendererEvent, file: string) {
+    $("#txt-output").val(file);
+    $("#btn-browse-output")
+      .removeClass("pulse")
+      ;
+    Materialize.updateTextFields();
 });
 
 ipcRenderer.on(IPCEventType.APP_SHOW_STATISTICS, function(event) {

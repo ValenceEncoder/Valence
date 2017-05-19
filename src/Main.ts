@@ -51,6 +51,22 @@ export default class Main {
         })
     }
 
+    private static onSaveFile(event:Electron.IpcMainEvent, defaultPath:string) {
+      Electron.dialog.showSaveDialog({
+        title: "Select output location",
+        defaultPath: defaultPath,
+        filters: [
+          {
+            name: "MP4 Video", extensions: ["mp4", "m4v"]
+          }
+        ]
+      }, function(file:string){
+        if(file) {
+          event.sender.send(IPCEventType.APP_SAVE_FILE_SELECTED, file);
+        }
+      });
+    }
+
 
     private static onReady() {
         Main.mainWindow = new Main.BrowserWindow({
@@ -80,6 +96,7 @@ export default class Main {
         Main.ipc.on(IPCEventType.ENCODE_COMPLETED, Main.onEncodeCompleted);
         Main.ipc.on(IPCEventType.SPAWN_ENCODER, Main.onSpawnEncoder);
         Main.ipc.on(IPCEventType.APP_OPEN_FILE, Main.onOpenFile);
+        Main.ipc.on(IPCEventType.APP_SAVE_FILE, Main.onSaveFile);
 
     }
 
