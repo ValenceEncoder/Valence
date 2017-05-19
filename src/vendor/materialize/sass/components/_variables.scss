@@ -257,9 +257,9 @@ $spinner-default-color: $secondary-color !default;
 // 17. Tabs
 // ==========================================================================
 
-$tabs-underline-color: $primary-color-light !default;
-$tabs-text-color: $primary-color !default;
-$tabs-bg-color: #fff !default;
+$tabs-underline-color: color('valence-blue', 'lighten-2') !default;
+$tabs-text-color: white !default;
+$tabs-bg-color: color('valence-blue', 'darken-1') !default;
 
 
 // 18. Tables
