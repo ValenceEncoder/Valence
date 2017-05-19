@@ -9,6 +9,7 @@
     "package": "electron-forge package",
     "package-darwin": "electron-forge package --platform darwin",
     "make-darwin": "electron-forge make --platform darwin",
+    "make-win": "electron-forge make --platform win32 --arch all",
     "package-win": "electron-forge package --platform win32",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
@@ -44,10 +45,12 @@
           "zip"
         ],
         "darwin": [
-          "dmg"
+          "dmg",
+          "zip"
         ],
         "linux": [
-          "deb"
+          "deb",
+          "zip"
         ]
       },
       "electronPackagerConfig": {
