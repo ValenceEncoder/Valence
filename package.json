@@ -79,7 +79,21 @@
       "electronInstallerDMG": {
         "icon": "build/icon.icns",
         "background": "build/background.png",
-        "overwrite": true
+        "overwrite": true,
+        "contents": [
+          {
+            "x": 336,
+            "y": 80,
+            "type": "link",
+            "path": "/Applications"
+          },
+          {
+            "x": 80,
+            "y": 80,
+            "type": "link",
+            "path": "/Users/liam/Documents/Valence/out/Valence-darwin-x64/Valence.app"
+          }
+        ]
       },
       "electronInstallerRedhat": {},
       "windowsStoreConfig": {
