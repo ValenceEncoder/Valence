@@ -8,9 +8,13 @@
     "start": "NODE_ENV=development electron-forge start",
     "package": "electron-forge package",
     "package-darwin": "electron-forge package --platform darwin",
+    "package-win": "electron-forge package --platform win32",
+    "package-nix": "electron-forge package --platform linux --arch all",
     "make-darwin": "electron-forge make --platform darwin",
     "make-win": "electron-forge make --platform win32 --arch all",
-    "package-win": "electron-forge package --platform win32",
+    "make-linux32": "electron-forge make --platform linux --arch ia32",
+    "make-linux64": "electron-forge make --platform linux --arch x64",
+    "make-linux": "npm run make-linux32 && npm run make-linux64",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint src"
@@ -49,7 +53,6 @@
           "zip"
         ],
         "linux": [
-          "deb",
           "zip"
         ]
       },
