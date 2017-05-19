@@ -57,7 +57,7 @@ export default class Main {
             width: 1200,
             height: 768,
             frame: false,
-            icon: "../logo/valence-purple-base-1024px.ico"
+            icon: "../logo/valence-prpl-base-transp.png"
         });
         let indexURL = Url.format({
             protocol: "file:",
