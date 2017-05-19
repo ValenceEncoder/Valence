@@ -6,7 +6,9 @@
   "main": "src/App.ts",
   "scripts": {
     "start": "NODE_ENV=development electron-forge start",
-    "package": "electron-forge package --platform=all",
+    "package": "electron-forge package",
+    "package-darwin": "electron-forge package --platform darwin",
+    "package-win": "electron-forge package --platform win32",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint src"
@@ -63,7 +65,7 @@
           ".nyc_output",
           "logo/ValenceLogo.ai"
         ],
-        "icon": "build/icon.ico",
+        "icon": "build/icon.icns",
         "electronVersion": "1.6.6",
         "overwrite": true
       },

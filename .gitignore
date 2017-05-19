@@ -11,3 +11,4 @@ vid/**/*
 dist
 .ghtoken.js
 ffmpeg/bin
+npm-debug.log
