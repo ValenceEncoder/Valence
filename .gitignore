@@ -3,6 +3,7 @@ out
 .nyc_output
 *.js
 !src/vendor/*/*.js
+!src/vendor/materialize/bin/materialize.js
 !Gulpfile.js
 src/package.json
 vid/**/*
