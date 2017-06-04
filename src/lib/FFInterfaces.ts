@@ -136,15 +136,8 @@ interface IConfigBin {
     ffmpeg: string;
 }
 
-interface IConfigVersions {
-    nwjs: number;
-    ffmpeg: string;
-    node: number;
-}
-
 
 export interface IConfig {
     bin: IConfigBin;
-    versions: IConfigVersions;
 }
 

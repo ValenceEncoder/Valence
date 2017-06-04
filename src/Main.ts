@@ -3,7 +3,16 @@ import * as Url from "url";
 import * as Path from "path";
 import {IPCEventType} from "./ElectronUtils";
 
-
+/***
+ * Set Global Root Path
+ */
+global.rootPath = `${Path.resolve(Path.join(Path.dirname(__filename), "../"))}`;
+global.appConfig = {
+  bin: {
+      ffmpeg: Path.join(global.rootPath, "/ffmpeg/bin/ffmpeg"),
+      ffprobe: Path.join(global.rootPath, "/ffmpeg/bin/ffprobe")
+  }
+};
 
 export default class Main {
     static mainWindow: Electron.BrowserWindow;

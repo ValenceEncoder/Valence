@@ -2,15 +2,16 @@ import {remote, ipcRenderer} from 'electron';
 import {IPCEventType} from '../ElectronUtils';
 import * as Path from "path";
 import {FFMpeg, VideoFile} from "../lib/FFProcess";
-import {IFFMpegProgress} from "../lib/FFInterfaces";
+import {IConfig, IFFMpegProgress} from "../lib/FFInterfaces";
 import BrowserWindow = Electron.BrowserWindow;
-
 
 enum EncodeState {
     READY,
     RUNNING,
     COMPLETE
 }
+
+const config:IConfig = remote.getGlobal("appConfig");
 
 export class EncodeRenderer {
 
@@ -44,9 +45,8 @@ export class EncodeRenderer {
         EncodeRenderer.parentWindow = EncodeRenderer.remoteWindow.fromId(parentId);
         $('#heading').text(`Encoding ${Path.basename(fileInfo.InputPath)}`);
 
-        console.log(EncodeRenderer.videoFile);
 
-        EncodeRenderer.ffmpeg = new FFMpeg(EncodeRenderer.videoFile.ProcessOptions);
+        EncodeRenderer.ffmpeg = new FFMpeg(config, EncodeRenderer.videoFile.ProcessOptions);
         EncodeRenderer.ffmpeg.on(FFMpeg.EVENT_OUTPUT, EncodeRenderer.onMpegOutput);
         EncodeRenderer.ffmpeg.on(FFMpeg.EVENT_ERROR, EncodeRenderer.onError);
         EncodeRenderer.ffmpeg.on(FFMpeg.EVENT_COMPLETE, EncodeRenderer.onMpegComplete);
@@ -59,7 +59,7 @@ export class EncodeRenderer {
 
 
 ipcRenderer.on(IPCEventType.SPAWN_ENCODER, function (event, fileInfo: VideoFile, parentId: number) {
-    //FIXME I assume due to protypical inheritance, this is getting passed as a POJO between window instances
+    //FIXME I assume due to prototypical inheritance, this is getting passed as a POJO between window instances so this is a pretty ugly hack atm
     let videoFile: VideoFile = new VideoFile(fileInfo.ProbeData, fileInfo.ProcessOptions);
     EncodeRenderer.start(videoFile, parentId);
 

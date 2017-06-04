@@ -8,7 +8,6 @@ import {FFMpegUtils} from "./FFMpegUtils";
 import * as decimal from "decimal.js";
 import Decimal = decimal.Decimal;
 
-const config: IConfig = require('electron').remote.getGlobal('ValenceConfig');
 
 
 export abstract class FFProcess extends EventEmitter {
@@ -22,7 +21,7 @@ export abstract class FFProcess extends EventEmitter {
 
     protected command: string;
 
-    constructor(options: IProcessOptions) {
+    constructor(protected config:IConfig, options: IProcessOptions) {
         super();
         if (!FFMpegUtils.fileExists(options.input)) {
             throw new Error(`File ${options.input} does not exist`);
@@ -42,8 +41,8 @@ export class FFProbe extends FFProcess {
         this.outBuffer += data;
     };
 
-    constructor(public options: IProcessOptions) {
-        super(options);
+    constructor(protected config:IConfig, public options: IProcessOptions) {
+        super(config, options);
         this.args    = this.parseArgs();
         this.command = config.bin.ffprobe;
     }
@@ -74,8 +73,8 @@ export class FFMpeg extends FFProcess {
     protected readonly targetOutput: "stderr" = "stderr";
 
 
-    constructor(public options: IProcessOptions) {
-        super(options);
+    constructor(protected config:IConfig, public options: IProcessOptions) {
+        super(config, options);
         this.command = config.bin.ffmpeg;
 
     }
