@@ -127,6 +127,10 @@ export class MainRenderer {
     }
 
     public static init() {
+        $("#err-dialog").modal(); //Init Modals
+        $("#success-dialog").modal(); //Init Modals
+        $(".button-collapse").sideNav(); //Init Side Nav
+        $('ul.tabs').tabs(); // Init Tabs
         $("#btn-quit").on('click', MainRenderer.onQuitClick); // Quit Application
         $("#btn-browse-input").on('click', MainRenderer.onBrowseClick); // Open File Picker
         $("#btn-encode").on('click', MainRenderer.onEncodeClick); // Start Encode Job

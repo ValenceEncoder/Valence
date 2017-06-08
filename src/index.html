@@ -2,225 +2,226 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VALENCE</title>
-  <link rel="stylesheet" href="css/materialize.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VALENCE</title>
+    <link rel="stylesheet" href="css/materialize.min.css"/>
 
 </head>
 
 <body class="app-bg">
-  <header class="draggable">
+<header class="draggable">
     <div class="container">
-      <div class="row pad-16">
-        <img class="responsive-img center-block logo" src="img/ValenceLogo.svg" alt="Valence Video Encoder Brand Banner" />
-      </div>
+        <div class="row pad-16">
+            <img class="responsive-img center-block logo" src="img/ValenceLogo.svg"
+                 alt="Valence Video Encoder Brand Banner"/>
+        </div>
     </div>
 
-  </header>
+</header>
 
 
-  <main>
+<main>
     <div class="container">
-      <div class="row">
-        <div class="col s10">
-          <div class="input-field">
-            <input id="txt-input" type="text" placeholder="Click Browse to Select a Video File" />
-            <label for="txt-input">Source File</label>
-          </div>
-        </div>
+        <div class="row">
+            <div class="col s10">
+                <div class="input-field">
+                    <input id="txt-input" type="text" placeholder="Click Browse to Select a Video File"/>
+                    <label for="txt-input">Source File</label>
+                </div>
+            </div>
 
-        <div class="col s2">
-          <button id="btn-browse-input" type="button" class="btn btn-floating btn-large valence-blue lighten-1 pulse"><i class="material-icons">folder</i></button>
+            <div class="col s2">
+                <button id="btn-browse-input" type="button"
+                        class="btn btn-floating btn-large valence-blue lighten-1 pulse"><i
+                        class="material-icons">folder</i></button>
+            </div>
         </div>
-      </div>
     </div>
     <!-- New File Information Tabs -->
     <div id="analysis-result" class="container hide">
-      <div class="row">
-        <div class="col s12">
-          <h4>INFO &amp; OPTIONS</h4>
+        <div class="row">
+            <div class="col s12">
+                <h4>INFO &amp; OPTIONS</h4>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <ul class="tabs valence-blue">
-            <li class="tab col s3"><a class="active white-text" href="#test1">Video Info</a></li>
-            <li class="tab col s3"><a class="white-text" href="#test2">Audio Info</a></li>
-            <li class="tab col s3"><a class="white-text" href="#test3">Encoder Options</a></li>
-          </ul>
-        </div>
-        <div id="test1" class="col s12">
-          <table class="highlight valence-blue darken-2">
-            <thead>
-              <tr>
-                <th>Codec</th>
-                <th>Duration</th>
-                <th>Size (kB)</th>
-              </tr>
-            </thead>
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs valence-blue">
+                    <li class="tab col s3"><a class="active white-text" href="#test1">Video Info</a></li>
+                    <li class="tab col s3"><a class="white-text" href="#test2">Audio Info</a></li>
+                    <li class="tab col s3"><a class="white-text" href="#test3">Encoder Options</a></li>
+                </ul>
+            </div>
+            <div id="test1" class="col s12">
+                <table class="highlight valence-blue darken-2">
+                    <thead>
+                    <tr>
+                        <th>Codec</th>
+                        <th>Duration</th>
+                        <th>Size (kB)</th>
+                    </tr>
+                    </thead>
 
-            <tbody>
-              <tr>
-                <td id="td-video-codec"></td>
-                <td id="td-video-duration"></td>
-                <td id="td-video-size"></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div id="test2" class="col s12 ">
-          <table class="highlight valence-blue darken-2">
-            <thead>
-              <tr>
-                <th>Codec</th>
-              </tr>
-            </thead>
+                    <tbody>
+                    <tr>
+                        <td id="td-video-codec"></td>
+                        <td id="td-video-duration"></td>
+                        <td id="td-video-size"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="test2" class="col s12 ">
+                <table class="highlight valence-blue darken-2">
+                    <thead>
+                    <tr>
+                        <th>Codec</th>
+                    </tr>
+                    </thead>
 
-            <tbody>
-              <tr>
-                <td id="td-audio-codec"></td>
-              </tr>
-            </tbody>
-          </table>
+                    <tbody>
+                    <tr>
+                        <td id="td-audio-codec"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="test3" class="col s12 valence-blue darken-2">Encoder Options</div>
         </div>
-        <div id="test3" class="col s12 valence-blue darken-2">Encoder Options</div>
-      </div>
     </div>
 
     <div id="analysis-preloader" class="container hide">
-      <div class="row">
-        <div class="col s12 center-align">
-          <h4 class="brand-font">ANALYSING VIDEO</h4>
-        </div>
-
-      </div>
-
-      <div class="row">
-        <div class="col s12 center-align">
-          <div class="preloader-wrapper big active">
-            <div class="spinner-layer">
-              <div class="circle-clipper left">
-                <div class="circle"></div>
-              </div>
-              <div class="gap-patch">
-                <div class="circle"></div>
-              </div>
-              <div class="circle-clipper right">
-                <div class="circle"></div>
-              </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <h4 class="brand-font">ANALYSING VIDEO</h4>
             </div>
-          </div>
+
         </div>
-      </div>
+
+        <div class="row">
+            <div class="col s12 center-align">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="container">
-      <div id="div-output" class="row hide">
-        <div class="col s10">
-          <div class="input-field">
-            <input id="txt-output" type="text" />
-            <label for="txt-output" class="active">Output File</label>
-          </div>
-        </div>
+        <div id="div-output" class="row hide">
+            <div class="col s10">
+                <div class="input-field">
+                    <input id="txt-output" type="text"/>
+                    <label for="txt-output" class="active">Output File</label>
+                </div>
+            </div>
 
-        <div class="col s2">
-          <button id="btn-browse-output" type="button" class="btn btn-floating btn-large valence-blue lighten-1"><i class="material-icons">folder</i></button>
+            <div class="col s2">
+                <button id="btn-browse-output" type="button" class="btn btn-floating btn-large valence-blue lighten-1">
+                    <i class="material-icons">folder</i></button>
+            </div>
         </div>
-      </div>
     </div>
-  </main>
+</main>
 
 
-  <div id="err-dialog" class="modal bottom-sheet red darken-2">
+<div id="err-dialog" class="modal bottom-sheet red darken-2">
 
     <div id="err-dialog-container" class="modal-content">
 
-      <h4 class="white-text">ERROR</h4>
-      <p id="err-message" class="white-text">File not found</p>
-      <div class="modal-footer red darken-2">
-        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat white-text">Close</a>
-      </div>
+        <h4 class="white-text">ERROR</h4>
+        <p id="err-message" class="white-text">File not found</p>
+        <div class="modal-footer red darken-2">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat white-text">Close</a>
+        </div>
     </div>
 
-  </div>
+</div>
 
-  <div id="success-dialog" class="modal bottom-sheet green darken-2">
+<div id="success-dialog" class="modal bottom-sheet green darken-2">
 
     <div id="success-dialog-container" class="modal-content">
 
-      <h4 class="white-text">ENCODE COMPLETE</h4>
-      <p id="success-message" class="white-text">Your video file was successfully encoded.</p>
-      <div class="modal-footer green darken-2">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text">Close</a>
-      </div>
+        <h4 class="white-text">ENCODE COMPLETE</h4>
+        <p id="success-message" class="white-text">Your video file was successfully encoded.</p>
+        <div class="modal-footer green darken-2">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text">Close</a>
+        </div>
     </div>
 
-  </div>
+</div>
 
-  <ul id="slide-out" class="side-nav">
+<ul id="slide-out" class="side-nav">
     <li><a href="#!"><i class="material-icons">graphic_eq</i>App Resource Usage Stats</a></li>
     <li><a href="#!">Memory</a></li>
     <li>
-      <div class="divider"></div>
+        <div class="divider"></div>
     </li>
     <li>
-      <div class="subheader">App</div>
+        <div class="subheader">App</div>
     </li>
     <li><a class="waves-effect" href="#!">Current RAM Usage <span id="ram-working"></span>kb</a></li>
     <li><a class="waves-effect" href="#!">Maximum RAM Usage <span id="ram-max"></span>kb</a></li>
     <li>
-      <div class="subheader">Window</div>
+        <div class="subheader">Window</div>
     </li>
     <li><a class="waves-effect" href="#!">Window RAM Usage <span id="ram-process"></span>kb</a></li>
-  </ul>
-  <a href="#" data-activates="slide-out" class="hide button-collapse"><i class="material-icons">menu</i></a>
+</ul>
+<a href="#" data-activates="slide-out" class="hide button-collapse"><i class="material-icons">menu</i></a>
 
-  <footer class="page-footer valence-purple darken-2">
+<footer class="page-footer valence-purple darken-2">
 
     <div class="container">
-      <div class="row">
+        <div class="row">
 
-        <div class="col s1">
-          <button id="btn-encode" class="btn btn-floating btn-large waves-effect waves-light light-green darken-1">
+            <div class="col s1">
+                <button id="btn-encode"
+                        class="btn btn-floating btn-large waves-effect waves-light light-green darken-1">
                     <i class="material-icons left">play_arrow</i>
                 </button>
-        </div>
+            </div>
 
-        <div class="col s1 offset-s10">
-          <button id="btn-quit" class="btn btn-floating btn-large waves-effect waves-light red darken-2 right">
+            <div class="col s1 offset-s10">
+                <button id="btn-quit" class="btn btn-floating btn-large waves-effect waves-light red darken-2 right">
                     <i class="material-icons">close</i>
                 </button>
-        </div>
+            </div>
 
-      </div>
+        </div>
     </div>
 
-  </footer>
-  <!-- Allows Electron to import scripts as normal browser  -->
-  <script>
+</footer>
+<!-- Allows Electron to import scripts as normal browser  -->
+<script>
     if (typeof module === 'object') {
-      window.module = module;
-      module = undefined;
+        window.module = module;
+        module        = undefined;
     }
-  </script>
+</script>
 
-  <!-- normal script imports etc  -->
-  <script src="vendor/jquery/jquery.js"></script>
-  <script src="vendor/materialize/bin/materialize.js"></script>
+<!-- normal script imports etc  -->
+<script src="vendor/jquery/jquery.js"></script>
+<script src="vendor/materialize/bin/materialize.js"></script>
 
-  <!-- Resets environment to ensure module object is stil available where it is needed -->
-  <script>
+<!-- Resets environment to ensure module object is stil available where it is needed -->
+<script>
     if (window.module) module = window.module;
-  </script>
+</script>
 
-  <script>
-    $("#err-dialog").modal();
-    $("#success-dialog").modal();
-    $(".button-collapse").sideNav();
-    $('ul.tabs').tabs();
+<script>
     require('./MainRender');
-  </script>
+</script>
 
 </body>
 
