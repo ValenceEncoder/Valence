@@ -79,6 +79,20 @@ export class FFMpegUtils {
         }
     }
 
+    public static parseGPUInfo(gpuInfo:IGPUOutput):IGPUInfo {
+
+        return {
+            Manufacturer: gpuInfo.AdapterCompatibility,
+            Model: gpuInfo.VideoProcessor,
+            FullName: gpuInfo.Description,
+            Device: gpuInfo.DeviceID
+        }
+    }
+
+    /**
+     * Get GPU info on windows
+     * @returns {any}
+     */
     public static getGPUInfo():Promise<IGPUOutput> {
         if(platform === 'win32') {
             return gpu();
