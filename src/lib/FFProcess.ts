@@ -30,7 +30,6 @@ export abstract class FFProcess extends EventEmitter {
 
     public abstract run(args?: any): any;
 
-    protected abstract parseArgs(infoVideo?: IStreamInfo, infoAudio?: IStreamInfo): string[];
 
 }
 
@@ -40,7 +39,7 @@ export class FFProbe extends FFProcess {
 
     constructor(protected config:IConfig, public options: IProcessOptions) {
         super(config, options);
-        this.args    = this.parseArgs();
+        this.args    = FFProbe.parseArgs(options);
         this.command = config.bin.ffprobe;
     }
 
@@ -49,7 +48,6 @@ export class FFProbe extends FFProcess {
     };
 
     public run(): FFProbe {
-        console.info("FFPROBE:", "executing command", this.command, this.args.join(" "));
         this.process = spawn(this.command, this.args, {shell:true});
         this.process[this.targetOutput].setEncoding('utf8');
         this.process[this.targetOutput].on('error', (err: any) => {
@@ -58,13 +56,14 @@ export class FFProbe extends FFProcess {
         });
         this.process[this.targetOutput].on('data', this.bufferOutput);
         this.process[this.targetOutput].on('close', (msg:any) => {
-            console.log(msg);
             let output: IFFProbeOutput;
             try {
                 output = JSON.parse(this.outBuffer);
                 this.emit(FFProbe.EVENT_OUTPUT, FFMpegUtils.getFileInfo(output));
             } catch (ex) {
+
                 this.emit(FFProbe.EVENT_ERROR, "FFprobe did not return readable data");
+                throw ex;
             }
 
 
@@ -73,8 +72,8 @@ export class FFProbe extends FFProcess {
         return this;
     }
 
-    protected parseArgs(): string[] {
-        let quotedFilename = '"' +  this.options.input + '"';
+    public static parseArgs(options:IProcessOptions): string[] {
+        let quotedFilename = '"' +  options.input + '"';
         return `-v quiet -print_format json -show_format -show_streams`.split(" ").concat([quotedFilename]);
     }
 
@@ -92,7 +91,7 @@ export class FFMpeg extends FFProcess {
 
     public run(fileInfo: IFileInfo): FFMpeg {
 
-        this.args    = this.parseArgs(fileInfo.videoInfo, fileInfo.audioInfo);
+        this.args    = FFMpeg.parseArgs(fileInfo.videoInfo, fileInfo.audioInfo, this.options);
         console.info("FFMPEG:", "executing command", this.command, this.args.join(" "));
         this.process = spawn(this.command, this.args);
         this.process[this.targetOutput].setEncoding('utf8');
@@ -114,14 +113,14 @@ export class FFMpeg extends FFProcess {
         return this;
     }
 
-    protected parseArgs(videoInfo: IStreamInfo, audioInfo: IStreamInfo): string[] {
+    public static parseArgs(videoInfo: IStreamInfo, audioInfo: IStreamInfo, options:IProcessOptions): string[] {
 
         let outArgs: string[] = [
             FFMpegUtils.FLAG_VERBOSITY,
-            FFMpegUtils.OPT_VERBOSTY_QUIET,
+            FFMpegUtils.OPT_VERBOSITY_QUIET,
             FFMpegUtils.FLAG_STATS,
             FFMpegUtils.FLAG_INPUT,
-            '"' +  this.options.input + '"',
+            '"' +  options.input + '"',
             FFMpegUtils.FLAG_OVERWRITE,
             FFMpegUtils.FLAG_CODEC_ALL,
             FFMpegUtils.OPT_CODEC_COPY
@@ -135,7 +134,7 @@ export class FFMpeg extends FFProcess {
             outArgs.push(FFMpegUtils.FLAG_CODEC_AUDIO, FFMpegUtils.OPT_CODEC_AUDIO_AAC)
         }
 
-        outArgs.push('"' + this.options.output + '"');
+        outArgs.push('"' + options.output + '"');
         return outArgs;
     }
 
@@ -180,8 +179,8 @@ export class VideoFile {
     }
 
     public getProgress(bytesProcessed: number): number {
-        var x: Decimal = new Decimal(bytesProcessed);
-        var y: Decimal = new Decimal(this.Size);
+        let x: Decimal = new Decimal(bytesProcessed);
+        let y: Decimal = new Decimal(this.Size);
         return x.dividedBy(y).times(100).toDecimalPlaces(2).toNumber();
     }
 
