@@ -37,9 +37,6 @@ export abstract class FFProcess extends EventEmitter {
 export class FFProbe extends FFProcess {
     protected readonly targetOutput: "stdout" = "stdout";
 
-    protected bufferOutput: (data: string) => void = (data: string) => {
-        this.outBuffer += data;
-    };
 
     constructor(protected config:IConfig, public options: IProcessOptions) {
         super(config, options);
@@ -47,24 +44,38 @@ export class FFProbe extends FFProcess {
         this.command = config.bin.ffprobe;
     }
 
+    protected bufferOutput: (data: string) => void = (data: string) => {
+        this.outBuffer += data;
+    };
+
     public run(): FFProbe {
-        this.process = spawn(this.command, this.args);
+        console.info("FFPROBE:", "executing command", this.command, this.args.join(" "));
+        this.process = spawn(this.command, this.args, {shell:true});
         this.process[this.targetOutput].setEncoding('utf8');
         this.process[this.targetOutput].on('error', (err: any) => {
+            console.error(err);
             this.emit(FFProbe.EVENT_ERROR, err);
         });
         this.process[this.targetOutput].on('data', this.bufferOutput);
-        this.process[this.targetOutput].on('close', () => {
+        this.process[this.targetOutput].on('close', (msg:any) => {
+            console.log(msg);
             let output: IFFProbeOutput;
-            output = JSON.parse(this.outBuffer);
-            this.emit(FFProbe.EVENT_OUTPUT, FFMpegUtils.getFileInfo(output));
+            try {
+                output = JSON.parse(this.outBuffer);
+                this.emit(FFProbe.EVENT_OUTPUT, FFMpegUtils.getFileInfo(output));
+            } catch (ex) {
+                this.emit(FFProbe.EVENT_ERROR, "FFprobe did not return readable data");
+            }
+
+
         });
 
         return this;
     }
 
     protected parseArgs(): string[] {
-        return `-v quiet -print_format json -show_format -show_streams ${this.options.input}`.split(" ");
+        let quotedFilename = '"' +  this.options.input + '"';
+        return `-v quiet -print_format json -show_format -show_streams`.split(" ").concat([quotedFilename]);
     }
 
 }
@@ -82,6 +93,7 @@ export class FFMpeg extends FFProcess {
     public run(fileInfo: IFileInfo): FFMpeg {
 
         this.args    = this.parseArgs(fileInfo.videoInfo, fileInfo.audioInfo);
+        console.info("FFMPEG:", "executing command", this.command, this.args.join(" "));
         this.process = spawn(this.command, this.args);
         this.process[this.targetOutput].setEncoding('utf8');
 
@@ -90,7 +102,6 @@ export class FFMpeg extends FFProcess {
          * and if not we buffer it and then flush it once its formed
          */
         this.process[this.targetOutput].on('data', (message: string) => {
-            console.log(this.outBuffer);
             this.outBuffer += message;
             if (FFMpegUtils.RGX_FORMED_OUTPUT.test(this.outBuffer)) {
                 let result     = this.outBuffer;
@@ -110,7 +121,7 @@ export class FFMpeg extends FFProcess {
             FFMpegUtils.OPT_VERBOSTY_QUIET,
             FFMpegUtils.FLAG_STATS,
             FFMpegUtils.FLAG_INPUT,
-            this.options.input,
+            '"' +  this.options.input + '"',
             FFMpegUtils.FLAG_OVERWRITE,
             FFMpegUtils.FLAG_CODEC_ALL,
             FFMpegUtils.OPT_CODEC_COPY
@@ -124,7 +135,7 @@ export class FFMpeg extends FFProcess {
             outArgs.push(FFMpegUtils.FLAG_CODEC_AUDIO, FFMpegUtils.OPT_CODEC_AUDIO_AAC)
         }
 
-        outArgs.push(this.options.output);
+        outArgs.push('"' + this.options.output + '"');
         return outArgs;
     }
 
