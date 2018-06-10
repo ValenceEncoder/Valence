@@ -1,3 +1,5 @@
 node_modules/
 dist/
 out/
+icons/CustomIcon/desktop.ini
+icons/CustomIcon/folder.ico
