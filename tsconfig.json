@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "outDir": "dist/lib",
+        "target": "esnext",
+        "removeComments": true,
+        "moduleResolution": "node",
+        "allowJs": true,
+        "experimentalDecorators": true,
+        "typeRoots": [
+            "./typings",
+            "./node_modules/@types"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "*": ["./typings/*"],
+        }
+    },
+    "compileOnSave": false,
+    "include": [
+        "src/lib/**/*"
+    ]
+}
