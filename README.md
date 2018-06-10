@@ -17,16 +17,19 @@ My boilerplate for new Electron based apps.
 
 ## Source File Overview
 
+
+| File                   | Description                                                                                      |
 |------------------------|--------------------------------------------------------------------------------------------------|
 | `src/lib/App.ts`       | Simple bootstrap script for electron. Imports `Electron.Application` and calls `Main.Init(app)`  |
 | `src/lib/Main.ts`      | Main `BrowserWindow` manager, creates the main window and sets up basic IPC                      |
 | `src/lib/IndexView.ts` | View Controller for `index.html`                                                                 |
-|------------------------|--------------------------------------------------------------------------------------------------|
 
 
 ## `npm` Script Tasks
 We use `npm-run-all` to manage parallel and sequential task running. The available tasks are:
 
+
+| Task Command           | Task Description                                                                                                              |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | `npm start`            | Runs `build` and `electron` tasks sequentially                                                                                |
 | `npm run build`        | Runs `clean`, `build:all` and `html` tasks sequentially                                                                       |                   
@@ -36,4 +39,4 @@ We use `npm-run-all` to manage parallel and sequential task running. The availab
 | `npm run css`          | Creates the `dist` and `dist/css` directories and then runs shell command: `uglifycss src/css/Index.css > dist/css/Index/css` |
 | `npm run clean`        | Runs shell command: `rm -rf dist/`. Deletes all generated/compiled files.                                                     |
 | `npm run html`         | Runs shell command: `cd dist && mkdir views && cd .. && cp src/views/*.html dist/views`. Copies HTML files to `dist/views`    |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+
