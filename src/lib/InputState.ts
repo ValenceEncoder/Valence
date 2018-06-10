@@ -2,6 +2,10 @@ import { ipcRenderer } from "electron";
 import IPCEventType from "./Channels";
 declare const window: any;
 
+/**
+ * Some KeyCodes that correspond to the value passed in event.which on keydown, keyup etc. events
+ * @see https://css-tricks.com/snippets/javascript/javascript-keycodes/#article-header-id-1
+ */
 export enum KeyCode {
     BACKSPACE       = 8,
     DELETE          = 46,
@@ -26,12 +30,18 @@ export enum KeyCode {
 
 }
 
+/**
+ * MouseCode values that correspond to event.which on mousedown, mouseup etc. events
+ */
 export enum MouseCode {
     LEFT            = 1,
     MIDDLE          = 2,
     RIGHT           = 3
 }
 
+/**
+ * Custom KeyDown Handlers can be added here
+ */
 export class KeyState {
     public static CtrlKeyDown: boolean = false;
     public static AltKeyDown: boolean = false;

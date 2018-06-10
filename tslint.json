@@ -1,0 +1,43 @@
+{
+    "defaultSeverity": "warn",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rulesDirectory": ["tslint-consistent-codestyle"],
+    "rules": {
+        "member-access": true,
+        "member-ordering": false,
+        "no-import-side-effect": false,
+        "max-classes-per-file": false,
+        "trailing-comma": false,
+        "no-namespace": false,
+        "max-line-length": false,
+        "one-variable-per-declaration": false,
+        "interface-name":false,
+        "object-literal-sort-keys": false,
+        "no-var-requires": false,
+        "no-reference": false,
+        "no-switch-case-fall-through": true,
+        "naming-convention": [
+            true,
+            {"type": "default", "format": "camelCase", "leadingUnderscore": "forbid", "trailingUnderscore": "forbid"},
+            {"type": "property", "modifiers": ["public"], "filter": "^(?!toString$)", "format": "PascalCase", "final": true},
+            {"type": "property", "modifiers": ["static", "readonly"], "format": null, "final": true},
+            {"type": "parameterProperty", "filter": "x", "format": "camelCase"},
+            {"type": "method", "modifiers": ["public"], "format": "PascalCase"},
+            {"type": "interface", "format": "PascalCase"},
+            {"type": "typeAlias", "format": "PascalCase"},
+            {"type": "genericTypeParameter", "format": "PascalCase"},
+            {"type": "enum", "format": "PascalCase"},
+            {"type": "class", "format": "PascalCase"},
+            {"type": "variable", "modifiers": ["local"], "format": null },
+            {"type": "method", "modifiers": ["private", "protected"], "format": "camelCase"},
+            {"type": "property", "modifiers": ["private", "protected"], "format": "camelCase"},
+            {"type": "property", "modifiers": "private", "leadingUnderscore": "forbid"},
+            {"type": "method", "modifiers": "private", "leadingUnderscore": "forbid"},
+            {"type": "enumMember", "format": "UPPER_CASE"}
+        ],
+        "variable-name": false
+    }
+}

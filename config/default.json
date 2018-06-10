@@ -1,0 +1,18 @@
+{
+    "Logging": {
+        "File": {
+            "Filename": "Debug.log",
+            "Level": "silly",
+            "Enabled": true
+        },
+        "Console": {
+            "Level": "silly",
+            "Enabled": true
+        }
+    },
+    "System": {
+        "UndoLimit": 100,
+        "IsDev": false,
+        "ShowDeveloperTools": false
+    }
+}

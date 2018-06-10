@@ -1,7 +1,16 @@
 import { App, BrowserWindow, ipcMain } from "electron";
+import * as log from "electron-log";
 import * as path from "path";
 import * as url from "url";
 import IPCEventType from "./Channels";
+import { Config } from "./Config";
+
+// Initialise Logging plugin
+log.transports.file.level = (Config.Logging.File.Enabled) ? Config.Logging.File.Level : false;
+log.transports.console.level = (Config.Logging.Console.Enabled) ? Config.Logging.Console.Level : false;
+log.transports.file.format = (Config.Logging.File.Enabled && Config.Logging.File.Format) ? Config.Logging.File.Format : log.transports.file.format;
+log.transports.console.format = (Config.Logging.Console.Enabled && Config.Logging.Console.Format) ? Config.Logging.Console.Format : log.transports.console.format;
+log.transports.file.file = (Config.Logging.File.Enabled) ? Config.Logging.SavePath : log.transports.file.file;
 
 export default class Main {
     public static MainWindow: BrowserWindow = null;
@@ -17,7 +26,7 @@ export default class Main {
     }
 
     public static OnReady() {
-        Main.IndexPath = path.join(__dirname, "..", "views", "index.html");
+        Main.IndexPath = path.join(__dirname, "..", "views", "main_window.html");
         Main.CreateMain();
     }
 

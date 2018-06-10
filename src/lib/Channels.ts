@@ -1,3 +1,5 @@
+
+/* tslint:disable:naming-convention */
 export default class IPCEventType {
     public static readonly APP_QUIT: string = "APP_QUIT";
     public static readonly MAIN_WINDOW_BLUR: string = "MAIN_WINDOW_BLUR";

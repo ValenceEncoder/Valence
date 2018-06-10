@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    meta(http-equiv="Content-Security-Policy" content=`${cspString}`)
+    title Electron TypeScript Bootsrap Starter
+    link(rel="stylesheet" href="../../css/bootstrap.min.css")
+    link(rel="stylesheet" href="../../css/fontawesome-all.min.css")
+    link(rel="stylesheet" href="../../css/Index.css")
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-success.justify-content-between.mb-2.drag.pointer
+      a.navbar-brand(href="#") Electron TypeScript Bootsrap Starter
+      ul#navwin.navbar-nav.ml-2.btn-group.my-2.no-drag
+        li#btnDevTools.nav-item.btn.btn-success(type="button" title="Open Developer Tools")
+          i.far.fa-search
+        li#btnMinimise.nav-item.btn.btn-success(type="button" title="Minimise")
+          i.far.fa-window-minimize
+        li#btnMaximise.nav-item.btn.btn-success(type="button" title="Maximise")
+          i.far.fa-window-maximize
+        li#btnQuit.nav-item.btn.btn-success(type="button" title="Close")
+          i.fas.fa-window-close
+    footer.footer
+      // Load jquery and SVG.js via require
+      script.
+        window.$ = window.JQuery = require("jquery");
+        window.Bootstrap = require("bootstrap");
+        require("../lib/IndexView.js");
