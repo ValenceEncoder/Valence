@@ -1,0 +1,13 @@
+// Styles specific to Valence that it helps to separate as they may make reuse more cumbersome
+
+.drag {
+    -webkit-app-region: drag;
+}
+
+.no-drag {
+    -webkit-app-region: no-drag;
+}
+
+#navwin {
+    flex-direction: row !important;
+}

@@ -1,3 +1,5 @@
+include ./mixins
+
 doctype html
 html(lang="en")
   head
@@ -5,67 +7,71 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
     //- meta(http-equiv="Content-Security-Policy" content=`${cspString}`)
-    title Electron TypeScript Bootsrap Starter
+    title Valence Encoder
     link(rel="stylesheet" href="../../css/fontawesome-all.min.css")
     link(rel="stylesheet" href="../../css/Index.css")
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.justify-content-between.mb-2.drag.pointer
-      a.navbar-brand(href="#") Electron TypeScript Bootsrap Starter
+      a.navbar-brand(href="#") 
+        img.d-inline-block.mr-4(src="../../icons/valence-prpl-base-100px.png", alt="Valence Encoder Logo", width="50" height="50")
+        | Valence Encoder
       ul#navwin.navbar-nav.ml-2.btn-group.my-2.no-drag
-        li#btnDevTools.nav-item.btn.btn-success(type="button" title="Open Developer Tools")
+        li#btnDevTools.nav-item.btn.btn-primary(type="button" title="Open Developer Tools")
           i.far.fa-search
-        li#btnMinimise.nav-item.btn.btn-success(type="button" title="Minimise")
+        li#btnMinimise.nav-item.btn.btn-primary(type="button" title="Minimise")
           i.far.fa-window-minimize
-        li#btnMaximise.nav-item.btn.btn-success(type="button" title="Maximise")
+        li#btnMaximise.nav-item.btn.btn-primary(type="button" title="Maximise")
           i.far.fa-window-maximize
-        li#btnQuit.nav-item.btn.btn-success(type="button" title="Close")
+        li#btnQuit.nav-item.btn.btn-primary(type="button" title="Close")
           i.fas.fa-window-close
-
     main
       .container
         .row
           .col
-            .input-field
-              input#txt-input(type="text" placeholder="Click Browse to Select a Video File")
-              label(for="txt-input") Source File
+            .form-inline
+              .input-group
+                input#txt-input.form-control.mr-2(type="text" placeholder="Click Browse to Select a Video File")
+                +btn("btn-browse-input", "secondary", "fa-folder", "Browse")
+      #analysis-result.container
+        .row.my-2
           .col
-            button#btn-browse-input.btn.btn-floating.btn-lg.valence-blue.lighten-1.pulse(type="button")
-              i.material-icons folder
-      // New File Information Tabs
-      #analysis-result.container.hide
-        .row
-          .col.s12
             h4 INFO & OPTIONS
         .row
-          .col.s12
-            ul.tabs.valence-blue
-              li.tab.col.s3
-                a.active.white-text(href="#test1") Video Info
-              li.tab.col.s3
-                a.white-text(href="#test2") Audio Info
-              li.tab.col.s3
-                a.white-text(href="#test3") Encoder Options
-          #test1.col.s12
-            table.highlight.valence-blue.darken-2
-              thead
-                tr
-                  th Codec
-                  th Duration
-                  th Size (kB)
-              tbody
-                tr
-                  td#td-video-codec
-                  td#td-video-duration
-                  td#td-video-size
-          #test2.col.s12
-            table.highlight.valence-blue.darken-2
-              thead
-                tr
-                  th Codec
-              tbody
-                tr
-                  td#td-audio-codec
-          #test3.col.s12.valence-blue.darken-2 Encoder Options
+          .col
+            ul#info-tabs.nav.nav-tabs(role="tablist")
+              +tab("video-info", "primary", "true")
+              +tab("audio-info", "primary")
+              +tab("encoder-options", "primary")
+            .tab-content
+              +tabpanel("video-info", "true")
+                table.table
+                  thead
+                    tr.table-primary
+                      th Codec
+                      th Duration
+                      th Size (kB)
+                  tbody
+                    tr
+                      td#td-video-codec Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis ipsam consectetur repellat. Totam libero et nisi consequatur veniam eligendi aperiam, laborum alias iste, ipsum, modi nulla iure delectus laboriosam cupiditate.
+                      td#td-video-duration Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa excepturi accusamus facilis veniam id similique asperiores labore sequi consequuntur ipsum voluptatum accusantium neque, dolor consequatur laborum error eos fugit iure?
+                      td#td-video-size Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse optio saepe, veritatis, illo rem error voluptates temporibus id sit illum quaerat nihil vitae impedit aspernatur. Placeat exercitationem odio officiis!
+              +tabpanel("audio-info")
+                table.table
+                  thead
+                    tr.table-primary
+                      th Codec
+                  tbody
+                    tr
+                      td#td-audio-codec Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, voluptas recusandae non delectus fugiat ad sapiente mollitia inventore distinctio, culpa consequatur similique nobis possimus quis beatae corrupti est odit eius.
+              +tabpanel("encoder-options")
+                table.table
+                  thead
+                    tr.table-primary
+                      th Audio Codec Options
+                  tbody
+                    tr
+                      td#td-encoder-options-audio Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, voluptas recusandae non delectus fugiat ad sapiente mollitia inventore distinctio, culpa consequatur similique nobis possimus quis beatae corrupti est odit eius.
+
       #analysis-preloader.container.hide
         .row
           .col.s12.center-align
@@ -87,12 +93,11 @@ html(lang="en")
               input#txt-output(type="text")
               label.active(for="txt-output") Output File
           .col.s2
-            button#btn-browse-output.btn.btn-floating.btn-lg.valence-blue.lighten-1(type="button")
-              i.material-icons folder
+            +btn("btn-browse-output", "secondary", "fa-folder", "Browse")
 
     footer.footer
-      // Load jquery and SVG.js via require
+      // Load jquery and Bootstrap via require
       script.
         window.$ = window.JQuery = require("jquery");
-        window.Bootstrap = require("bootstrap");
+        window.Bootstrap = require("../../js/bootstrap.bundle.js");
         require("../lib/MainWindow.js");

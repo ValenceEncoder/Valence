@@ -1,0 +1,27 @@
+mixin btn(id, color_class, icon, label, size)
+    - var btnSize = (size) ? ` btn-${size}` : ``;
+    button(type="button", class=`btn btn-${color_class}${btnSize}`, id=`${id}`)
+              i(class=`far ${icon} mr-2`)
+              | #{label}
+// +tab("tab-video-info", "video-info", "Video Info", "true")
+mixin tab(target, color_class, select)
+    - var color_class = color_class || "primary"
+    - var targetSplit = target.split("-");
+    - var id = `tab-${target}`;
+    - var label = targetSplit[0].replace(/(^|[\s\xA0])[^\s\xA0]/g, function(s){ return s.toUpperCase(); }) + " " + targetSplit[1].replace(/(^|[\s\xA0])[^\s\xA0]/g, function(s){ return s.toUpperCase(); });
+    - var selected = select || "false"
+    - var active = (select) ? " active" : "";
+    li(class=`nav-item mr-2`)
+        a.nav-link(id=`${id}`, class=`nav-link text-white bg-${color_class}${active}` href=`#${target}`, data-toggle="tab", role="tab", aria-controls=`${target}` aria-selected=`${selected}`) #{label}
+
+// #video-info.tab-pane.fade.show.active(role="tabpanel" aria-labelled-by="tab-video-info")
+mixin tabpanel(id, first)
+    - var show = (first) ? " show" : "";
+    - var active = (first) ? " active": "";
+    - var labelledBy = `tab-${id}`;
+    div(id=`${id}`, class=`tab-pane fade${show}${active}`, role="tabpanel", aria-labelled-by=`${labelledBy}`)
+        if block
+            block
+        else
+            p No content
+    

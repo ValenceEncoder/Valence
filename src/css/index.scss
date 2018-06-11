@@ -1,18 +1,9 @@
 @import "_colors";
-
-// $valence-primary: #853963;
-// $valence-secondary: #1486AC;
-// $valence-danger: #a21318;
-
-// Bootstrap overrides
-$theme-colors: (
-    "primary": #853963,
-    "success": #8FDC97, 
-    "secondary": #1486ac,
-    "danger": #a21318,
-    "info": #A3D9FF,
-    "default": #AFBFC0,
-    "warning": #FFE67A,
-);
+@import "_fonts";
+@import "_overrides";
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
+
+@import "_pulse";
+@import "_waves";
+@import "_app";

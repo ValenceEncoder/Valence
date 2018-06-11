@@ -35,6 +35,8 @@ export interface IConfigSystem {
     Version: string;
     IsDev: boolean;
     ShowDeveloperTools: boolean;
+    FFMpegBinary: string;
+    FFProbeBinary: string;
     [key: string]: any;
 }
 

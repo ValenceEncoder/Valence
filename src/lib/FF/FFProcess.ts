@@ -2,7 +2,7 @@ import { ChildProcess, spawn } from "child_process";
 import * as decimal from "decimal.js";
 import { EventEmitter } from "events";
 import { IFFConfig, IFFProbeOutput, IFileInfo, IProcessOptions, IStreamInfo } from "./FFInterfaces";
-import { FFMpegUtils } from "./FFMpegUtils";
+import { Utils } from "./Utils";
 import Decimal = decimal.Decimal;
 
 /* tslint:disable:naming-convention no-console */
@@ -19,7 +19,7 @@ export abstract class FFProcess extends EventEmitter {
 
     constructor(protected config: IFFConfig, options: IProcessOptions) {
         super();
-        if (!FFMpegUtils.fileExists(options.input)) {
+        if (!Utils.fileExists(options.input)) {
             throw new Error(`File ${options.input} does not exist`);
         }
     }
@@ -90,10 +90,10 @@ export class FFMpeg extends FFProcess {
          */
         this.process[this.targetOutput].on("data", (message: string) => {
             this.outBuffer += message;
-            if (FFMpegUtils.RGX_FORMED_OUTPUT.test(this.outBuffer)) {
+            if (Utils.RGX_FORMED_OUTPUT.test(this.outBuffer)) {
                 const result = this.outBuffer;
                 this.outBuffer = "";
-                this.emit(FFProcess.EVENT_OUTPUT, FFMpegUtils.toObject(result));
+                this.emit(FFProcess.EVENT_OUTPUT, Utils.toObject(result));
             }
         });
 
@@ -108,22 +108,22 @@ export class FFMpeg extends FFProcess {
 
     public static parseArgs(videoInfo: IStreamInfo, audioInfo: IStreamInfo, options: IProcessOptions): string[] {
         const outArgs: string[] = [
-            FFMpegUtils.FLAG_VERBOSITY,
-            FFMpegUtils.OPT_VERBOSITY_QUIET,
-            FFMpegUtils.FLAG_STATS,
-            FFMpegUtils.FLAG_INPUT,
+            Utils.FLAG_VERBOSITY,
+            Utils.OPT_VERBOSITY_QUIET,
+            Utils.FLAG_STATS,
+            Utils.FLAG_INPUT,
             options.input,
-            FFMpegUtils.FLAG_OVERWRITE,
-            FFMpegUtils.FLAG_CODEC_ALL,
-            FFMpegUtils.OPT_CODEC_COPY
+            Utils.FLAG_OVERWRITE,
+            Utils.FLAG_CODEC_ALL,
+            Utils.OPT_CODEC_COPY
         ];
 
         if (videoInfo.codec_name !== "h264") {
-            outArgs.push(FFMpegUtils.FLAG_CODEC_VIDEO, FFMpegUtils.OPT_CODEC_VIDEO_H264);
+            outArgs.push(Utils.FLAG_CODEC_VIDEO, Utils.OPT_CODEC_VIDEO_H264);
         }
 
         if (audioInfo.codec_name !== "aac") {
-            outArgs.push(FFMpegUtils.FLAG_CODEC_AUDIO, FFMpegUtils.OPT_CODEC_AUDIO_AAC);
+            outArgs.push(Utils.FLAG_CODEC_AUDIO, Utils.OPT_CODEC_AUDIO_AAC);
         }
 
         outArgs.push(options.output);
@@ -152,7 +152,7 @@ export class VideoFile {
 
     // TODO Add options to output other container formats
     public get OutputPath(): string {
-        return FFMpegUtils.changeExtension(this.InputPath, "mp4");
+        return Utils.changeExtension(this.InputPath, "mp4");
     }
 
     public get ProbeData(): IFileInfo {

@@ -1,7 +1,7 @@
 import * as path from "path";
 import { IFFProbeOutput, IFFProbeOutputHandler, IProcessOptions } from "./FFInterfaces";
-import { FFMpegUtils } from "./FFMpegUtils";
 import { FFMpeg, FFProbe } from "./FFProcess";
+import { Utils } from "./Utils";
 
 if (require.main !== module) {
     // Loaded by another module e.g. with require('./src/Main');
@@ -29,7 +29,7 @@ const options: IProcessOptions = commandLineArgs(argDefs);
 
 const pipeProbeInfo: IFFProbeOutputHandler = (probeOutput: IFFProbeOutput): void => {
 
-    const fileInfo = FFMpegUtils.getFileInfo(probeOutput);
+    const fileInfo = Utils.getFileInfo(probeOutput);
     console.log("PipeProbeToFFMpegInfo", fileInfo);
 
     ffmpegInstance = new FFMpeg(config, options);

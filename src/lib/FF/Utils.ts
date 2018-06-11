@@ -1,12 +1,11 @@
 import * as fs from "fs";
-import * as Path from "path";
-import {
-    IFFMpegProgress, IFFProbeOutput, IFFProbeStreamData, IFileInfo, IGPUInfo, IGPUOutput,
-    IStreamInfo
-} from "./FFInterfaces";
+import * as path from "path";
+import * as url from "url";
+import { Config } from "../Config";
+import { IFFMpegProgress, IFFProbeOutput, IFFProbeStreamData, IFileInfo, IGPUInfo, IGPUOutput, IStreamInfo } from "./FFInterfaces";
 
 /* tslint:disable:naming-convention */
-export class FFMpegUtils {
+export class Utils {
 
     /***
      * FFMpeg Regular Expressions
@@ -80,6 +79,30 @@ export class FFMpegUtils {
         };
     }
 
+    /**
+     * Joins a relative path to the APP root
+     * @param filepath the path to prepend with app root
+     */
+    public static path(filepath: string): string {
+        return url.format({
+            protocol: "file:",
+            pathname: path.join(Config.System.AppDistRoot, filepath),
+            slashes: true
+        });
+    }
+
+    /**
+     * Gets a HTML template from the views directory
+     * @param template the path to prepend with template root
+     */
+    public static getTemplate(template: string): string {
+        return url.format({
+            protocol: "file:",
+            pathname: path.join(Config.System.TemplateRoot, template),
+            slashes: true
+        });
+    }
+
     public static parseGPUInfo(gpuInfo: IGPUOutput): IGPUInfo {
 
         return {
@@ -97,13 +120,13 @@ export class FFMpegUtils {
      */
     public static toObject(output: string): IFFMpegProgress {
         return {
-            frame: FFMpegUtils.RGX_FRAME.test(output)       ? parseInt(output.match(FFMpegUtils.RGX_FRAME)[1], 10) : null,
-            fps: FFMpegUtils.RGX_FPS.test(output)           ? parseInt(output.match(FFMpegUtils.RGX_FPS)[1], 10) : null,
-            q: FFMpegUtils.RGX_Q.test(output)               ? parseInt(output.match(FFMpegUtils.RGX_Q)[1], 10) : null,
-            size: FFMpegUtils.RGX_SIZE.test(output)         ? parseInt(output.match(FFMpegUtils.RGX_SIZE)[1], 10) : null,
-            time: FFMpegUtils.RGX_TIME.test(output)         ? output.match(FFMpegUtils.RGX_TIME)[1] : null,
-            bitrate: FFMpegUtils.RGX_BITRATE.test(output)   ? output.match(FFMpegUtils.RGX_BITRATE)[1] : null,
-            speed: FFMpegUtils.RGX_SPEED.test(output)       ? output.match(FFMpegUtils.RGX_SPEED)[1] : null
+            frame: Utils.RGX_FRAME.test(output)       ? parseInt(output.match(Utils.RGX_FRAME)[1], 10) : null,
+            fps: Utils.RGX_FPS.test(output)           ? parseInt(output.match(Utils.RGX_FPS)[1], 10) : null,
+            q: Utils.RGX_Q.test(output)               ? parseInt(output.match(Utils.RGX_Q)[1], 10) : null,
+            size: Utils.RGX_SIZE.test(output)         ? parseInt(output.match(Utils.RGX_SIZE)[1], 10) : null,
+            time: Utils.RGX_TIME.test(output)         ? output.match(Utils.RGX_TIME)[1] : null,
+            bitrate: Utils.RGX_BITRATE.test(output)   ? output.match(Utils.RGX_BITRATE)[1] : null,
+            speed: Utils.RGX_SPEED.test(output)       ? output.match(Utils.RGX_SPEED)[1] : null
         };
     }
 
@@ -113,8 +136,8 @@ export class FFMpegUtils {
      * @returns {string}
      */
     public static reslashPath(filepath: string): string {
-        const isExtendedLengthPath = FFMpegUtils.RGX_EXTENDED_PATH.test(filepath);
-        const hasNonAscii = FFMpegUtils.RGX_ASCII.test(filepath);
+        const isExtendedLengthPath = Utils.RGX_EXTENDED_PATH.test(filepath);
+        const hasNonAscii = Utils.RGX_ASCII.test(filepath);
 
         if (isExtendedLengthPath || hasNonAscii) {
             const err: Error = (isExtendedLengthPath) ? new Error("Windows Extended (UNC) file paths are not supported.") : new Error("There are ASCII characters in the file path. Please rename the file and remove any ASCII characters.");
@@ -131,9 +154,9 @@ export class FFMpegUtils {
      * @returns {string}
      */
     public static changeExtension(filepath: string, ext: string): string {
-        return Path.join(
-            Path.dirname(filepath),
-            `${Path.basename(filepath, Path.extname(filepath))}.${ext}`,
+        return path.join(
+            path.dirname(filepath),
+            `${path.basename(filepath, path.extname(filepath))}.${ext}`,
         );
     }
 
@@ -143,13 +166,6 @@ export class FFMpegUtils {
      * @returns {boolean}
      */
     public static fileExists(filepath: string): boolean {
-        try {
-            fs.statSync(Path.resolve(filepath));
-        } catch (e) {
-            // console.info(`File ${filepath} does not exist.`);
-            return false;
-        }
-
-        return true;
+        return fs.existsSync(path.resolve(filepath));
     }
 }
