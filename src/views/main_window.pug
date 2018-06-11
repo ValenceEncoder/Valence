@@ -4,13 +4,12 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
-    meta(http-equiv="Content-Security-Policy" content=`${cspString}`)
+    //- meta(http-equiv="Content-Security-Policy" content=`${cspString}`)
     title Electron TypeScript Bootsrap Starter
-    link(rel="stylesheet" href="../../css/bootstrap.min.css")
     link(rel="stylesheet" href="../../css/fontawesome-all.min.css")
     link(rel="stylesheet" href="../../css/Index.css")
   body
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-success.justify-content-between.mb-2.drag.pointer
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.justify-content-between.mb-2.drag.pointer
       a.navbar-brand(href="#") Electron TypeScript Bootsrap Starter
       ul#navwin.navbar-nav.ml-2.btn-group.my-2.no-drag
         li#btnDevTools.nav-item.btn.btn-success(type="button" title="Open Developer Tools")
@@ -21,9 +20,79 @@ html(lang="en")
           i.far.fa-window-maximize
         li#btnQuit.nav-item.btn.btn-success(type="button" title="Close")
           i.fas.fa-window-close
+
+    main
+      .container
+        .row
+          .col
+            .input-field
+              input#txt-input(type="text" placeholder="Click Browse to Select a Video File")
+              label(for="txt-input") Source File
+          .col
+            button#btn-browse-input.btn.btn-floating.btn-lg.valence-blue.lighten-1.pulse(type="button")
+              i.material-icons folder
+      // New File Information Tabs
+      #analysis-result.container.hide
+        .row
+          .col.s12
+            h4 INFO & OPTIONS
+        .row
+          .col.s12
+            ul.tabs.valence-blue
+              li.tab.col.s3
+                a.active.white-text(href="#test1") Video Info
+              li.tab.col.s3
+                a.white-text(href="#test2") Audio Info
+              li.tab.col.s3
+                a.white-text(href="#test3") Encoder Options
+          #test1.col.s12
+            table.highlight.valence-blue.darken-2
+              thead
+                tr
+                  th Codec
+                  th Duration
+                  th Size (kB)
+              tbody
+                tr
+                  td#td-video-codec
+                  td#td-video-duration
+                  td#td-video-size
+          #test2.col.s12
+            table.highlight.valence-blue.darken-2
+              thead
+                tr
+                  th Codec
+              tbody
+                tr
+                  td#td-audio-codec
+          #test3.col.s12.valence-blue.darken-2 Encoder Options
+      #analysis-preloader.container.hide
+        .row
+          .col.s12.center-align
+            h4.brand-font ANALYSING VIDEO
+        .row
+          .col.s12.center-align
+            .preloader-wrapper.big.active
+              .spinner-layer
+                .circle-clipper.left
+                  .circle
+                .gap-patch
+                  .circle
+                .circle-clipper.right
+                  .circle
+      .container
+        #div-output.row.hide
+          .col.s10
+            .input-field
+              input#txt-output(type="text")
+              label.active(for="txt-output") Output File
+          .col.s2
+            button#btn-browse-output.btn.btn-floating.btn-lg.valence-blue.lighten-1(type="button")
+              i.material-icons folder
+
     footer.footer
       // Load jquery and SVG.js via require
       script.
         window.$ = window.JQuery = require("jquery");
         window.Bootstrap = require("bootstrap");
-        require("../lib/IndexView.js");
+        require("../lib/MainWindow.js");

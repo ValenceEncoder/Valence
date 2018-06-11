@@ -19,11 +19,12 @@
         "no-var-requires": false,
         "no-reference": false,
         "no-switch-case-fall-through": true,
+        "no-console": false,
         "naming-convention": [
             true,
             {"type": "default", "format": "camelCase", "leadingUnderscore": "forbid", "trailingUnderscore": "forbid"},
             {"type": "property", "modifiers": ["public"], "filter": "^(?!toString$)", "format": "PascalCase", "final": true},
-            {"type": "property", "modifiers": ["static", "readonly"], "format": null, "final": true},
+            {"type": "property", "modifiers": ["public", "static", "readonly"], "format": "UPPER_CASE", "final": true},
             {"type": "parameterProperty", "filter": "x", "format": "camelCase"},
             {"type": "method", "modifiers": ["public"], "format": "PascalCase"},
             {"type": "interface", "format": "PascalCase"},
