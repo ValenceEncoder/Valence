@@ -1,9 +1,10 @@
 import { ChildProcess, spawn } from "child_process";
 import * as decimal from "decimal.js";
 import { EventEmitter } from "events";
-import { IFFConfig, IFFProbeOutput, IFileInfo, IProcessOptions, IStreamInfo } from "./FFInterfaces";
-import { Utils } from "./Utils";
 import Decimal = decimal.Decimal;
+import { IFFConfig } from "../typings/config";
+import { IFFProbeOutput, IFileInfo, IProcessOptions, IStreamInfo } from "./FFInterfaces";
+import { Utils } from "./Utils";
 
 /* tslint:disable:naming-convention no-console */
 export abstract class FFProcess extends EventEmitter {

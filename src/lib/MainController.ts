@@ -2,9 +2,10 @@ import {BrowserWindow, ipcRenderer} from "electron";
 import * as log from "electron-log";
 import IPCEventType from "./Channels";
 import { Config } from "./Config";
-import { IFFConfig, IFileInfo, IProcessOptions } from "./FF/FFInterfaces";
+import { IFileInfo, IProcessOptions } from "./FF/FFInterfaces";
 import { FFProbe, VideoFile } from "./FF/FFProcess";
 import { Utils } from "./FF/Utils";
+import { IFFConfig } from "./typings/config";
 
 const config: IFFConfig = {
     bin: {
@@ -30,10 +31,6 @@ export class MainController {
 
     private static onProbeComplete(event: Electron.Event) {
         MainController.ffprobe = null;
-    }
-
-    private static onQuitClick(event: Electron.Event) {
-        ipcRenderer.send(IPCEventType.APP_QUIT);
     }
 
     private static onIPCAppFileSelected(event: Electron.Event, file: string) {
@@ -62,7 +59,6 @@ export class MainController {
 
     private static onIPCAppSaveFileSelected(event: Electron.Event, file: string) {
         $("#txt-output").val(file);
-        // $("#btn-browse-output").removeClass("pulse");
     }
 
     private static onEncodeClick(event: JQuery.Event) {
@@ -72,8 +68,6 @@ export class MainController {
             log.warn(`Path ${inputFile} does not exist`);
             return;
         }
-        const windowID: number = BrowserWindow.getFocusedWindow().id;
-
         MainController.encodeWin = new BrowserWindow({
             width: 900,
             height: 300,
@@ -86,7 +80,7 @@ export class MainController {
 
         MainController.encodeWin.on("ready-to-show", () => {
             MainController.encodeWin.show();
-            MainController.encodeWin.webContents.send(IPCEventType.SPAWN_ENCODER, MainController.videoFile, windowID);
+            MainController.encodeWin.webContents.send(IPCEventType.SPAWN_ENCODER, MainController.videoFile);
         });
 
         MainController.encodeWin.on("closed", () => {

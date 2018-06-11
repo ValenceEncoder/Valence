@@ -1,6 +1,7 @@
-mixin btn(id, color_class, icon, label, size)
+mixin btn(id, color_class, icon, label, size, extra_classes)
     - var btnSize = (size) ? ` btn-${size}` : ``;
-    button(type="button", class=`btn btn-${color_class}${btnSize}`, id=`${id}`)
+    - var extraClasses = (extra_classes) ? ` ${extra_classes}` : ``;
+    button(type="button", class=`btn btn-${color_class}${btnSize}${extraClasses}`, id=`${id}`)
               i(class=`far ${icon} mr-2`)
               | #{label}
 // +tab("tab-video-info", "video-info", "Video Info", "true")

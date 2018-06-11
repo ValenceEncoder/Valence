@@ -192,12 +192,3 @@ export interface IFFMpegProgress {
     bitrate?: string;
     speed?: string;
 }
-
-interface IFFConfigBin {
-    ffprobe: string;
-    ffmpeg: string;
-}
-
-export interface IFFConfig {
-    bin: IFFConfigBin;
-}

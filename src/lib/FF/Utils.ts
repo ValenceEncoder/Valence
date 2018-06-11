@@ -61,8 +61,6 @@ export class Utils {
      * @returns {{videoInfo: IStreamInfo, audioInfo: IStreamInfo}}
      */
     public static getFileInfo(fileInfo: IFFProbeOutput): IFileInfo {
-        console.log("FFMpegUtils::getFileInfo");
-        fs.writeFileSync("./FileInfo.json", JSON.stringify(fileInfo, null, 2));
         const videoStream: IFFProbeStreamData = fileInfo.streams.find((i) => i.codec_type === "video");
         const audioStream: IFFProbeStreamData = fileInfo.streams.find((i) => i.codec_type === "audio");
         const duration                        = fileInfo.format.duration;

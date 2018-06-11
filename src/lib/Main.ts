@@ -56,7 +56,7 @@ export default class Main {
 
     public static CreateMain() {
         const mainOpts: any = {
-            width: 1450,
+            width: 1200,
             height: 800,
             frame: false,
             show: false,

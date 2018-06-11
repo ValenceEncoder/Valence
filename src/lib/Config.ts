@@ -31,7 +31,8 @@ export class CConfig implements IConfig {
             "Package",
             "TemplateRoot",
             "FFMpegBinary",
-            "FFProbeBinary"
+            "FFProbeBinary",
+            "FFConfig"
         ],
         Logging: [
             "SavePath"
@@ -128,7 +129,8 @@ export class CConfig implements IConfig {
         defaultConfig.System.UserLogFolder =            app.getPath("logs");
         defaultConfig.System.UserConfigPath =           path.join(defaultConfig.System.UserDataFolder, "user.json");
         defaultConfig.System.FFMpegBinary =             path.join(defaultConfig.System.AppRoot, "ffmpeg/bin/ffmpeg");
-        defaultConfig.System.FFProbe =                  path.join(defaultConfig.System.AppRoot, "ffmpeg/bin/ffprobe");
+        defaultConfig.System.FFProbeBinary =            path.join(defaultConfig.System.AppRoot, "ffmpeg/bin/ffprobe");
+        defaultConfig.System.FFConfig =                 {bin: {ffmpeg: defaultConfig.System.FFMpegBinary, ffprobe: defaultConfig.System.FFProbeBinary}};
         defaultConfig.Logging.SavePath =                path.join(defaultConfig.System.UserLogFolder, defaultConfig.Logging.File.Filename);
 
          /** Get the current app version */

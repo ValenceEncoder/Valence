@@ -1,0 +1,26 @@
+include ./mixins
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="ie=edge")
+    //- meta(http-equiv="Content-Security-Policy" content=`${cspString}`)
+    title Valence Encoder
+    link(rel="stylesheet" href="../../css/fontawesome-all.min.css")
+    link(rel="stylesheet" href="../../css/Index.css")
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.justify-content-between.mb-2.drag.pointer
+      a.navbar-brand(href="#") 
+        img.d-inline-block.mr-4(src="../../icons/valence-prpl-base-100px.png", alt="Valence Encoder Logo", width="50" height="50")
+        | Valence - Encoding
+      ul#navwin.navbar-nav.ml-2.btn-group.my-2.no-drag
+        li#btnDevTools.nav-item.btn.btn-primary(type="button" title="Open Developer Tools")
+          i.far.fa-search
+        li#btnMinimise.nav-item.btn.btn-primary(type="button" title="Minimise")
+          i.far.fa-window-minimize
+        li#btnMaximise.nav-item.btn.btn-primary(type="button" title="Maximise")
+          i.far.fa-window-maximize
+        li#btnQuit.nav-item.btn.btn-primary(type="button" title="Close")
+          i.fas.fa-window-close

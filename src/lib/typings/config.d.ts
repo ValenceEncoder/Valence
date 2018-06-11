@@ -19,6 +19,15 @@ export interface IConfigLogging {
     [key: string]: any;
 }
 
+export interface IFFConfigBin {
+    ffprobe: string;
+    ffmpeg: string;
+}
+
+export interface IFFConfig {
+    bin: IFFConfigBin;
+}
+
 export interface IConfigSystem {
     AppDistRoot: string;
     AppRoot: string;
@@ -37,6 +46,7 @@ export interface IConfigSystem {
     ShowDeveloperTools: boolean;
     FFMpegBinary: string;
     FFProbeBinary: string;
+    FFConfig: IFFConfig;
     [key: string]: any;
 }
 
@@ -50,3 +60,4 @@ export interface IConfig {
     SaveUserConfig?(): void;
     [key: string]: any;
 }
+
