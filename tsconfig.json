@@ -1,18 +1,22 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "noImplicitAny": true,
-        "inlineSourceMap": true,
-        "inlineSources": true,
-        "outDir": "dist/lib",
-        "target": "esnext",
-        "removeComments": true,
-        "moduleResolution": "node",
-        "allowJs": true,
-        "experimentalDecorators": true
-    },
-    "compileOnSave": false,
-    "include": [
-        "src/lib/**/*"
-    ]
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "es6",
+    "sourceMap": true,
+    "outDir": "./dist/src",
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "App.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "test/**/*",
+    "tmp",
+    "typings"
+  ]
 }

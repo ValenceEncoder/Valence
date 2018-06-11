@@ -1,0 +1,6 @@
+-c -S
+-R spec
+--compilers ts:ts-node/register
+--require source-map-support/register
+--recursive
+--check-leaks
