@@ -1,29 +1,108 @@
+include ./mixins
+
 doctype html
 html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible" content="ie=edge")
-    meta(http-equiv="Content-Security-Policy" content=`${cspString}`)
-    title Electron TypeScript Bootsrap Starter
-    link(rel="stylesheet" href="../../css/bootstrap.min.css")
+    //- meta(http-equiv="Content-Security-Policy" content=`${cspString}`)
+    title Valence
     link(rel="stylesheet" href="../../css/fontawesome-all.min.css")
     link(rel="stylesheet" href="../../css/Index.css")
   body
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-success.justify-content-between.mb-2.drag.pointer
-      a.navbar-brand(href="#") Electron TypeScript Bootsrap Starter
-      ul#navwin.navbar-nav.ml-2.btn-group.my-2.no-drag
-        li#btnDevTools.nav-item.btn.btn-success(type="button" title="Open Developer Tools")
-          i.far.fa-search
-        li#btnMinimise.nav-item.btn.btn-success(type="button" title="Minimise")
-          i.far.fa-window-minimize
-        li#btnMaximise.nav-item.btn.btn-success(type="button" title="Maximise")
-          i.far.fa-window-maximize
-        li#btnQuit.nav-item.btn.btn-success(type="button" title="Close")
-          i.fas.fa-window-close
-    footer.footer
-      // Load jquery and SVG.js via require
+    nav.navbar.bg-primary.justify-content-between.mb-2.drag.pointer
+      .container.justify-content-between
+        //- a.navbar-brand(href="#") 
+        //-   img.d-inline-block.mr-4(src="../../icons/valence-prpl-base-100px.png", alt="Valence Encoder Logo", width="50" height="50")
+        //-   | Valence
+        a.navbar-brand(href="#") 
+          img.brand-logo-svg.d-inline-block.mr-4(src="../../icons/banner-white.svg", alt="Valence Encoder Logo")
+        ul#navwin.navbar-nav.ml-2.btn-group.my-2.no-drag
+          li#btnDevTools.nav-item.btn.btn-primary(type="button" title="Open Developer Tools")
+            i.far.fa-search
+          li#btnMinimise.nav-item.btn.btn-primary(type="button" title="Minimise")
+            i.far.fa-window-minimize
+          li#btnMaximise.nav-item.btn.btn-primary(type="button" title="Maximise")
+            i.far.fa-window-maximize
+          li#btnQuit.nav-item.btn.btn-primary(type="button" title="Close")
+            i.fas.fa-window-close
+    main
+      .container
+        .row
+          .col
+            .form-inline
+              .input-group
+                input#txt-input.form-control.mr-2(type="text" placeholder="Click Browse to Select a Video File")
+                +btn("btn-browse-input", "secondary", "fa-folder", "Browse", "ml-2")
+      #analysis-result.container.hide
+        .row.my-2
+          .col
+            h4 INFO & OPTIONS
+        .row
+          .col
+            ul#info-tabs.nav.nav-tabs(role="tablist")
+              +tab("video-info", "primary", "true")
+              +tab("audio-info", "primary")
+              +tab("encoder-options", "primary")
+            .tab-content
+              +tabpanel("video-info", "true")
+                table.table
+                  thead
+                    tr.table-primary
+                      th Codec
+                      th Duration
+                      th Size (kB)
+                  tbody
+                    tr
+                      td#td-video-codec Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis ipsam consectetur repellat. Totam libero et nisi consequatur veniam eligendi aperiam, laborum alias iste, ipsum, modi nulla iure delectus laboriosam cupiditate.
+                      td#td-video-duration Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa excepturi accusamus facilis veniam id similique asperiores labore sequi consequuntur ipsum voluptatum accusantium neque, dolor consequatur laborum error eos fugit iure?
+                      td#td-video-size Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam esse optio saepe, veritatis, illo rem error voluptates temporibus id sit illum quaerat nihil vitae impedit aspernatur. Placeat exercitationem odio officiis!
+              +tabpanel("audio-info")
+                table.table
+                  thead
+                    tr.table-primary
+                      th Codec
+                  tbody
+                    tr
+                      td#td-audio-codec Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, voluptas recusandae non delectus fugiat ad sapiente mollitia inventore distinctio, culpa consequatur similique nobis possimus quis beatae corrupti est odit eius.
+              +tabpanel("encoder-options")
+                table.table
+                  thead
+                    tr.table-primary
+                      th Audio Codec Options
+                  tbody
+                    tr
+                      td#td-encoder-options-audio Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, voluptas recusandae non delectus fugiat ad sapiente mollitia inventore distinctio, culpa consequatur similique nobis possimus quis beatae corrupti est odit eius.
+
+      #analysis-preloader.container.hide
+        .row
+          .col.s12.center-align
+            h4.brand-font ANALYSING VIDEO
+        .row
+          .col.s12.center-align
+            .preloader-wrapper.big.active
+              .spinner-layer
+                .circle-clipper.left
+                  .circle
+                .gap-patch
+                  .circle
+                .circle-clipper.right
+                  .circle
+      .container
+        #div-output.row.hide
+          .col.s10
+            .input-field
+              input#txt-output(type="text")
+              label.active(for="txt-output") Output File
+          .col.s2
+            +btn("btn-browse-output", "secondary", "fa-folder", "Browse")
+
+      footer.footer.navbar.bg-primary.justify-content-between
+        .container.justify-content-between
+          +btn("btn-encode", "success", "fa-play", "Start", null, "ml-auto text-white")
+      // Load jquery and Bootstrap via require
       script.
         window.$ = window.JQuery = require("jquery");
-        window.Bootstrap = require("bootstrap");
-        require("../lib/IndexView.js");
+        window.Bootstrap = require("../../js/bootstrap.bundle.js");
+        require("../lib/MainWindow.js");

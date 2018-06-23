@@ -1,8 +1,8 @@
-import * as path from "path";
 import * as fs from "fs";
-import merge = require("lodash.merge");
 import cloneDeep = require("lodash.clonedeep");
-import { IConfigLogging, IConfigSystem, IConfig } from "./typings/config";
+import merge = require("lodash.merge");
+import * as path from "path";
+import { IConfig, IConfigLogging, IConfigSystem } from "./typings/config";
 
 const isMain = (process && process.type !== "renderer");
 const app = (isMain) ? require("electron").app : require("electron").remote.app;
@@ -29,7 +29,10 @@ export class CConfig implements IConfig {
             "AppDistRoot",
             "AppRoot",
             "Package",
-            "TemplateRoot"
+            "TemplateRoot",
+            "FFMpegBinary",
+            "FFProbeBinary",
+            "FFConfig"
         ],
         Logging: [
             "SavePath"
@@ -125,6 +128,9 @@ export class CConfig implements IConfig {
         defaultConfig.System.UserDocumentsFolder =      app.getPath("documents");
         defaultConfig.System.UserLogFolder =            app.getPath("logs");
         defaultConfig.System.UserConfigPath =           path.join(defaultConfig.System.UserDataFolder, "user.json");
+        defaultConfig.System.FFMpegBinary =             path.join(defaultConfig.System.AppRoot, "ffmpeg/bin/ffmpeg");
+        defaultConfig.System.FFProbeBinary =            path.join(defaultConfig.System.AppRoot, "ffmpeg/bin/ffprobe");
+        defaultConfig.System.FFConfig =                 {bin: {ffmpeg: defaultConfig.System.FFMpegBinary, ffprobe: defaultConfig.System.FFProbeBinary}};
         defaultConfig.Logging.SavePath =                path.join(defaultConfig.System.UserLogFolder, defaultConfig.Logging.File.Filename);
 
          /** Get the current app version */

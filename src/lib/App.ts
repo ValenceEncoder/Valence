@@ -1,7 +1,6 @@
+import { Beload } from "beload";
 import { app } from "electron";
-
 import Main from "./Main";
 
-// tslint:disable-next-line:no-console
-console.log(app.getAppPath());
+const reloader = new Beload(["../**/*", "../../css/**/*"], app, "change", {verbose: true});
 Main.Init(app);

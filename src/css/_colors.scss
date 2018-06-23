@@ -1,0 +1,179 @@
+
+@import "../../node_modules/bootstrap/scss/_functions";
+
+$theme-colors: (
+    "primary": #853963,
+    "secondary": #1486ac,
+    "success":  darken(#8FDC97, 10%), 
+    "danger": #a21318,
+    "warning": #FFE67A,
+    "info": #A3D9FF,
+    "default": #AFBFC0,
+);
+
+// Tabs
+$nav-tabs-border-color: theme-color("primary");
+$nav-tabs-link-active-border-color: theme-color("primary");
+
+$base-primary: theme-color("primary");
+$base-secondary: theme-color("secondary");
+$base-success: theme-color("success");
+$base-danger: theme-color("danger");
+$base-warning: theme-color("warning");
+$base-info: theme-color("info");
+$base-default: theme-color("default");
+
+$valence-primary: (
+        "base": $base-primary,
+        "lighten-5": lighten($base-primary, 10%),
+        "lighten-4": lighten($base-primary, 7.5%),
+        "lighten-3": lighten($base-primary, 5%),
+        "lighten-2": lighten($base-primary, 2.5%),
+        "lighten-1": lighten($base-primary, 1%),
+        "darken-1": darken($base-primary, 1%),
+        "darken-2": darken($base-primary, 2.5%),
+        "darken-3": darken($base-primary, 5%),
+        "darken-4": darken($base-primary, 10%),
+);
+
+$valence-secondary: (
+        "base": $base-secondary,
+        "lighten-5": lighten($base-secondary, 10%),
+        "lighten-4": lighten($base-secondary, 7.5%),
+        "lighten-3": lighten($base-secondary, 5%),
+        "lighten-2": lighten($base-secondary, 2.5%),
+        "lighten-1": lighten($base-secondary, 1%),
+        "darken-1": darken($base-secondary, 1%),
+        "darken-2": darken($base-secondary, 2.5%),
+        "darken-3": darken($base-secondary, 5%),
+        "darken-4": darken($base-secondary, 10%),
+);
+
+$valence-danger: (
+        "base": $base-danger,
+        "lighten-5": lighten($base-danger, 10%),
+        "lighten-4": lighten($base-danger, 7.5%),
+        "lighten-3": lighten($base-danger, 5%),
+        "lighten-2": lighten($base-danger, 2.5%),
+        "lighten-1": lighten($base-danger, 1%),
+        "darken-1": darken($base-danger, 1%),
+        "darken-2": darken($base-danger, 2.5%),
+        "darken-3": darken($base-danger, 5%),
+        "darken-4": darken($base-danger, 10%),
+);
+
+$valence-warning: (
+        "base": $base-warning,
+        "lighten-5": lighten($base-warning, 10%),
+        "lighten-4": lighten($base-warning, 7.5%),
+        "lighten-3": lighten($base-warning, 5%),
+        "lighten-2": lighten($base-warning, 2.5%),
+        "lighten-1": lighten($base-warning, 1%),
+        "darken-1": darken($base-warning, 1%),
+        "darken-2": darken($base-warning, 2.5%),
+        "darken-3": darken($base-warning, 5%),
+        "darken-4": darken($base-warning, 10%),
+);
+
+$valence-info: (
+        "base": $base-info,
+        "lighten-5": lighten($base-info, 10%),
+        "lighten-4": lighten($base-info, 7.5%),
+        "lighten-3": lighten($base-info, 5%),
+        "lighten-2": lighten($base-info, 2.5%),
+        "lighten-1": lighten($base-info, 1%),
+        "darken-1": darken($base-info, 1%),
+        "darken-2": darken($base-info, 2.5%),
+        "darken-3": darken($base-info, 5%),
+        "darken-4": darken($base-info, 10%),
+);
+
+$valence-success: (
+        "base": $base-success,
+        "lighten-5": lighten($base-success, 10%),
+        "lighten-4": lighten($base-success, 7.5%),
+        "lighten-3": lighten($base-success, 5%),
+        "lighten-2": lighten($base-success, 2.5%),
+        "lighten-1": lighten($base-success, 1%),
+        "darken-1": darken($base-success, 1%),
+        "darken-2": darken($base-success, 2.5%),
+        "darken-3": darken($base-success, 5%),
+        "darken-4": darken($base-success, 10%),
+);
+
+$valence-default: (
+        "base": $base-default,
+        "lighten-5": lighten($base-default, 10%),
+        "lighten-4": lighten($base-default, 7.5%),
+        "lighten-3": lighten($base-default, 5%),
+        "lighten-2": lighten($base-default, 2.5%),
+        "lighten-1": lighten($base-default, 1%),
+        "darken-1": darken($base-default, 1%),
+        "darken-2": darken($base-default, 2.5%),
+        "darken-3": darken($base-default, 5%),
+        "darken-4": darken($base-default, 10%),
+);
+
+$valence_shades: (
+        "black": #000000,
+        "white": #FFFFFF,
+        "transparent": transparent
+);
+
+$valence_colors: (
+        "valence-primary": $valence-primary,
+        "valence-secondary": $valence-secondary,
+        "valence-success": $valence-success,
+        "valence-default": $valence-default,
+        "valence-warning": $valence-warning,
+        "valence-info": $valence-info,
+        "valence-danger": $valence-danger,
+        "valence-shades": $valence_shades
+);
+
+// Color Classes
+
+@each $color_name, $color in $valence_colors {
+  @each $color_type, $color_value in $color {
+    @if $color_type == "base" {
+      .#{$color_name} {
+        background-color: $color_value !important;
+      }
+      .#{$color_name}-text {
+        color: $color_value !important;
+      }
+    } @else if $color_name != "shades" {
+      .#{$color_name}.#{$color_type} {
+        background-color: $color_value !important;
+      }
+      .#{$color_name}-text.text-#{$color_type} {
+        color: $color_value !important;
+      }
+    }
+  }
+}
+
+// Shade classes
+@each $color, $color_value in $valence_shades {
+  .#{$color} {
+    background-color: $color_value !important;
+  }
+  .#{$color}-text {
+    color: $color_value !important;
+  }
+}
+
+// usage: color("name_of_color", "type_of_color")
+// to avoid to repeating map-get($colors, ...)
+
+@function valence-color($color, $type) {
+  @if map-has-key($valence_colors, $color) {
+    $curr_color: map-get($valence_colors, $color);
+    @if map-has-key($curr_color, $type) {
+      @return map-get($curr_color, $type);
+    }
+  }
+  @warn "Unknown `#{name}` in $colors.";
+  @return null;
+}
+

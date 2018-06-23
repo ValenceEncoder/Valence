@@ -1,47 +1,3 @@
-<<<<<<< HEAD
-# Electron App Starter
-My boilerplate for new Electron based apps.
-
-## Components
-- Electron
-- TypeScript
-- Bootstrap 4
-
-## Requirements
-- Node >= v8.10.*
-- Windows: GNU Utils. NPM Scripts use commands like `rm -rf` so to use them on Windows you'll need to have GNU Utils installed or use WSL etc. 
-
-## Setup
-- Clone the repo `git clone git@github.com:hammus/electron-ts`
-- Install the npm dependancies `npm install`
-- Start the application `npm start`
-
-## Source File Overview
-
-
-| File                   | Description                                                                                      |
-|------------------------|--------------------------------------------------------------------------------------------------|
-| `src/lib/App.ts`       | Simple bootstrap script for electron. Imports `Electron.Application` and calls `Main.Init(app)`  |
-| `src/lib/Main.ts`      | Main `BrowserWindow` manager, creates the main window and sets up basic IPC                      |
-| `src/lib/IndexView.ts` | View Controller for `index.html`                                                                 |
-
-
-## `npm` Script Tasks
-We use `npm-run-all` to manage parallel and sequential task running. The available tasks are:
-
-
-| Task Command           | Task Description                                                                                                              |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| `npm start`            | Runs `build` and `electron` tasks sequentially                                                                                |
-| `npm run build`        | Runs `clean`, `build:all` and `html` tasks sequentially                                                                       |                   
-| `npm run electron`     | Runs  shell command: `cross-env NODE_ENV=dev electron .`. Starts the Electron Application                                     |                   
-| `npm run build:all`    | Runs `ts` and `css` tasks in parallel                                                                                         |
-| `npm run ts`           | Runs shell command: `tsc`. Compiles TypeScripts to `dist/lib/*`                                                               |
-| `npm run css`          | Creates the `dist` and `dist/css` directories and then runs shell command: `uglifycss src/css/Index.css > dist/css/Index/css` |
-| `npm run clean`        | Runs shell command: `rm -rf dist/`. Deletes all generated/compiled files.                                                     |
-| `npm run html`         | Runs shell command: `cd dist && mkdir views && cd .. && cp src/views/*.html dist/views`. Copies HTML files to `dist/views`    |
-
-=======
  [![Build Status](https://travis-ci.org/ValenceEncoder/Valence.svg?branch=master)](https://travis-ci.org/ValenceEncoder/Valence) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ![Valence Video Encoder](./logo/banner-gh.png)
@@ -104,4 +60,3 @@ By using FFMPEG to preserve (copy) `x264` / `h264` encoded video streams stored 
 Valence Video Encoder is Copyright &copy; 2017 Liam Whan. Valence is Free and Open Source Software. 
 No warranties either express or implied are provided, and by downloading this software or repository you are doing so at your own risk. 
 Valence-specific source code is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for the Valence License as well as the Licenses of all third party packages used. 
->>>>>>> 9e6a13cdb519236655b10acb14793a75a3b529f4
