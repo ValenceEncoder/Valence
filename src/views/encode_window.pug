@@ -24,3 +24,19 @@ html(lang="en")
           i.far.fa-window-maximize
         li#btnQuit.nav-item.btn.btn-primary(type="button" title="Close")
           i.fas.fa-window-close
+    main
+      .container
+        .row
+          .col-12
+            .progress
+              #progress-bar.progress-bar(role="progressbar")
+        .row
+          .col-12
+            span#progress-text
+
+      
+      // Load jquery and Bootstrap via require
+      script.
+        window.$ = window.JQuery = require("jquery");
+        window.Bootstrap = require("../../js/bootstrap.bundle.js");
+        require("../lib/EncodeWindow.js");

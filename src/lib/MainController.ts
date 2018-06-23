@@ -1,10 +1,10 @@
 import {BrowserWindow, ipcRenderer} from "electron";
-import * as log from "electron-log";
 import IPCEventType from "./Channels";
 import { Config } from "./Config";
-import { IFileInfo, IProcessOptions } from "./FF/FFInterfaces";
+import { IFFProbeOutput, IFileInfo, IProcessOptions } from "./FF/FFInterfaces";
 import { FFProbe, VideoFile } from "./FF/FFProcess";
-import { Utils } from "./FF/Utils";
+import { Utils as FFUtils } from "./FF/Utils";
+import {log} from "./Log";
 import { IFFConfig } from "./typings/config";
 
 const config: IFFConfig = {
@@ -15,11 +15,11 @@ const config: IFFConfig = {
 };
 
 export class MainController {
-    private static encodeWin: BrowserWindow;
     public static StatsVisible: boolean = false;
     private static ffprobe: FFProbe;
-    private static input: IProcessOptions;
     private static videoFile: VideoFile;
+    private static probeOutput: IFileInfo = null;
+    private static processOptions: IProcessOptions = null;
 
     private static onBrowseClick(event: JQuery.Event) {
         ipcRenderer.send(IPCEventType.APP_OPEN_FILE);
@@ -35,19 +35,21 @@ export class MainController {
 
     private static onIPCAppFileSelected(event: Electron.Event, file: string) {
         $("#txt-input").val(file);
-        $("#txt-output").val(Utils.changeExtension(file, "mp4"));
+        $("#txt-output").val(FFUtils.changeExtension(file, "mp4"));
         $("#btn-browse-output").on("click", (e: JQuery.Event) =>  MainController.onBrowseOutputClick(e)).addClass("pulse");
+        log.debug("File", file);
 
-        MainController.input   = {input: file};
-        MainController.ffprobe = new FFProbe(config, MainController.input);
+        MainController.processOptions   = {input: file};
+        MainController.ffprobe          = new FFProbe(config, MainController.processOptions);
         MainController.ffprobe.on(FFProbe.EVENT_OUTPUT, MainController.outputAnalysis);
         MainController.ffprobe.on(FFProbe.EVENT_COMPLETE, MainController.onProbeComplete);
         MainController.ffprobe.run();
         $("#analysis-preloader").removeClass("hide");
     }
 
-    private static outputAnalysis(result: IFileInfo) {
-        MainController.videoFile = new VideoFile(result, MainController.input);
+    private static outputAnalysis(result: IFFProbeOutput) {
+        MainController.probeOutput = FFUtils.getFileInfo(result);
+        MainController.videoFile = new VideoFile(MainController.probeOutput, MainController.processOptions);
         $("#td-video-codec").text(MainController.videoFile.VideoCodec);
         $("#td-video-duration").text(MainController.videoFile.Duration.toString());
         $("#td-video-size").text(`${MainController.videoFile.Size}kb`);
@@ -64,46 +66,15 @@ export class MainController {
     private static onEncodeClick(event: JQuery.Event) {
         const $txtInput = $("#txt-input");
         const inputFile = $txtInput.val() as string;
-        if (!Utils.fileExists(inputFile) || $txtInput.val() === "") {
+        if (!FFUtils.fileExists(inputFile) || $txtInput.val() === "") {
             log.warn(`Path ${inputFile} does not exist`);
             return;
         }
-        MainController.encodeWin = new BrowserWindow({
-            width: 900,
-            height: 300,
-            show: true,
-            modal: true,
-            autoHideMenuBar: true,
-        });
-
-        MainController.encodeWin.loadURL(Utils.path("/views/encode_window.html"));
-
-        MainController.encodeWin.on("ready-to-show", () => {
-            MainController.encodeWin.show();
-            MainController.encodeWin.webContents.send(IPCEventType.SPAWN_ENCODER, MainController.videoFile);
-        });
-
-        MainController.encodeWin.on("closed", () => {
-            MainController.encodeWin = null;
-        });
-
-        ipcRenderer.on(IPCEventType.ENCODE_COMPLETED, MainController.onIPCEncodeCompleted);
-    }
-
-    private static onIPCEncodeCompleted(event: Electron.Event, message: any) {
-        MainController.encodeWin.close();
-        MainController.encodeWin = null;
-        // $("#success-dialog").modal('open');
+        ipcRenderer.send(IPCEventType.APP_OPEN_ENCODE_WINDOW, MainController.probeOutput, MainController.processOptions);
     }
 
     private static onIPCAppShowStatistics(event: Electron.Event): void {
-
         MainController.StatsVisible = !MainController.StatsVisible;
-        // let navAction: string = (MainController.statsVisible) ? "show" : "hide";
-        // $(".button-collapse").sideNav(navAction);
-
-        // MainRenderer.getRAMUsage();
-
     }
 
     public static Init() {

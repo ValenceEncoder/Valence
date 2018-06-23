@@ -9467,4 +9467,9 @@ h3 {
   line-height: 60px;
 }
 
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
 /*# sourceMappingURL=css/Index.css.map */

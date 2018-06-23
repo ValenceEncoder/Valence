@@ -1,7 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as url from "url";
-import { Config } from "../Config";
 import { IFFMpegProgress, IFFProbeOutput, IFFProbeStreamData, IFileInfo, IGPUInfo, IGPUOutput, IStreamInfo } from "./FFInterfaces";
 
 /* tslint:disable:naming-convention */
@@ -75,30 +74,6 @@ export class Utils {
             videoInfo,
             audioInfo
         };
-    }
-
-    /**
-     * Joins a relative path to the APP root
-     * @param filepath the path to prepend with app root
-     */
-    public static path(filepath: string): string {
-        return url.format({
-            protocol: "file:",
-            pathname: path.join(Config.System.AppDistRoot, filepath),
-            slashes: true
-        });
-    }
-
-    /**
-     * Gets a HTML template from the views directory
-     * @param template the path to prepend with template root
-     */
-    public static getTemplate(template: string): string {
-        return url.format({
-            protocol: "file:",
-            pathname: path.join(Config.System.TemplateRoot, template),
-            slashes: true
-        });
     }
 
     public static parseGPUInfo(gpuInfo: IGPUOutput): IGPUInfo {

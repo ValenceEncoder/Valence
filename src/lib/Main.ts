@@ -1,16 +1,12 @@
 import { App, BrowserWindow, dialog, ipcMain } from "electron";
-import * as log from "electron-log";
 import * as path from "path";
-import * as url from "url";
 import IPCEventType from "./Channels";
 import { Config } from "./Config";
+import { ElectronUtils } from "./ElectronUtils";
+import { IFileInfo, IProcessOptions } from "./FF/FFInterfaces";
+import { log } from "./Log";
 
-// Initialise Logging plugin
-log.transports.file.level = (Config.Logging.File.Enabled) ? Config.Logging.File.Level : false;
-log.transports.console.level = (Config.Logging.Console.Enabled) ? Config.Logging.Console.Level : false;
-log.transports.file.format = (Config.Logging.File.Enabled && Config.Logging.File.Format) ? Config.Logging.File.Format : log.transports.file.format;
-log.transports.console.format = (Config.Logging.Console.Enabled && Config.Logging.Console.Format) ? Config.Logging.Console.Format : log.transports.console.format;
-log.transports.file.file = (Config.Logging.File.Enabled) ? Config.Logging.Savepath : log.transports.file.file;
+/* tslint:disable:naming-convention */
 
 declare const global: any;
 /***
@@ -27,6 +23,7 @@ global.appConfig = {
 
 export default class Main {
     public static MainWindow: BrowserWindow = null;
+    public static EncodeWin: BrowserWindow = null;
     public static Application: App;
     public static IsEncoding: boolean = false;
 
@@ -74,17 +71,44 @@ export default class Main {
             Main.MainWindow.webContents.send(IPCEventType.MAIN_WINDOW_BLUR);
         });
 
-        Main.MainWindow.loadURL(
-            url.format({
-                pathname: path.join(Config.System.TemplateRoot, "main_window.html"),
-                protocol: "file",
-                slashes: true
-            })
-        );
+        Main.MainWindow.loadURL(ElectronUtils.GetTemplate("main_window.html"));
 
         Main.SetupIPC();
 
     }
+
+    public static onCreateEncode(event: Electron.Event, probeInfo: IFileInfo, processOptions: IProcessOptions) {
+        log.debug(probeInfo, processOptions);
+        Main.EncodeWin = new BrowserWindow({
+            width: 900,
+            height: 300,
+            show: true,
+            modal: true,
+            parent: Main.MainWindow,
+            frame: false,
+            autoHideMenuBar: true,
+        });
+
+        Main.EncodeWin.loadURL(ElectronUtils.GetTemplate("encode_window.html"));
+
+        ipcMain.on(IPCEventType.APP_ENCODE_WINDOW_READY, () => {
+            Main.EncodeWin.show();
+            Main.EncodeWin.webContents.send(IPCEventType.SPAWN_ENCODER, probeInfo, processOptions);
+        });
+        ipcMain.on(IPCEventType.ENCODE_COMPLETED, Main.onIPCEncodeCompleted);
+        ipcMain.on(IPCEventType.APP_CLOSE_ENCODE_WINDOW, Main.onIPCEncodeCompleted);
+        ipcMain.on(IPCEventType.APP_SHOW_DEV_TOOLS_ENCODE_WINDOW, () => Main.ShowDevTools(Main.EncodeWin));
+
+        Main.EncodeWin.on("closed", () => {
+            Main.EncodeWin = null;
+        });
+
+    }
+
+    private static onIPCEncodeCompleted() {
+        Main.EncodeWin.close();
+    }
+
     private static onOpenFile(event: Electron.Event) {
         dialog.showOpenDialog({
             properties: ["openFile"],
@@ -125,11 +149,13 @@ export default class Main {
     }
 
     public static SetupIPC() {
+        log.debug("Setup");
         ipcMain.on(IPCEventType.SHOW_DEV_TOOLS, () => { Main.ShowDevTools(Main.MainWindow); });
         ipcMain.on(IPCEventType.ENCODE_COMPLETED, Main.onEncodeCompleted);
         ipcMain.on(IPCEventType.SPAWN_ENCODER, Main.onSpawnEncoder);
         ipcMain.on(IPCEventType.APP_OPEN_FILE, Main.onOpenFile);
         ipcMain.on(IPCEventType.APP_SAVE_FILE, Main.onSaveFile);
+        ipcMain.on(IPCEventType.APP_OPEN_ENCODE_WINDOW, Main.onCreateEncode);
 
         ipcMain.on(IPCEventType.APP_QUIT, () => {
             Main.Application.quit();

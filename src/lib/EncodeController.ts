@@ -1,9 +1,10 @@
-import {BrowserWindow, ipcRenderer, remote} from "electron";
+import {BrowserWindow, ipcRenderer} from "electron";
 import * as Path from "path";
 import IPCEventType from "./Channels";
 import {Config} from "./Config";
-import {IFFMpegProgress} from "./FF/FFInterfaces";
+import {IFFMpegProgress, IFileInfo, IProcessOptions} from "./FF/FFInterfaces";
 import {FFMpeg, VideoFile} from "./FF/FFProcess";
+import {log} from "./Log";
 
 export enum EncoderState {
     READY,
@@ -14,16 +15,13 @@ export enum EncoderState {
 export class EncodeController {
 
     private static ffmpeg: FFMpeg;
-    private static parentWindow: BrowserWindow;
-    private static readonly remoteWindow: typeof BrowserWindow = remote.BrowserWindow;
-
     public static EncoderState: EncoderState = EncoderState.READY;
 
     private static videoFile: VideoFile;
 
     public static OnMpegComplete(): void {
         EncodeController.EncoderState = EncoderState.COMPLETE;
-        EncodeController.parentWindow.webContents.send(IPCEventType.ENCODE_COMPLETED);
+        ipcRenderer.send(IPCEventType.ENCODE_COMPLETED);
     }
 
     public static OnMpegOutput(info: IFFMpegProgress): void {
@@ -36,10 +34,9 @@ export class EncodeController {
         console.log(err);
     }
 
-    public static Start(fileInfo: VideoFile, parentId: number): void {
+    public static StartEncode(fileInfo: VideoFile): void {
 
         EncodeController.videoFile    = fileInfo;
-        EncodeController.parentWindow = EncodeController.remoteWindow.fromId(parentId);
         $("#heading").text(`Encoding ${Path.basename(fileInfo.InputPath)}`);
 
         EncodeController.ffmpeg = new FFMpeg(Config.System.FFConfig, EncodeController.videoFile.ProcessOptions);
@@ -51,10 +48,13 @@ export class EncodeController {
 
     }
 
-}
+    public static Init(): void {
+        log.info("Initializing Encode Window");
+        ipcRenderer.on(IPCEventType.SPAWN_ENCODER, (event: Electron.Event, fileInfo: IFileInfo, jobOptions: IProcessOptions): void => {
+            log.info("Spawn Event Recieved");
+            const videoFile: VideoFile = new VideoFile(fileInfo, jobOptions);
+            EncodeController.StartEncode(videoFile);
+        });
+    }
 
-ipcRenderer.on(IPCEventType.SPAWN_ENCODER, (event: Electron.Event, fileInfo: VideoFile, parentId: number): void => {
-    // FIXME(liam): I assume due to prototypical inheritance, this is getting passed as a POJO between window instances so this is a pretty ugly hack atm
-    const videoFile: VideoFile = new VideoFile(fileInfo.ProbeData, fileInfo.ProcessOptions);
-    EncodeController.Start(videoFile, parentId);
-});
+}
