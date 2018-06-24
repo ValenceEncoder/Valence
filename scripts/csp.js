@@ -13,7 +13,8 @@ class CSP {
     constructor() {
         this.scriptSrc = [
             `'self'`,
-            `'sha256-MKQyGgR6cDXjHFnURvyQfiS5yIK6VphXbnHZUMGAafo='`
+            `'sha256-MKQyGgR6cDXjHFnURvyQfiS5yIK6VphXbnHZUMGAafo='`,
+            `'sha256-hI2pvQLTS1JmB44Kr3KOBNteZBQ1+vjMyWpGY7ZEeHA='`
         ];
         this.styleSrc = [
             `'self'`, 

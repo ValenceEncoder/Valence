@@ -81,12 +81,13 @@ export default class Main {
         log.debug(probeInfo, processOptions);
         Main.EncodeWin = new BrowserWindow({
             width: 900,
-            height: 300,
+            height: 200,
             show: true,
             modal: true,
             parent: Main.MainWindow,
             frame: false,
             autoHideMenuBar: true,
+            icon: `${Config.System.AppRoot}/icons/valence-prpl-base-transp.png`
         });
 
         Main.EncodeWin.loadURL(ElectronUtils.GetTemplate("encode_window.html"));

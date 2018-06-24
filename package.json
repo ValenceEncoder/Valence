@@ -1,5 +1,5 @@
 {
-  "name": "valence-encoder",
+  "name": "Valence",
   "version": "1.0.0",
   "description": "An Open Source Video Transcoder built with Electron and FFMpeg",
   "main": "dist/lib/App.js",
@@ -39,6 +39,7 @@
     "@types/lodash.merge": "^4.6.3",
     "@types/pug": "^2.0.4",
     "archiver": "^2.1.1",
+    "bewatch": "git+https://github.com/hammus/bewatch.git",
     "command-line-args": "^5.0.2",
     "cross-env": "^5.2.0",
     "crypto-js": "^3.1.9-1",

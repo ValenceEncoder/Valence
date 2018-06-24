@@ -30,4 +30,8 @@ export class ElectronUtils {
         });
     }
 
+    public static IsDev(): boolean {
+        return (process && process.env.hasOwnProperty("NODE_ENV") && process.env.NODE_ENV.indexOf("dev") !== -1);
+    }
+
 }

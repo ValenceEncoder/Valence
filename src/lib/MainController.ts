@@ -1,6 +1,7 @@
-import {BrowserWindow, ipcRenderer} from "electron";
+import {ipcRenderer} from "electron";
 import IPCEventType from "./Channels";
 import { Config } from "./Config";
+import { ElectronUtils } from "./ElectronUtils";
 import { IFFProbeOutput, IFileInfo, IProcessOptions } from "./FF/FFInterfaces";
 import { FFProbe, VideoFile } from "./FF/FFProcess";
 import { Utils as FFUtils } from "./FF/Utils";
@@ -78,6 +79,9 @@ export class MainController {
     }
 
     public static Init() {
+        if (ElectronUtils.IsDev()) {
+            $(".dev-only").removeClass("hide");
+        }
         // $("#err-dialog").modal(); // Init Modals
         // $("#success-dialog").modal(); // Init Modals
         $("#btn-browse-input").click((e: JQuery.Event) => MainController.onBrowseClick(e)); // Open File Picker
