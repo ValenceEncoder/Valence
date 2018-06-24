@@ -5,54 +5,62 @@ const npmPackage = require("../package.json");
 const commandLineArgs = require("command-line-args");
 
 const argDefs = [
-    {name: "platform", alias: "p", type: String},
-    {name: "arch", alias: "a", type: String}
+    { name: "platform", alias: "p", type: String, defaultValue: process.platform },
+    { name: "arch", alias: "a", type: String, defaultValue: process.arch }
 ];
 const argv = commandLineArgs(argDefs);
 
-let platform = argv.hasOwnProperty("platform") ? argv.platform : process.platform;
-let arch = argv.hasOwnProperty("arch") ? argv.arch : process.arch;
+const zip = (options) => {
+    const { platform, arch } = options;
 
-let appName = `${npmPackage.name}-${platform}-${arch}`;
-let appFolder = `out/${appName}`;
-let inputFolder = path.join(__dirname, "..", appFolder);
-let outputFile = path.join(__dirname, "..", `out/${appName}.zip`);
+    let appName = `${npmPackage.name}-${platform}-${arch}`;
+    let appFolder = `out/${appName}`;
+    let inputFolder = path.join(__dirname, "..", appFolder);
+    let outputFile = path.join(__dirname, "..", `out/${appName}.zip`);
 
-console.log(`AppName:\t${appName}`);
-console.log(`Input Folder:\t${inputFolder}`);
-console.log(`Output File:\t${outputFile}`);
+    console.log(`AppName:\t${appName}`);
+    console.log(`Input Folder:\t${inputFolder}`);
+    console.log(`Output File:\t${outputFile}`);
 
-
-let output = fs.createWriteStream(outputFile);
-let archive = archiver("zip", {
-    zlib: { level: 9 }
-});
-
-output.on('close', function() {
-    console.log(archive.pointer() + ' total bytes');
-    console.log(`Compression Complete. Zip file created at ${outputFile}`);
-});
-
-output.on('end', function() {
-    console.log('Data has been drained');
-});
-
-archive.on("warning", function(err) {
-    if (err.code === "ENOENT") {
-      console.warn(err);
-    } else {
-      // throw error
-      throw err;
+    if (!fs.existsSync(appFolder)) {
+        console.log(`${appFolder} does not exist. Nothing to zip.`);
+        return;
     }
-});
 
-archive.on('error', function(err) {
-  throw err;
-});
 
-// pipe archive data to the file
-archive.pipe(output);
+    let output = fs.createWriteStream(outputFile);
+    let archive = archiver("zip", {
+        zlib: { level: 9 }
+    });
 
-archive.directory(inputFolder, appName);
+    output.on('close', function () {
+        console.log(archive.pointer() + ' total bytes');
+        console.log(`Compression Complete. Zip file created at ${outputFile}`);
+    });
 
-archive.finalize();
+    output.on('end', function () {
+        console.log('Data has been drained');
+    });
+
+    archive.on("warning", function (err) {
+        if (err.code === "ENOENT") {
+            console.warn(err);
+        } else {
+            // throw error
+            throw err;
+        }
+    });
+
+    archive.on('error', function (err) {
+        throw err;
+    });
+
+    // pipe archive data to the file
+    archive.pipe(output);
+
+    archive.directory(inputFolder, appName);
+
+    archive.finalize();
+}
+
+if (require.main !== module) { module.exports = { zip }; } else { zip(argv); }
