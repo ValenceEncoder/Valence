@@ -10,7 +10,7 @@
     "bump:minor": "node scripts/version.js -i",
     "bump:major": "node scripts/version.js -m",
     "electron": "cross-env NODE_ENV=dev electron .",
-    "pug": "node scripts/pug.js",
+    "pug": "node scripts/pug.js --csp",
     "pug:watch": "node scripts/pug.js --watch",
     "sass": "sass ./src/css/index.scss ./css/Index.css",
     "sass:watch": "node scripts/sass.js",
