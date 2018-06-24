@@ -44,11 +44,13 @@ const PLATFORM_MAP = {
     "win32-ia32": URL_WIN32,
     "darwin-x64" : URL_MACOS,
     "linux-x32": URL_LIN32,
-    "linux-ia32": URL_LIN64
+    "linux-ia32": URL_LIN32,
+    "linux-x64": URL_LIN64
 };
 
 if (!PLATFORM_MAP.hasOwnProperty(OS_ARCH)) {
     console.error(`No url found for '${OS_ARCH}'. URLS`, PLATFORM_MAP);
+    process.exit(1);
 }
 
 const URL = PLATFORM_MAP[OS_ARCH];
@@ -135,7 +137,7 @@ const getBinaries = (options = {}) => {
     }
     
     if (!fs.existsSync(TEMP_DIR)) { fs.mkdirSync(TEMP_DIR); }
-
+    const writeStream = fs.createWriteStream(TEMP_ZIP, {encoding: "binary", flags: "w"});
     http.get(URL, (res) => {
         res
         .on("data", (data) => {
