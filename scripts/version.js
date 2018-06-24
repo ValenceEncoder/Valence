@@ -1,8 +1,8 @@
 const fs = require("fs");
-const cmd = require("command-line-args");
 const packageFile = require("path").join(__dirname, "../package.json");
 const package = require(packageFile);
 
+const cmd = require("command-line-args");
 const argDefs = [
     { name: "patch", alias: "p", type: Boolean },
     { name: "major", alias: "m", type: Boolean },
