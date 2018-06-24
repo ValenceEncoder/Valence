@@ -126,7 +126,13 @@ export class CConfig implements IConfig {
         defaultConfig.System.UserDesktopFolder =        app.getPath("desktop");
         defaultConfig.System.UserHomeFolder =           app.getPath("home");
         defaultConfig.System.UserDocumentsFolder =      app.getPath("documents");
-        defaultConfig.System.UserLogFolder =            app.getPath("logs");
+        if (CConfig.canGetLogPath()) {
+            defaultConfig.System.UserLogFolder = app.getPath("logs");
+        } else {
+            console.warn("Config:: SetLogPath -- Platform has indicated it does not have a default Application Log folder (this is expected on Ubuntu/Linux distros, using User Data folder instead: ", defaultConfig.System.UserLogFolder);
+            defaultConfig.System.UserLogFolder = defaultConfig.System.UserDataFolder;
+        }
+        defaultConfig.System.UserConfigPath = path.join(defaultConfig.System.UserDataFolder, "user.json");
         defaultConfig.System.UserConfigPath =           path.join(defaultConfig.System.UserDataFolder, "user.json");
         defaultConfig.System.FFMpegBinary =             path.join(defaultConfig.System.AppRoot, "ffmpeg/bin/ffmpeg");
         defaultConfig.System.FFProbeBinary =            path.join(defaultConfig.System.AppRoot, "ffmpeg/bin/ffprobe");
@@ -137,6 +143,15 @@ export class CConfig implements IConfig {
         defaultConfig.System.Version = defaultConfig.System.Package.version;
 
         return defaultConfig;
+    }
+
+    protected static canGetLogPath(): boolean {
+        try {
+            app.getPath("logs");
+            return true;
+        } catch (ex) {
+            return false;
+        }
     }
 
     public static Init(): CConfig {

@@ -139,6 +139,7 @@ export default class Main {
       }
 
     public static ShowDevTools(win: BrowserWindow): void {
+        if (!ElectronUtils.IsDev()) { return; }
         if (!win.webContents.isDevToolsOpened()) {
             win.webContents.openDevTools();
             win.webContents.on("devtools-opened", () => {
